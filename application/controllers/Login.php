@@ -14,10 +14,8 @@ class Login extends CI_Controller {
 /*---------------------------------------------------------------------*/
 	public function index(){
 		//buscar tipo de logueo
-		 // $row = $this->configmodel->get_by_tipo(1);
-	     // $tipo = $row->login;
-
-	      $tipo = 1;
+		 $row = $this->configmodel->get_by_tipo(1);
+	     $tipo = $row->login;
 
 		  $this->load->view('login/header');
 		switch ($tipo) 
