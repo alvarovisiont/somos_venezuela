@@ -74,13 +74,16 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 
-/*
+
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'ec2-23-23-177-166.compute-1.amazonaws.com',
-	'username' => 'vrpswiyxhqtmvz',
-	'password' => 'f05c42dcd7416945c90fba4fa7a617f1b6d898417b945ef1b72423f3c5fa4d81',
-	'database' => 'd43u22fndhrjqc',
+	'hostname' => 'ec2-54-235-101-91.compute-1.amazonaws.com',
+
+	'username' => 'tbalxrgddkmkds',
+
+	'password' => '8a52a3d321079462b2448e5cb5c5da69f8819c147ff05b425d4d32a1b5eb71a5',
+	
+	'database' => 'd40lsgi2jrphbi',
         //'database' => 'DIGITAL',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
@@ -97,7 +100,8 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-*/
+
+/*
 
 
 $db['default'] = array(
@@ -123,6 +127,7 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
+*/
 
 
 
