@@ -12,20 +12,22 @@ class Perfil extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('configmodel'));
+        $this->load->model(array('perfilmodel'));
     }// fin construct
 
 
-    public function index() {
+    public function dashboard() {
 		
       if (!$this->session->userdata('is_logued_in'))
        {
         redirect('login/', 'refresh');
        }else
        {
+         $perfil = $this->perfilmodel->show_perfil(); 
+
          $this->load->view('dashboard/header');
          $this->load->view('dashboard/menu');
-         $this->load->view('perfil/dashboard');
+         $this->load->view('perfil/index',compact('perfil',$perfil));
          $this->load->view('dashboard/footer');
 		}
     }//fin index

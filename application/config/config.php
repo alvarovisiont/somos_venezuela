@@ -36,7 +36,9 @@ else
   $config['base_url'] .= str_replace(basename($_SERVER['ORIG_SCRIPT_NAME']),"",$_SERVER['ORIG_SCRIPT_NAME']);
 }
 
+
 // $config['base_url'] = "https://sistemaweb21.herokuapp.com/";
+
 
 /*
 |--------------------------------------------------------------------------

@@ -32,18 +32,7 @@
 			</a>
 		</div><!-- /.main-container -->
 
-		<!-- basic scripts -->
-
-		<!--[if !IE]> -->
-
-
-		 <script src="<?= base_url('assets_sistema/js/jquery-2.1.4.min.js') ?>"></script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script src="assets/js/jquery-1.11.3.min.js"></script>
-<![endif]-->
+		<script src="<?= base_url('assets_sistema/js/jquery-2.1.4.min.js') ?>"></script>
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) 
 				document.write("<script src='<?= base_url('assets_sistema/js/jquery.mobile.custom.min.js')?>'>"+"<"+"/script>");
@@ -56,6 +45,10 @@
 		<!-- ace scripts -->
 		<script src="<?= base_url('assets_sistema/js/ace-elements.min.js') ?>"></script>
 		<script src="<?= base_url('assets_sistema/js/ace.min.js') ?>"></script>
+		<!-- ace settings handler -->
+		<script src="<?php echo base_url()?>assets_sistema/js/ace-extra.min.js"></script>
+		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.min.js"></script>
+		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.bootstrap.min.js"></script>
 
 		<!-- inline scripts related to this page -->
 
@@ -65,38 +58,40 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
-	var $overflow = '';
-	var colorbox_params = {
-		rel: 'colorbox',
-		reposition:true,
-		scalePhotos:true,
-		scrolling:false,
-		previous:'<i class="ace-icon fa fa-arrow-left"></i>',
-		next:'<i class="ace-icon fa fa-arrow-right"></i>',
-		close:'&times;',
-		current:'{current} of {total}',
-		maxWidth:'100%',
-		maxHeight:'100%',
-		onOpen:function(){
-			$overflow = document.body.style.overflow;
-			document.body.style.overflow = 'hidden';
-		},
-		onClosed:function(){
-			document.body.style.overflow = $overflow;
-		},
-		onComplete:function(){
-			$.colorbox.resize();
-		}
-	};
+				var $overflow = '';
+				var colorbox_params = {
+					rel: 'colorbox',
+					reposition:true,
+					scalePhotos:true,
+					scrolling:false,
+					previous:'<i class="ace-icon fa fa-arrow-left"></i>',
+					next:'<i class="ace-icon fa fa-arrow-right"></i>',
+					close:'&times;',
+					current:'{current} of {total}',
+					maxWidth:'100%',
+					maxHeight:'100%',
+					onOpen:function(){
+						$overflow = document.body.style.overflow;
+						document.body.style.overflow = 'hidden';
+					},
+					onClosed:function(){
+						document.body.style.overflow = $overflow;
+					},
+					onComplete:function(){
+						$.colorbox.resize();
+					}
+				};
 
-	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
-	$("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+				$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+				$("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
 	
 	
-	$(document).one('ajaxloadstart.page', function(e) {
-		$('#colorbox, #cboxOverlay').remove();
-   });
-})
+				$(document).one('ajaxloadstart.page', function(e) {
+					$('#colorbox, #cboxOverlay').remove();
+			   });
+
+				$('.table').dataTable()
+		})
 		</script>
 	</body>
 </html>

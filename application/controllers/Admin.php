@@ -48,10 +48,30 @@ class Admin extends CI_Controller {
 /*------------------------------------------------------------------------------------*/  
      public function a_plantilla()
      {
+        // post form dashboard
+
         $id = $_POST['id'];
-            unset($_POST['id']);
-            $this->configmodel->update_loqueo($id, $_POST);     
-        $this->plantilla();         
+
+        if(empty($_POST['titulo']))
+        {
+            unset($_POST['titulo']);
+        }
+
+        if(!empty($_FILES['imagen']['name']))
+        {
+            $_POST['imagen'] = pg_escape_bytea(file_get_contents($_FILES['imagen']['tmp_name']));
+        }
+
+        if(!empty($_FILES['cintillo']['name']))
+        {
+            $_POST['cintillo'] = pg_escape_bytea(file_get_contents($_FILES['cintillo']['tmp_name']));
+        }
+
+        unset($_POST['id']);
+
+        $this->configmodel->update_loqueo($id, $_POST);     
+
+        redirect('admin/plantilla', 'refresh');        
      }
 
 
