@@ -103,6 +103,14 @@
 						case 3:
 							$tipo = '<span class="badge">Sub Area</span>';
 
+							$agregar_sub_area = "<button type='button' class='btn btn-xs btn-default' data-toggle='modal' data-target='#modal_sub_area' data-area='".$row->id."' title='No te vuelvas loco que no puedes agregar más!'
+								data-tool='tooltip'
+								disabled=''
+								>
+								<i class='fa fa-plus'></i>
+							</button>";
+
+
 							$editar_sub_area = "<button type='button' class='btn btn-xs btn-warning' data-toggle='modal' data-target='#modal_sub_area' data-area='".$row->id_padre."' title='Editar Sub Area'
 								data-tool='tooltip'
 								data-edit='".$row->id."'
