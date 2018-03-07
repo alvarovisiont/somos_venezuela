@@ -12,7 +12,7 @@ class Perfil extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('perfilmodel'));
+        $this->load->model(array('perfil'));
     }// fin construct
 
 
@@ -23,7 +23,7 @@ class Perfil extends CI_Controller {
         redirect('login/', 'refresh');
        }else
        {
-         $perfil = $this->perfilmodel->show_perfil(); 
+         $perfil = $this->perfil->show_perfil(); 
 
          $this->load->view('dashboard/header');
          $this->load->view('dashboard/menu');
@@ -38,7 +38,7 @@ class Perfil extends CI_Controller {
         $_POST['createdat'] = date('Y-m-d H:i:s');
         $_POST['updatedat']  = date('Y-m-d H:i:s');
 
-        if($this->perfilmodel->crear_perfil($_POST))
+        if($this->perfil->crear_perfil($_POST))
         {
             
             redirect('perfil/dashboard','refresh');
