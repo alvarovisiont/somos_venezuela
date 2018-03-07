@@ -9,7 +9,7 @@ class Perfilmodel extends CI_Model {
     {
       //parent::__construct();
       //Codeigniter : Write Less Do More
-      //Revisar 
+      //Revisar  
     }
 
     public function show_perfil()

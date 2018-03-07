@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Menumodel extends CI_Model {
 
 	public function __construct()
-    {
+    { 
       //parent::__construct();
       //Codeigniter : Write Less Do More
       //Revisar 
