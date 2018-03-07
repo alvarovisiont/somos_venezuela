@@ -164,6 +164,11 @@
 									Logueo
 								</a>
 
+								<a href="<?php echo base_url() ?>index.php/menu/plantilla"> 
+									<i class="menu-icon fa fa-caret-right"></i>
+									Menu
+								</a>
+
 								<b class="arrow"></b>
 						 </li>
 
