@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Menu extends CI_Model {
+class Menumodel extends CI_Model {
 
 	public function __construct()
     { 
