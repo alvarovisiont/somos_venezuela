@@ -29,8 +29,26 @@ class Perfil extends CI_Controller {
          $this->load->view('dashboard/menu');
          $this->load->view('perfil/index',compact('perfil',$perfil));
          $this->load->view('dashboard/footer');
+         
 		}
     }//fin index
+
+    public function store()
+    {
+        $_POST['createdat'] = date('Y-m-d H:i:s');
+        $_POST['updatedat']  = date('Y-m-d H:i:s');
+
+        if($this->perfilmodel->crear_perfil($_POST))
+        {
+            
+            redirect('perfil/dashboard','refresh');
+        }
+        else
+        {  
+            
+            redirect('perfil/dashboard','refresh');
+        }
+    }
 
 /*------------------------------------------------------------------------------------/  
     public function plantilla(){

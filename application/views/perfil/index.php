@@ -10,12 +10,12 @@
 
 <div class="row no-gutters">
 	<div class="col-xs-12">
-	
-	<div>
-	   <a title="Agregar Perfil" href="#">
-	   	<img src="<?php echo base_url() ?>assets/galerias/iconos/agregar.png" alt="Agregar" height="50"/></a>
 
-	</div>
+	<button type='button' data-toggle='modal' data-target='#modal_perfil' 
+	 title='Agregar Perfil' data-tool='tooltip'>
+	 <img src="<?php echo base_url() ?>assets/galerias/iconos/agregar.png" alt="Agregar" height="50"/>
+	</button>
+
 	<br>	
 	<div class="table-header">
 		Perfiles registrados
@@ -55,6 +55,39 @@
 		</table>
 	</div>
 </div>
+
+<div id="modal_perfil" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header modalHeader">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Agregar Perfil</h4>
+            </div>
+            <form action="<?php echo base_url()?>index.php/perfil/store" class="form-horizontal" id="form_perfil" method="POST">
+	            <div class="modal-body">
+					
+	            	<div class="form-group">
+	            		<label for="nombre" class="control-label col-md-2 col-sm-2">Nombre Perfil</label>
+	            		<div class="col-md-4 col-sm-4">
+	            			<input type="text" id="nombre" name="nombre" required="" class="form-control" value="">
+	            		</div>	
+	            	</div>
+
+	            </div><!-- fin modal-body -->
+	            <div class="modal-footer">
+	                <button type="submit" class="btn btn-pink">Grabar</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	            </div>
+            </form>
+        </div><!-- fin modal-content -->
+    </div><!-- fin modal-dialog -->
+</div> <!-- fin modal -->
+
+
+
+
+
 		
 
 			

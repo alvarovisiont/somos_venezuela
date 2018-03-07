@@ -20,4 +20,18 @@ class Perfilmodel extends CI_Model {
 
     	return $result->result();
     }
+
+
+    public function crear_perfil($datos)
+    {
+      if($this->db->insert('perfil',$datos))
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+
+    }
 }
