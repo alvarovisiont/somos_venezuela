@@ -14,7 +14,8 @@ class Menumodel extends CI_Model {
 
     public function show_menu()
     {
-      $sql = "WITH RECURSIVE tree_table(id,nombre,id_padre,id_tipo,link,icono,ruta,con) AS 
+      $sql = "
+      WITH RECURSIVE tree_table(id,nombre,id_padre,id_tipo,link,icono,ruta,con) AS 
       (
         SELECT id, nombre, id_padre, id_tipo, link, icono, ruta, id + 1 as con from menu  where id_padre = 0
         UNION ALL 

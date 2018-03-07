@@ -90,7 +90,9 @@
 					$('#colorbox, #cboxOverlay').remove();
 			   });
 
-				$('#tabla').dataTable()
+				$('#tabla').dataTable({
+					"order": []
+				})
 
     			$('[data-tool="tooltip"]').tooltip();
 		})

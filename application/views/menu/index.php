@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<br/>
-		<table class="table table-bordered table-responsive">
+		<table class="table table-bordered table-responsive" id="tabla">
 			<thead>
 				<tr>
 					<th class="text-center">Id</th>
