@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Perfil extends CI_Model {
+class Perfilmodel extends CI_Model {
 
 	public function __construct()
     {
