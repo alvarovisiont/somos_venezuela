@@ -22,6 +22,7 @@
 
 		<!-- ace styles -->
 		<link href="<?php echo base_url()?>assets_sistema/css/ace.min.css" rel="stylesheet" type="text/css">
+		<link href="<?php echo base_url()?>assets_sistema/css/styles.css" rel="stylesheet" type="text/css">
 
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
@@ -30,15 +31,13 @@
 		<link href="<?php echo base_url()?>assets_sistema/css/ace-skins.min.css" rel="stylesheet" type="text/css">
 
 		<link href="<?php echo base_url()?>assets_sistema/css/ace-rtl.min.css" rel="stylesheet" type="text/css">
+		<link href="<?php echo base_url()?>assets_sistema/css/ace-rtl.min.css" rel="stylesheet" type="text/css">
 
 		<!--[if lte IE 9]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
-
-		<!-- ace settings handler -->
-		<link href="<?php echo base_url()?>assets_sistema/js/ace-extra.min.js" rel="stylesheet" type="text/css">
 
 		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
