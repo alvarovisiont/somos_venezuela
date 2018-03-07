@@ -90,7 +90,9 @@
 					$('#colorbox, #cboxOverlay').remove();
 			   });
 
-				$('.table').dataTable()
+				$('#tabla').dataTable()
+
+    			$('[data-tool="tooltip"]').tooltip();
 		})
 		</script>
 	</body>

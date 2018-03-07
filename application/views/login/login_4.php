@@ -13,7 +13,7 @@
 					</div>
 
 					<span class="login100-form-title p-t-20 p-b-45">
-						Inicio de Sesion
+						<?= $titulo; ?>
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-10" data-validate = "Alerta Usuario es requerido">

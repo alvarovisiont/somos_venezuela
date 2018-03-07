@@ -14,7 +14,7 @@
 				 <form action="<?=base_url();?>index.php/login/logueo" class="login100-form validate-form" method="post">	
 				 	
 					<span class="login100-form-title">
-						Inicio de Sesion
+						<?= $titulo; ?>
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Alerta email es requerido: ex@abc.xyz">

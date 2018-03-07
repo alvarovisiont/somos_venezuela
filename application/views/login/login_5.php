@@ -9,7 +9,7 @@
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image: url(<?php echo base_url()?>assets/assets_login1/images/bg-02.jpg);">
 					<span class="login100-form-title-1">
-						Inicio de Sesion
+						<?= $titulo; ?>
 					</span>
 				</div>
 
