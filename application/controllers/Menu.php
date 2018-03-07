@@ -12,13 +12,13 @@ class Menu extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('menumodel'));
+        $this->load->model(array('menu'));
     }// fin construct
 
 
     public function index($mensaje = null, $clase = null) {
 
-    	$menu    = $this->menumodel->show_menu();
+    	$menu    = $this->menu->show_menu();
         $mensaje = null;
         $clase   = null;
         if($mensaje)
@@ -55,7 +55,7 @@ class Menu extends CI_Controller {
         $_POST['createdat'] = date('Y-m-d H:i:s');
         $_POST['updatedat']  = date('Y-m-d H:i:s');
 
-        if($this->menumodel->crear_modulo($_POST))
+        if($this->menu->crear_modulo($_POST))
         {
             
             redirect('menu/','refresh');
@@ -69,7 +69,7 @@ class Menu extends CI_Controller {
 
     public function edit($id)
     {
-        $register = $this->menumodel->findRegisterById($id);
+        $register = $this->menu->findRegisterById($id);
 
         $ruta = base_url().'index.php/menu/update/'.$id;
         $this->load->view('dashboard/header');
@@ -82,7 +82,7 @@ class Menu extends CI_Controller {
     public function update($id)
     {
         $_POST['updatedat'] = date('Y-m-d H:i:s');
-        if($this->menumodel->actualizar_registro($id,$_POST))
+        if($this->menu->actualizar_registro($id,$_POST))
         {
             redirect('menu/','refresh');
         }
@@ -94,7 +94,7 @@ class Menu extends CI_Controller {
 
     public function destroy($id)
     {
-        if($this->menumodel->destroy($id))
+        if($this->menu->destroy($id))
         {
             redirect('menu/','refresh');
         }
