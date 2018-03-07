@@ -12,7 +12,7 @@
 				 <form action="<?=base_url();?>index.php/login/logueo" class="login100-form validate-form" method="post">	
 
 					<span class="login100-form-title p-b-43">
-						Inicio de Sesion
+						<?= $titulo; ?>
 					</span>
 					
 					
