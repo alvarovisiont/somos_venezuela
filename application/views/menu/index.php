@@ -17,8 +17,10 @@
 				echo '<p class="alert alert-'.$clase.'">'.$mensaje.'</p>';
 			}
 		?>
+	
 		<div class="row no-gutters">
-			<div class="col-xs-offset-9 col-xs-3 text-center">
+
+		<div class="col-xs-offset-9 col-xs-3 text-center">
 				<a href="<?= base_url().'index.php/menu/create' ?>" class="btn btn-purple">Agregar Módulo&nbsp;<i class="fa fa-plus"></i></a>
 			</div>
 		</div>
@@ -206,6 +208,7 @@
             	
            	 	<div class="modal-body">
 						<input type="hidden" name="id_tipo" value="3">
+						<input type="hidden" name="link" value="true">
 						<input type="hidden" id="id_padre_sub_area" name="id_padre">
 
 		            	<div class="form-group">
@@ -228,4 +231,3 @@
     </div><!-- fin modal-dialog -->
 </div> <!-- fin modal -->
 
-		

@@ -51,7 +51,7 @@ class Login extends CI_Controller {
 		 //VERIFICAR
 		 $this->session->set_userdata('is_logued_in', TRUE);
 
-		 redirect('admin/', 'refresh');
+		 redirect('admin', 'refresh');
 	}
 
 /*---------------------------------------------------------------------*/

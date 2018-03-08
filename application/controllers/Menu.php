@@ -31,9 +31,8 @@ class Menu extends CI_Controller {
             $clase = base64_decode($clase);
         }
 
-
     	$this->load->view('dashboard/header');
-        $this->load->view('dashboard/menu');
+        $this->load->view('dashboard/menu',['menu' => $menu]);
     	$this->load->view('menu/index',['menu' => $menu, 'mensaje' => $mensaje, 'clase' => $clase]);
     	$this->load->view('dashboard/footer');
         $this->load->view('menu/scripts');
@@ -48,6 +47,7 @@ class Menu extends CI_Controller {
         $this->load->view('dashboard/menu');
         $this->load->view('menu/form',['ruta' => $ruta,'register' => null]);
         $this->load->view('dashboard/footer');
+         $this->load->view('menu/scripts');
     }
 
     public function store()
@@ -76,6 +76,7 @@ class Menu extends CI_Controller {
         $this->load->view('dashboard/menu');
         $this->load->view('menu/form', ['register' => $register,'ruta' => $ruta]);
         $this->load->view('dashboard/footer');
+        $this->load->view('menu/scripts');
 
     }
 
