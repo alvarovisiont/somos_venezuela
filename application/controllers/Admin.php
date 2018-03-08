@@ -16,15 +16,24 @@ class Admin extends CI_Controller {
        
     }// fin construct
 
+    public function session(){
+    //armar session completa      
+       $session_user = $this->configmodel->session_usuario(); 
+       $usuario_data = array(
+         'nombre_usuario' => $session_user->nombre,
+         'apellido_usuario' => $session_user->apellido,
+         'imagen_personal' => $session_user->imagen,
+      );
+      $this->session->set_userdata($usuario_data);
+    }
 
-    public function index() {
-		
+    public function index() {		
       if (!$this->session->userdata('is_logued_in'))
        {
         redirect('login/', 'refresh');
-
        }else
        {
+         $this->session();
          $this->load->view('dashboard/header');
          $this->load->view('dashboard/menu');
          $this->load->view('dashboard/dashboard');

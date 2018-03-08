@@ -9,7 +9,7 @@ class Login extends CI_Controller {
 /*---------------------------------------------------------------------*/
     public function __construct() {
          parent::__construct();
-         $this->load->model(array('configmodel'));
+         $this->load->model(array('configmodel','usuariomodel'));
     }
 /*---------------------------------------------------------------------*/
 	public function index(){
@@ -49,11 +49,46 @@ class Login extends CI_Controller {
 	public function logueo(){
 
 		 //VERIFICAR
-		 $this->session->set_userdata('is_logued_in', TRUE);
 
-		 redirect('admin', 'refresh');
+
+		 if ($this->input->post()) {
+
+		 	$username = $this->input->post('email');
+            $password = $this->input->post('pass');
+           // $username = $username.$this->input->post('username');
+
+            $check_user = $this->usuariomodel->login_usuario($username, $password);
+
+         if ($check_user == TRUE) {
+
+           if ($check_user->correo_activo == 'f')
+            {
+             $this->session->set_flashdata('usuario_mensj', 'Debe activar su cuenta '.$username);
+                             redirect(base_url() . 'index.php/login', 'refresh');
+            }else
+            {
+
+            if ($check_user->correo_activo == 'f')
+            {
+             $this->session->set_flashdata('usuario_mensj', 'Su usuario se encuentra desactivado');
+                             redirect(base_url() . 'index.php/login', 'refresh');
+            }
+
+            }
+		 }	
+		        $this->session->set_userdata('is_logued_in', TRUE);
+
+		         $data = array(
+                    'is_logued_in' => TRUE,
+                    'id_usuario' => $check_user->id,
+                    'id_permiso' => $check_user->id_permiso,
+                    'bpass' => $check_user->password_activo
+                );
+
+                $this->session->set_userdata($data);	
+		        redirect('admin', 'refresh');
 	}
-
+  }
 /*---------------------------------------------------------------------*/
 
 }

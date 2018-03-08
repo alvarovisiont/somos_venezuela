@@ -88,9 +88,9 @@
 
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="<?php echo base_url()?>assets_sistema/images/avatars/avatar2.png" alt="Sistema web 21" />
+								<img class="nav-user-photo" src="<?php echo base_url()?>assets_sistema/images/avatars/<?php echo $this->session->userdata('imagen_personal')?>" alt="Sistema web 21" />
 								<span class="user-info">
-									<small>Session,</small>
+									<small><?php echo $this->session->userdata('apellido_usuario')." ". $this->session->userdata('nombre_usuario')  ?></small>
 									Usuario
 								</span>
 

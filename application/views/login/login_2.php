@@ -3,7 +3,6 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -12,7 +11,16 @@
 				</div>
 
 				 <form action="<?=base_url();?>index.php/login/logueo" class="login100-form validate-form" method="post">	
-				 	
+	
+			<?php if($this->session->userdata('usuario_mensj'))
+					{?>
+                    <div>
+                       <p>
+						<span><?php echo $this->session->userdata('usuario_mensj');?></span>
+					   </p>
+                </div>
+             <?php  } ?>	
+
 					<span class="login100-form-title">
 						<?= $titulo; ?>
 					</span>

@@ -12,6 +12,8 @@ class Configmodel extends CI_Model {
       //Revisar 
     }
 
+/*----------------------------------------------------------------------------------------------------*/   
+
      public function get_by_tipo($id) {
        $this->db->select('*');
         $this->db->where('id', $id);
@@ -19,7 +21,7 @@ class Configmodel extends CI_Model {
        
         return $query->row();
     }
-
+/*----------------------------------------------------------------------------------------------------*/   
 
      public function update_loqueo($id, $datos)
     {
@@ -28,6 +30,20 @@ class Configmodel extends CI_Model {
         $this->db->update('config', $datos);
     }
 
+/*----------------------------------------------------------------------------------------------------*/   
+
+    public function session_usuario(){
+        $this->db->where('id_usuario', $this->session->userdata('id_usuario'));    
+        $query = $this->db->get('usuario_info');     
+        
+        if ($query->num_rows() == 1) {
+            return $query->row();
+        } else {
+            //$this->session->set_flashdata('usuario_mensj', 'Los datos introducidos son incorrectos');
+            redirect(base_url() . 'index.php/error', 'refresh');
+        }
+    }//fin de la session_usuario
+ /*----------------------------------------------------------------------------------------------------*/   
 }
 
 ?>    
