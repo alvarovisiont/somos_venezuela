@@ -76,7 +76,7 @@ class Login extends CI_Controller {
 
             }
 		 }	
-		        $this->session->set_userdata('is_logued_in', TRUE);
+		       
 
 		         $data = array(
                     'is_logued_in' => TRUE,
@@ -90,5 +90,12 @@ class Login extends CI_Controller {
 	}
   }
 /*---------------------------------------------------------------------*/
+        public function salir ()
+        {
+            $this->session->set_userdata('is_logued_in', FALSE);
+            $this->session->sess_destroy();
+            redirect(base_url() . 'index.php/login', 'refresh');
+        }
+
 
 }

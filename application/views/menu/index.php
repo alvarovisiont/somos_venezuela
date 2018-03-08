@@ -21,6 +21,14 @@
 		<div class="row no-gutters">
 
 		<div class="col-xs-offset-9 col-xs-3 text-center">
+				<a href="<?= base_url().'index.php/menu/actualizar' ?>" class="btn btn-success">Actualizar Menu&nbsp;<i class="fa fa-plus"></i></a>
+			</div>
+
+        </div>
+        <br/>
+		<div class="row no-gutters">	
+
+		<div class="col-xs-offset-9 col-xs-3 text-center">
 				<a href="<?= base_url().'index.php/menu/create' ?>" class="btn btn-purple">Agregar Módulo&nbsp;<i class="fa fa-plus"></i></a>
 			</div>
 		</div>

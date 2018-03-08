@@ -108,7 +108,7 @@
 								<li class="divider"></li>
 
 								<li>
-									    <a href="<?php echo base_url() ?>index.php/login/index"> 
+									    <a href="<?php echo base_url() ?>index.php/login/salir"> 
 										<i class="ace-icon fa fa-power-off"></i>
 										Salir
 									</a>
@@ -191,121 +191,8 @@
 					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
 				</div>
 			
-
-	<!--menu dinamico-->
-
-			  <?php if (@$menu){ ?>
-
-			<script type="text/javascript">
-				try{ace.settings.loadState('main-container')}catch(e){}
-			</script>
-
-			<div id="sidebar" class="sidebar                  responsive                    ace-save-state">
-				<script type="text/javascript">
-					try{ace.settings.loadState('sidebar')}catch(e){}
-				</script>
-
-<ul class="nav nav-list">
-
-    <? 
-    $aux_tipo = 0;
-    foreach ($menu as $row) 
-       { 
-
-       	if ($row->link == "f"){
-       		$ruta_link = "#";
-       		$classe = 'class="dropdown-toggle"';
-       		$classe_flecha = 'class="arrow fa fa-angle-down"';
-       		$icono_classe = 'class="menu-icon fa '.$row->icono.'"';
-       	}else
-       	{
-       		$ruta_link = base_url().$row->ruta;
-       		$classe = 'class=""';
-       		$classe_flecha = 'class=""';
-       		$icono_classe = 'class="menu-icon fa '.$row->icono.'"';
-       	}
-
-       	if ($row->id_tipo == 1){ 
-       		if ($row->id_tipo == $aux_tipo){?>
-       			</li>
-       			 <li class="">
-       			 	<a href="<?php echo $ruta_link?>" <?php echo $classe;?> >
-							<i <?php echo $icono_classe;?>></i>
-							<span class="menu-text">
-								<?php echo $row->nombre;?>
-							</span>
-							<b <?php echo $classe_flecha;?>></b>
-						</a>
-						<b class="arrow"></b>
-       		<?php } else
-       		{   if ($aux_tipo <> 0) { ?> </li></ul> <?php } ?>
-
-       			 <li class="">
-       			 	<a href="<?php echo $ruta_link?>" <?php echo $classe;?> >
-							<i <?php echo $icono_classe;?>></i>
-							<span class="menu-text">
-								<?php echo $row->nombre;?>
-							</span>
-							<b <?php echo $classe_flecha;?>></b>
-						</a>
-					<b class="arrow"></b>
-       		<?php }
-       	?>
-       	<?php } 
-
-       		if ($row->id_tipo == 2){ 
-       		if ($row->id_tipo == $aux_tipo){?>
-       			 </li></ul>
-       			 <ul class="submenu">
-				 <li class="">
-       			 	<a href="<?php echo $ruta_link?>" <?php echo $classe;?> >
-							<i class="menu-icon fa fa-caret-right"></i>
-							<span class="menu-text">
-								<?php echo $row->nombre;?>
-							</span>
-							<b <?php echo $classe_flecha;?>></b>
-						</a>
-						<b class="arrow"></b>
-       		<?php } else
-       		{?>
-       			<ul class="submenu">
-				<li class="">
-       			 	<a href="<?php echo $ruta_link?>" <?php echo $classe;?> >
-							<i class="menu-icon fa fa-caret-right"></i>
-							<span class="menu-text">
-								<?php echo $row->nombre;?>
-							</span>
-							<b <?php echo $classe_flecha;?>></b>
-						</a>
-						<b class="arrow"></b>
-       		<?php }
-       	?>
-       	<?php }
-       	 		if ($row->id_tipo == 3){ ?>
-       			 <ul class="submenu">
-				 <li class="">
-       			 	<a href="<?php echo $ruta_link?>" <?php echo $classe;?> >
-							<i class="menu-icon fa fa-caret-right"></i>
-							<span class="menu-text">
-								<?php echo $row->nombre;?>
-							</span>
-							<b <?php echo $classe_flecha;?>></b>
-						</a>
-					
-						<b class="arrow"></b>
-					</li></ul> 	
-       		<?php } 
-       		$aux_tipo = $row->id_tipo;
-          }
-
-    if ($aux_tipo == 1)
-      { ?> </ul> </li>
-      <?php }else { ?> </ul></li> <?php }?>	
-      </ul>
-    </div>
-			 <?php }
-			  ?>
-
+	        <!--menu dinamico-->
+	        <?=menu()?>
 			</div>
 
             <div class="main-content">

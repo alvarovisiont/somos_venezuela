@@ -104,4 +104,123 @@ class Menu extends CI_Controller {
             redirect('menu/','refresh');
         }
     }
+
+
+     public function actualizar(){
+    //armar session completa      
+       $menu    = $this->menumodel->show_menu();
+
+       $html_menu = '<div id="sidebar" class="sidebar responsive ace-save-state">
+        <ul class="nav nav-list">';  
+
+       $aux_tipo = 0;
+        foreach ($menu as $row) 
+       { 
+
+        if ($row->link == "f"){
+          $ruta_link = "#";
+          $classe = 'class="dropdown-toggle"';
+          $classe_flecha = 'class="arrow fa fa-angle-down"';
+          $icono_classe = 'class="menu-icon fa '.$row->icono.'"';
+        }else
+        {
+          $ruta_link = base_url().$row->ruta;
+          $classe = 'class=""';
+          $classe_flecha = 'class=""';
+          $icono_classe = 'class="menu-icon fa '.$row->icono.'"';
+        }
+
+          if ($row->id_tipo == 1){ 
+          if ($row->id_tipo == $aux_tipo){
+
+         $html_menu .= '</li>
+             <li class="">
+              <a href="'.$ruta_link.'" '.$classe.' >
+              <i '.$icono_classe.'></i>
+              <span class="menu-text">'.$row->nombre.'
+              </span>
+              <b '.$classe_flecha.'></b>
+            </a>
+            <b class="arrow"></b>';
+
+            } else { 
+
+            if ($aux_tipo <> 0) { 
+            $html_menu .= '</li></ul>';
+            }
+
+            $html_menu .= ' <li class="">
+              <a href="'.$ruta_link.'" '.$classe.' >
+              <i '.$icono_classe.'></i>
+              <span class="menu-text">'.$row->nombre.'
+              </span>
+              <b '.$classe_flecha.'></b>
+            </a>
+          <b class="arrow"></b>';
+
+           } }
+
+          if ($row->id_tipo == 2){ 
+          if ($row->id_tipo == $aux_tipo){
+
+          $html_menu .= ' </li></ul>
+             <ul class="submenu">
+         <li class="">
+             <a href="'.$ruta_link.'" '.$classe.' >
+              <i class="menu-icon fa fa-caret-right"></i>
+              <span class="menu-text">'.$row->nombre.'
+              </span>
+               <b '.$classe_flecha.'></b>
+            </a>
+            <b class="arrow"></b>';  
+
+            } else {
+
+            $html_menu .= '<ul class="submenu">
+        <li class="">
+               <a href="'.$ruta_link.'" '.$classe.' >
+              <i class="menu-icon fa fa-caret-right"></i>
+              <span class="menu-text">'.$row->nombre.'
+              </span>
+               <b '.$classe_flecha.'></b>
+            </a>
+            <b class="arrow"></b>';  
+           } 
+         } 
+
+         if ($row->id_tipo == 3){ 
+
+         $html_menu .= '<ul class="submenu">
+         <li class="">
+              <a href="'.$ruta_link.'" '.$classe.' >
+              <i class="menu-icon fa fa-caret-right"></i>
+               <span class="menu-text">'.$row->nombre.'
+              </span>
+               <b '.$classe_flecha.'></b>
+            </a>
+          
+            <b class="arrow"></b>
+          </li></ul> ';
+
+        }
+        $aux_tipo = $row->id_tipo;
+    } //en foreach
+
+     if ($aux_tipo == 1)
+      {
+        $html_menu .= '</ul> </li>';  
+      }else {
+        $html_menu .= '</ul></li>';
+      }
+      $html_menu .= '</ul> </div>';
+
+       $menu_data = array(
+         'menu_usuario' => $html_menu,
+      );
+      $this->session->set_userdata($menu_data);
+
+       $this->index();  
+    }
+
+   
 }
