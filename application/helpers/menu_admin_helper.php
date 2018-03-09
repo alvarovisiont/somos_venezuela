@@ -12,6 +12,9 @@ if(!function_exists('menu'))
 
  	 $varhtml = $CI->session->userdata('menu_usuario');
 
+ 	 $varhtml .= '<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>';
      return $varhtml;
  }
 }
@@ -85,7 +88,4 @@ if(!function_exists('menu_admin'))
      return $varhtml;
  }
 }
- 
-
-
  

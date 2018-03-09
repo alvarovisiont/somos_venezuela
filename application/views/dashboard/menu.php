@@ -131,66 +131,9 @@
 				<script type="text/javascript">
 					try{ace.settings.loadState('sidebar')}catch(e){}
 				</script>
-
-
-				<ul class="nav nav-list">
-					<li class="">
-						<a href="<?php echo base_url() ?>index.php/admin">
-							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text"> Dashboard </span>
-						</a>
-
-						<b class="arrow"></b>
-					</li>
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<span class="menu-icon glyphicon glyphicon-th-large"></span>
-							<span class="menu-text"> Menú </span>
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-						<b class="arrow"></b>
-						<ul class="submenu">
-							<li>
-								<a href="<?php echo base_url() ?>index.php/menu">
-									<span class="menu-icon fa fa-caret-right"></span>
-									<span class="menu-text">Gestión Menú</span>
-								</a>		
-							</li>
-						</ul>
-					</li>
-					<li class="">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-desktop"></i>
-							<span class="menu-text">
-								Configuración
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="">
-								<a href="<?php echo base_url() ?>index.php/admin/plantilla"> 
-									<i class="menu-icon fa fa-caret-right"></i>
-									Logueo
-								</a>
-								<a href="<?php echo base_url() ?>index.php/perfil/dashboard"> 
-									<i class="menu-icon fa fa-caret-right"></i>
-									Perfiles
-								</a>
-								<b class="arrow"></b>
-						 	</li>
-						</ul>
-					</li>
-
-				</ul><!-- /.nav-list -->
-
-				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
-				</div>
 			
+			<?=menu_admin()?>
+
 	        <!--menu dinamico-->
 	        <?=menu()?>
 			</div>
