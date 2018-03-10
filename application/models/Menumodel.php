@@ -34,6 +34,37 @@ class Menumodel extends CI_Model {
     	return $result->result();
     }
 
+
+
+     public function show_menu_perfil()
+    {
+      $sql = "
+       WITH RECURSIVE tree_table(id,nombre,id_padre,id_tipo,link,icono,ruta,con) AS 
+      (
+        SELECT id, nombre, id_padre, id_tipo, link, icono, ruta, id as con from menu  where id_padre = 0
+      ), 
+        tree_table_nietos(id,nombre,id_padre,id_tipo,link,icono,ruta,con) AS(
+        SELECT menu.id, menu.nombre, menu.id_padre, menu.id_tipo, menu.link, menu.icono, menu.ruta, (tree_table.con + menu.session) as con from menu JOIN tree_table ON tree_table.id = menu.id_padre
+        UNION ALL 
+        SELECT menu.id, menu.nombre, menu.id_padre, menu.id_tipo, menu.link, menu.icono, menu.ruta, 
+        tree_table_nietos.con as con from menu 
+        JOIN tree_table_nietos ON tree_table_nietos.id = menu.id_padre
+        JOIN tree_table ON tree_table.id = tree_table_nietos.id_padre
+      ) 
+      SELECT result.*, a.id_area, a.id_sub_area from 
+      (SELECT * from tree_table UNION SELECT * FROM tree_table_nietos) as result 
+      inner join acceso as a on result.id = a.id_modulo 
+      
+      where a.id_perfil =". $this->session->userdata('id_permiso')." and a.visible = true
+      ORDER BY result.con asc, result.id_tipo asc ";
+
+      $result = $this->db->query($sql);
+
+      return $result->result();
+    }
+
+
+
      public function crear_modulo($datos)
     {
       
