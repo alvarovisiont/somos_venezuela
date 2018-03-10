@@ -3,23 +3,14 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Perfilmodel extends CI_Model {
+class Permisomodel extends CI_Model {
 
 	public function __construct()
     {
       //parent::__construct();
       //Codeigniter : Write Less Do More
       //Revisar  
-      $this->load->model(array('menumodel'));
-    }
-
-    public function show_perfil()
-    {
-    	$this->db->select('*');
-    	$result = $this->db->get('perfil');
-      $this->db->order_by('nombre');
-
-    	return $result->result();
+    	//$this->load->model(array('menumodel'));
     }
 
     public function show_perfil_by_selection($manual)
@@ -50,20 +41,6 @@ class Perfilmodel extends CI_Model {
 
       $this->db->where('id_perfil',$perfil);
 
-      return  $this->db->get('acceso')->result;
-    }
-
-
-    public function crear_perfil($datos)
-    {
-      if($this->db->insert('perfil',$datos))
-      {
-        return true;
-      }
-      else
-      {
-        return false;
-      }
-
+      return  $this->db->get('acceso')->result();
     }
 }

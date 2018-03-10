@@ -35,7 +35,7 @@ if(!function_exists('menu_admin'))
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<span class="menu-icon glyphicon glyphicon-th-large"></span>
-							<span class="menu-text"> Menú </span>
+							<span class="menu-text"> Menú</span>
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
 						<b class="arrow"></b>
@@ -69,6 +69,10 @@ if(!function_exists('menu_admin'))
 								<a href="'.base_url().'index.php/perfil/dashboard"> 
 									<i class="menu-icon fa fa-caret-right"></i>
 									Perfiles
+								</a>
+								<a href="'.base_url().'index.php/permiso/dashboard"> 
+									<i class="menu-icon fa fa-caret-right"></i>
+									Permisologia
 								</a>
 								<b class="arrow"></b>
 						 	</li>
