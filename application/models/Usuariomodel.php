@@ -23,5 +23,10 @@ class Usuariomodel extends CI_Model {
         }
     }
 
+    public function count_users()
+    {
+        return $this->db->count_all('usuario');
+    }
+
 
 }
