@@ -189,8 +189,18 @@ class Menu extends CI_Controller {
 
              if ($aux_tipo == 3){
              $html_menu .= '</li></ul>';
+             $html_menu .= '<ul class="submenu">
+              <li class="">
+               <a href="'.$ruta_link.'" '.$classe.' >
+              <i class="menu-icon fa fa-caret-right"></i>
+              <span class="menu-text">'.$row->nombre.'
+              </span>
+               <b '.$classe_flecha.'></b>
+            </a>
+            <b class="arrow"></b>';
            }
 
+            if ($aux_tipo == 1){
             $html_menu .= '<ul class="submenu">
               <li class="">
                <a href="'.$ruta_link.'" '.$classe.' >
@@ -199,7 +209,8 @@ class Menu extends CI_Controller {
               </span>
                <b '.$classe_flecha.'></b>
             </a>
-            <b class="arrow"></b>';  
+            <b class="arrow"></b>';
+            }   
         
          } 
 

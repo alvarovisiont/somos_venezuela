@@ -30,9 +30,9 @@ class Admin extends CI_Controller {
      public function session_menu(){
     //armar session completa
 
-      $menu    = $this->menumodel->show_menu();
+      $menu  = $this->menumodel->show_menu_perfil();
 
-       $html_menu = '<div id="sidebar" class="sidebar responsive ace-save-state">
+      $html_menu = '<div id="sidebar" class="sidebar responsive ace-save-state">
                     <ul class="nav nav-list">';  
 
        $aux_tipo = 0;
@@ -51,11 +51,7 @@ class Admin extends CI_Controller {
           $classe_flecha = 'class=""';
           $icono_classe = 'class="menu-icon fa '.$row->icono.'"';
         }
-
  /*-----------------------------------------------------------------*/
-         
-        if ($row->id_tipo == 1){ 
-
         if ($aux_tipo == 0){
 
          $html_menu .= '
@@ -88,20 +84,42 @@ class Admin extends CI_Controller {
           <b class="arrow"></b>';
 
            } 
-         }
 
+           $aux_tipo = 1;
          /*-----------------------------------------------------------------*/
 
-         if ($row->id_tipo == 2){ 
-        
-         if ($aux_tipo == 2){
+         $areas = explode(',', $row->id_area);
+         $sub_areas = explode(',', $row->id_sub_area);
+
+
+
+        foreach ($areas as $row_areas)
+        {
+          $id_area = trim($row_areas, "{}");
+
+        $area_menu  = $this->menumodel->show_menu_area($id_area);
+
+        if ($area_menu == TRUE) {
+
+        if ($area_menu->link == "f"){
+          $ruta_link = "#";
+          $classe = 'class="dropdown-toggle"';
+          $classe_flecha = 'class="arrow fa fa-angle-down"';
+        }else
+        {
+          $ruta_link = base_url().$area_menu->ruta;
+          $classe = 'class=""';
+          $classe_flecha = 'class=""';
+        }    
+
+       if ($aux_tipo == 2){
 
           $html_menu .= ' </li></ul>
           <ul class="submenu">
            <li class="">
              <a href="'.$ruta_link.'" '.$classe.' >
               <i class="menu-icon fa fa-caret-right"></i>
-              <span class="menu-text">'.$row->nombre.'
+              <span class="menu-text">'.$area_menu->nombre.'
               </span>
                <b '.$classe_flecha.'></b>
             </a>
@@ -109,43 +127,71 @@ class Admin extends CI_Controller {
 
             } 
 
-             if ($aux_tipo == 3){
+           if ($aux_tipo == 3){
              $html_menu .= '</li></ul>';
-           }
 
-            $html_menu .= '<ul class="submenu">
+              $html_menu .= '<ul class="submenu">
               <li class="">
                <a href="'.$ruta_link.'" '.$classe.' >
               <i class="menu-icon fa fa-caret-right"></i>
-              <span class="menu-text">'.$row->nombre.'
+              <span class="menu-text">'.$area_menu->nombre.'
               </span>
                <b '.$classe_flecha.'></b>
             </a>
             <b class="arrow"></b>';  
-        
-         } 
+           }
 
-         /*----------------------------------------------------------------*/
-
-         if ($row->id_tipo == 3){ 
-
-         $html_menu .= '<ul class="submenu">
-         <li class="">
-              <a href="'.$ruta_link.'" '.$classe.' >
+            if ($aux_tipo == 1){
+            $html_menu .= '<ul class="submenu">
+              <li class="">
+               <a href="'.$ruta_link.'" '.$classe.' >
               <i class="menu-icon fa fa-caret-right"></i>
-               <span class="menu-text">'.$row->nombre.'
+              <span class="menu-text">'.$area_menu->nombre.'
               </span>
                <b '.$classe_flecha.'></b>
             </a>
-          
-            <b class="arrow"></b>
-          </li></ul> ';
+            <b class="arrow"></b>';  
+           } 
+         } 
+         /*----------------------------------------------------------------*/
+           $aux_tipo = 2;
 
-        }
+          foreach ($sub_areas as $row_sub_areas)
+           {
+              $id_sub_area = trim($row_sub_areas, "{}");
+              $sub_menu  = $this->menumodel->show_menu_sub_area($id_area, $id_sub_area);
 
-          $aux_tipo = $row->id_tipo;
-       }
+              if ($sub_menu  == TRUE) {
+                    if ($sub_menu->id_tipo == 3){ 
 
+                    $ruta_link = base_url().$sub_menu->ruta;
+                    $classe = 'class=""';
+                    $classe_flecha = 'class=""';
+                
+                    $html_menu .= '<ul class="submenu">
+                     <li class="">
+                          <a href="'.$ruta_link.'" '.$classe.' >
+                          <i class="menu-icon fa fa-caret-right"></i>
+                           <span class="menu-text">'.$sub_menu->nombre.'
+                          </span>
+                           <b '.$classe_flecha.'></b>
+                        </a>
+                      
+                        <b class="arrow"></b>
+                      </li></ul> ';
+
+                       $aux_tipo = 3;
+                    }    
+              }  
+           } //end foreach sub-area
+
+
+
+
+      }  //en foreach de area
+   }// end foreach de modulo 
+
+  /*-----------------------------------------------------------------*/
 
       if ($aux_tipo == 1)
       {
