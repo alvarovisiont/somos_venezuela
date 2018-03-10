@@ -107,15 +107,15 @@ class Menu extends CI_Controller {
 
 
      public function actualizar(){
-    //armar session completa      
-       $menu    = $this->menumodel->show_menu();
+
+        $menu    = $this->menumodel->show_menu();
 
        $html_menu = '<div id="sidebar" class="sidebar responsive ace-save-state">
-        <ul class="nav nav-list">';  
+                    <ul class="nav nav-list">';  
 
        $aux_tipo = 0;
         foreach ($menu as $row) 
-       { 
+       {
 
         if ($row->link == "f"){
           $ruta_link = "#";
@@ -130,10 +130,13 @@ class Menu extends CI_Controller {
           $icono_classe = 'class="menu-icon fa '.$row->icono.'"';
         }
 
-          if ($row->id_tipo == 1){ 
-          if ($row->id_tipo == $aux_tipo){
+ /*-----------------------------------------------------------------*/
+         
+        if ($row->id_tipo == 1){ 
 
-         $html_menu .= '</li>
+        if ($aux_tipo == 0){
+
+         $html_menu .= '
              <li class="">
               <a href="'.$ruta_link.'" '.$classe.' >
               <i '.$icono_classe.'></i>
@@ -145,8 +148,12 @@ class Menu extends CI_Controller {
 
             } else { 
 
-            if ($aux_tipo <> 0) { 
-            $html_menu .= '</li></ul>';
+            if ($aux_tipo == 1) { 
+            $html_menu .= '</li>';
+            }
+
+            if ($aux_tipo == 2) { 
+            $html_menu .= '</ul></li>';
             }
 
             $html_menu .= ' <li class="">
@@ -158,14 +165,18 @@ class Menu extends CI_Controller {
             </a>
           <b class="arrow"></b>';
 
-           } }
+           } 
+         }
 
-          if ($row->id_tipo == 2){ 
-          if ($row->id_tipo == $aux_tipo){
+         /*-----------------------------------------------------------------*/
+
+         if ($row->id_tipo == 2){ 
+        
+         if ($aux_tipo == 2){
 
           $html_menu .= ' </li></ul>
-             <ul class="submenu">
-         <li class="">
+          <ul class="submenu">
+           <li class="">
              <a href="'.$ruta_link.'" '.$classe.' >
               <i class="menu-icon fa fa-caret-right"></i>
               <span class="menu-text">'.$row->nombre.'
@@ -174,10 +185,14 @@ class Menu extends CI_Controller {
             </a>
             <b class="arrow"></b>';  
 
-            } else {
+            } 
+
+             if ($aux_tipo == 3){
+             $html_menu .= '</li></ul>';
+           }
 
             $html_menu .= '<ul class="submenu">
-        <li class="">
+              <li class="">
                <a href="'.$ruta_link.'" '.$classe.' >
               <i class="menu-icon fa fa-caret-right"></i>
               <span class="menu-text">'.$row->nombre.'
@@ -185,8 +200,10 @@ class Menu extends CI_Controller {
                <b '.$classe_flecha.'></b>
             </a>
             <b class="arrow"></b>';  
-           } 
+        
          } 
+
+         /*----------------------------------------------------------------*/
 
          if ($row->id_tipo == 3){ 
 
@@ -203,22 +220,24 @@ class Menu extends CI_Controller {
           </li></ul> ';
 
         }
-        $aux_tipo = $row->id_tipo;
-    } //en foreach
+          $aux_tipo = $row->id_tipo;
+       }
 
-     if ($aux_tipo == 1)
+      if ($aux_tipo == 1)
       {
-        $html_menu .= '</ul> </li>';  
-      }else {
-        $html_menu .= '</ul></li>';
+        $html_menu .= '</li>';  
       }
-      $html_menu .= '</ul> </div>';
+       if ($aux_tipo == 2) {
+        $html_menu .= '</li></ul>';
+      }
+
+       $html_menu .= '</ul> </div>';
 
        $menu_data = array(
          'menu_usuario' => $html_menu,
       );
       $this->session->set_userdata($menu_data);
-
+    
        $this->index();  
     }
 
