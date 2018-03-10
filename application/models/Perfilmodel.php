@@ -22,6 +22,11 @@ class Perfilmodel extends CI_Model {
     	return $result->result();
     }
 
+    public function count_perfil()
+    {
+      return $this->db->count_all('perfil');
+    }
+
     public function show_perfil_by_selection($manual)
     {
       /* ============================================================================================

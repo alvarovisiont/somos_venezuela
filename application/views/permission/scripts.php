@@ -75,10 +75,13 @@
 		})
 		.always(function() {
 			console.log("complete");
-		});
+		});	
 		
+	})
 
-
-		
+	$('.show_permissions').on('click',function(e){
+		$('#div_oculto').hide()
+		$('#div_oculto_modulos').hide()
+		$('#div_principal').show('slow/400/fast')
 	})
 </script>
