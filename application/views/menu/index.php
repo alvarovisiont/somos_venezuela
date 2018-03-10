@@ -61,12 +61,25 @@
 					$eliminar_sub_area = '';
 					$eliminar_modulo   = '';
 
+					$title = "";
+					$disabled="";
+
 
 					switch ($row->id_tipo) {
 						case 1:
 							$tipo = '<span class="badge">Módulo</span>';
 
-							$agregar_area = "<button type='button' class='btn btn-xs btn-info' data-toggle='modal' data-target='#modal_area' data-modulo='".$row->id."' title='Agregar Area'
+							if($row->link === 't')
+							{
+								$disabled="disabled=''";
+								$title = "No te vuelvas loco que no puedes agregar más!";
+							}
+							else
+							{
+								$title="Agregar Área";
+							}
+
+							$agregar_area = "<button type='button' class='btn btn-xs btn-info' data-toggle='modal' data-target='#modal_area' data-modulo='".$row->id."' title='".$title."' $disabled
 								data-tool='tooltip'>
 								<i class='fa fa-plus'></i> 
 							</button>";
@@ -86,7 +99,17 @@
 						case 2:
 							$tipo = '<span class="badge">Área</span>';
 
-							$agregar_sub_area = "<button type='button' class='btn btn-xs btn-info' data-toggle='modal' data-target='#modal_sub_area' data-area='".$row->id."' title='Agregar Sub Area'
+							if($row->link === 't')
+							{
+								$disabled="disabled=''";
+								$title = "No te vuelvas loco que no puedes agregar más!";
+							}
+							else
+							{
+								$title="Agregar Sub Area";
+							}
+
+							$agregar_sub_area = "<button type='button' class='btn btn-xs btn-info' data-toggle='modal' data-target='#modal_sub_area' data-area='".$row->id."' title='".$title."' $disabled
 								data-tool='tooltip'
 								>
 								<i class='fa fa-plus'></i>
