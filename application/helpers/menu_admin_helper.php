@@ -1,24 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
 //si no existe la función invierte_date_time la creamos
-if(!function_exists('menu'))
-{
-    //formateamos la fecha y la hora, función de cesarcancino.com
-
- function menu()
- {
- 	 $CI =& get_instance();
-     $CI->load->library('session');
-
- 	 $varhtml = $CI->session->userdata('menu_usuario');
-
- 	 $varhtml .= '<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-					<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
-				</div>';
-     return $varhtml;
- }
-}
-
 
 if(!function_exists('menu_admin'))
 {
@@ -73,9 +55,27 @@ if(!function_exists('menu_admin'))
 									<i class="menu-icon fa fa-caret-right"></i>
 									Perfiles
 								</a>
+								<a href="'.base_url().'index.php/permiso/dashboard"> 
+									<i class="menu-icon fa fa-caret-right"></i>
+									Permisología
+								</a>
 								<b class="arrow"></b>
+
+								<a href="'.base_url().'index.php/perfil/dashboard_table"> 
+									<i class="menu-icon fa fa-caret-right"></i>
+									Perfiles con data table
+								</a>
 						 	</li>
 						</ul>
+					</li>
+
+					<li class="">
+						<a href="'.base_url().'index.php/usuario">
+							<i class="menu-icon fa fa-users"></i>
+							<span class="menu-text"> Usuarios </span>
+						</a>
+
+						<b class="arrow"></b>
 					</li>
 
 				</ul><!-- /.nav-list -->';

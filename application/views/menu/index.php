@@ -11,12 +11,6 @@
 
 <div class="row no-gutters">
 	<div class="col-xs-12">
-		<?
-			if($mensaje)
-			{
-				echo '<p class="alert alert-'.$clase.'">'.$mensaje.'</p>';
-			}
-		?>
 	
 		<div class="row no-gutters">
 

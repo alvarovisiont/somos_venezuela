@@ -29,4 +29,28 @@ class Usuariomodel extends CI_Model {
     }
 
 
+    public function show_usuario()
+    {
+       $this->db->select('u.*, p.nombre as permiso');
+       $this->db->from('usuario as u');
+       $this->db->join('perfil as p', 'u.id_permiso = p.id');
+
+       $result =  $this->db->get();
+
+        return $result->result();
+    } 
+
+     public function actualizar_registro($id,$datos)
+    {
+      $this->db->where('id',$id);
+      if($this->db->update('usuario',$datos))
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    } 
+
 }

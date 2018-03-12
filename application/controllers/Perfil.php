@@ -33,6 +33,24 @@ class Perfil extends CI_Controller {
 		}
     }//fin index
 
+     public function dashboard_table() {
+        
+      if (!$this->session->userdata('is_logued_in'))
+       {
+        redirect('login/', 'refresh');
+       }else
+       {
+         $perfil = $this->perfilmodel->show_perfil(); 
+
+         $this->load->view('dashboard/header');
+         $this->load->view('dashboard/menu');
+         $this->load->view('perfil/index_table',compact('perfil',$perfil));
+         $this->load->view('dashboard/footer_table');
+         
+        }
+    }//fin index
+
+
     public function store()
     {
         $_POST['createdat'] = date('Y-m-d H:i:s');

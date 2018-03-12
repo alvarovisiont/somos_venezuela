@@ -19,23 +19,13 @@ class Menu extends CI_Controller {
     public function index($mensaje = null, $clase = null) {
 
     	$menu    = $this->menumodel->show_menu();
-        $mensaje = null;
-        $clase   = null;
-        if($mensaje)
-        {
-            $mensaje = base64_decode($mensaje);
-        }
-
-        if($clase)
-        {
-            $clase = base64_decode($clase);
-        }
+    
 
     	$this->load->view('dashboard/header');
-        $this->load->view('dashboard/menu',['menu' => $menu]);
-    	$this->load->view('menu/index',['menu' => $menu, 'mensaje' => $mensaje, 'clase' => $clase]);
+      $this->load->view('dashboard/menu',['menu' => $menu]);
+    	$this->load->view('menu/index',['menu' => $menu]);
     	$this->load->view('dashboard/footer');
-        $this->load->view('menu/scripts');
+      $this->load->view('menu/scripts');
 
     }
 
@@ -189,8 +179,18 @@ class Menu extends CI_Controller {
 
              if ($aux_tipo == 3){
              $html_menu .= '</li></ul>';
+             $html_menu .= '<ul class="submenu">
+              <li class="">
+               <a href="'.$ruta_link.'" '.$classe.' >
+              <i class="menu-icon fa fa-caret-right"></i>
+              <span class="menu-text">'.$row->nombre.'
+              </span>
+               <b '.$classe_flecha.'></b>
+            </a>
+            <b class="arrow"></b>';
            }
 
+            if ($aux_tipo == 1){
             $html_menu .= '<ul class="submenu">
               <li class="">
                <a href="'.$ruta_link.'" '.$classe.' >
@@ -199,7 +199,8 @@ class Menu extends CI_Controller {
               </span>
                <b '.$classe_flecha.'></b>
             </a>
-            <b class="arrow"></b>';  
+            <b class="arrow"></b>';
+            }   
         
          } 
 

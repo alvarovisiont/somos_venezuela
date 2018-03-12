@@ -35,8 +35,25 @@ class Menumodel extends CI_Model {
     }
 
 
+    public function show_menu_area($area)
+    {
+       $this->db->select('*');
+       $this->db->where('id',$area);
+       $result =  $this->db->get('menu');
+        return $result->row();
+    }  
 
-     public function show_menu_perfil()
+    public function show_menu_sub_area($area, $sub_area)
+    {
+       $this->db->select('*');
+       $this->db->where('id',$sub_area);
+       $this->db->where('id_padre',$area);
+       $result =  $this->db->get('menu');
+
+       return $result->row();
+    }  
+
+    public function show_menu_perfil()
     {
       $sql = "
        WITH RECURSIVE tree_table(id,nombre,id_padre,id_tipo,link,icono,ruta,con) AS 

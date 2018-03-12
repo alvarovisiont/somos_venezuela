@@ -68,7 +68,7 @@ class Login extends CI_Controller {
             }else
             {
 
-            if ($check_user->correo_activo == 'f')
+            if ($check_user->usuario_activo == 'f')
             {
              $this->session->set_flashdata('usuario_mensj', 'Su usuario se encuentra desactivado');
                              redirect(base_url() . 'index.php/login', 'refresh');

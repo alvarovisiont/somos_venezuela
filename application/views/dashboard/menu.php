@@ -148,8 +148,8 @@
 							</li>
 
 							<li>
-								<a href="#">Other Pages</a>
+								<a href="#">modulo</a>
 							</li>
-							<li class="active">Blank Page</li>
+							<li class="active">acciones</li>
 						</ul><!-- /.breadcrumb -->					
 					</div>
