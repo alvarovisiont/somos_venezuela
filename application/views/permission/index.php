@@ -205,7 +205,7 @@
 																				checked="true" 
 																				class="ace ace-switch ace-switch-5 check_area_'.$value1->id.' check_modulo_'.$value->id.'"
 																				name="sub_areas_'.$value1->id.'[]" 
-																				value="'.$value->id.'" multiple=""
+																				value="'.$value2->id.'" multiple=""
 																				data-link='.$value2->link.' 
 																			/>
 																			<span class="lbl middle"></span>
