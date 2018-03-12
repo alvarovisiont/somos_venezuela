@@ -97,6 +97,8 @@ class Admin extends CI_Controller {
         {
           $id_area = trim($row_areas, "{}");
 
+        if ($id_area <> null)
+        { 
         $area_menu  = $this->menumodel->show_menu_area($id_area);
 
         if ($area_menu == TRUE) {
@@ -153,12 +155,18 @@ class Admin extends CI_Controller {
             <b class="arrow"></b>';  
            } 
          } 
+
+        }//fin de id_area en null 
          /*----------------------------------------------------------------*/
            $aux_tipo = 2;
 
           foreach ($sub_areas as $row_sub_areas)
            {
               $id_sub_area = trim($row_sub_areas, "{}");
+
+              if ($id_sub_area <> null)
+              { 
+
               $sub_menu  = $this->menumodel->show_menu_sub_area($id_area, $id_sub_area);
 
               if ($sub_menu  == TRUE) {
@@ -183,6 +191,9 @@ class Admin extends CI_Controller {
                        $aux_tipo = 3;
                     }    
               }  
+
+             }//fin del null de sub_area 
+
            } //end foreach sub-area
 
 

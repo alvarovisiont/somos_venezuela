@@ -15,6 +15,12 @@
 
 		<link href="<?php echo base_url()?>assets_sistema/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+
+		<link rel="stylesheet" href="<?php echo base_url()?>assets_sistema/css/jquery-ui.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets_sistema/css/bootstrap-datepicker3.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets_sistema/css/ui.jqgrid.min.css" />
+
+
 		<!-- page specific plugin styles -->
 
 		<!-- text fonts -->

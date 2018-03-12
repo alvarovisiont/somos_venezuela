@@ -102,11 +102,11 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 
+
+
+
+
 /*
-
-
-
-
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => '127.0.0.1',
@@ -129,7 +129,6 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
 */
 
 

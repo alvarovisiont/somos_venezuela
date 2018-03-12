@@ -55,9 +55,27 @@ if(!function_exists('menu_admin'))
 									<i class="menu-icon fa fa-caret-right"></i>
 									Perfiles
 								</a>
+								<a href="'.base_url().'index.php/permiso/dashboard"> 
+									<i class="menu-icon fa fa-caret-right"></i>
+									Permisología
+								</a>
 								<b class="arrow"></b>
+
+								<a href="'.base_url().'index.php/perfil/dashboard_table"> 
+									<i class="menu-icon fa fa-caret-right"></i>
+									Perfiles con data table
+								</a>
 						 	</li>
 						</ul>
+					</li>
+
+					<li class="">
+						<a href="'.base_url().'index.php/usuario">
+							<i class="menu-icon fa fa-users"></i>
+							<span class="menu-text"> Usuarios </span>
+						</a>
+
+						<b class="arrow"></b>
 					</li>
 
 				</ul><!-- /.nav-list -->';

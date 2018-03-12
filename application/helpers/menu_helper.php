@@ -16,6 +16,15 @@ if(!function_exists('menu'))
  }
 }
 
+if(!function_exists('invierte_date_time'))
+{
+    //formateamos la fecha y la hora, función de cesarcancino.com
+ function invierte_date_time($fecha)
+ {
+  return date('d/m/Y H:i:s', strtotime($fecha));
+ }
+}
+
  
 
 
