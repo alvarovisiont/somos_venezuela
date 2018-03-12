@@ -62,6 +62,8 @@ class Permisomodel extends CI_Model {
     public function guardar_permisos_asignados($permisos)
     {
 
+      // función para guardar los accesos
+
       $insert = [];
 
       $array_where = [];

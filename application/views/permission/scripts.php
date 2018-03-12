@@ -110,7 +110,12 @@
 
 				$.grep(data,function(i,e){
 
-					$('input[name="modulos[]"][value="'+i.id_modulo+'"]').prop('checked', true)
+					$('input[name="modulos[]"][value="'+i.id_modulo+'"]').prop({
+						'checked':true,
+						'disabled': true
+					})
+
+
 
 					$('#div_visible_modulo_'+i.id_modulo).removeClass('hidden')
 
@@ -207,7 +212,10 @@
 
 				$.grep(data,function(i,e){
 
-					$('input[name="modulos[]"][value="'+i.id_modulo+'"]').prop('checked', true)
+					$('input[name="modulos[]"][value="'+i.id_modulo+'"]').prop({
+						'checked':true,
+						'disabled': true
+					})
 
 					$('#div_visible_modulo_'+i.id_modulo).removeClass('hidden')
 
