@@ -37,7 +37,6 @@
 		<link href="<?php echo base_url()?>assets_sistema/css/ace-skins.min.css" rel="stylesheet" type="text/css">
 
 		<link href="<?php echo base_url()?>assets_sistema/css/ace-rtl.min.css" rel="stylesheet" type="text/css">
-		<link href="<?php echo base_url()?>assets_sistema/css/ace-rtl.min.css" rel="stylesheet" type="text/css">
 
 		<!--[if lte IE 9]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
