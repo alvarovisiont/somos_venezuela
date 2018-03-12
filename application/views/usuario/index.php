@@ -15,7 +15,7 @@
 	    <div class="row no-gutters">	
 
 		<div class="col-xs-offset-9 col-xs-3 text-center">
-				<a href="<?= base_url().'index.php/menu/create' ?>" class="btn btn-purple">Usuario<i class="fa fa-plus"></i></a>
+				<a href="<?= base_url().'index.php/nuevo_u' ?>" class="btn btn-purple">Usuario<i class="fa fa-plus"></i></a>
 			</div>
 		</div>
 		<br/>

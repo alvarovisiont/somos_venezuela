@@ -37,7 +37,7 @@ class Menu extends CI_Controller {
         $this->load->view('dashboard/menu');
         $this->load->view('menu/form',['ruta' => $ruta,'register' => null]);
         $this->load->view('dashboard/footer');
-         $this->load->view('menu/scripts');
+        $this->load->view('menu/scripts');
     }
 
     public function store()

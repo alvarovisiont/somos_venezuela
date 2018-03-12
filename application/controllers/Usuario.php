@@ -9,7 +9,7 @@ class Usuario extends CI_Controller {
 /*---------------------------------------------------------------------*/
     public function __construct() {
          parent::__construct();
-         $this->load->model(array('configmodel','usuariomodel'));
+         $this->load->model(array('configmodel','usuariomodel', 'perfilmodel'));
     }
 /*---------------------------------------------------------------------*/
 	public function index(){
@@ -61,7 +61,6 @@ class Usuario extends CI_Controller {
 
         if($this->usuariomodel->actualizar_registro($id,$data))
         {
-
             //registro modificado;
              $this->session->set_flashdata('usuario_mensj', 'Cambiado el estatus');
             redirect('usuario/','refresh');
@@ -70,15 +69,21 @@ class Usuario extends CI_Controller {
         {
             redirect('usuario/','refresh');
         }
-
-
-
        }
 
    }
 
+ /*--------------------------------------------------------------------------------------------------------*/
+   public function create()
+   {
+      $perfil = $this->perfilmodel->show_perfil();
 
-
+      $ruta = base_url().'index.php/usuario/store';
+        $this->load->view('dashboard/header');
+        $this->load->view('dashboard/menu');
+        $this->load->view('usuario/form',['ruta' => $ruta,'register' => null, 'perfil' => $perfil]);
+        $this->load->view('dashboard/footer');
+   }
 
 
 }
