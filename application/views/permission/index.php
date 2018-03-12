@@ -22,9 +22,9 @@
 					<br/>
 					<button class="btn btn-app btn-primary no-radius show_div" data-type="perfiles">
 						<i class="ace-icon fa fa-pencil-square-o bigger-230"></i>
-							Edit
+							Editar
 						<span class="badge badge-warning badge-left"><?= $total_perfiles ?></span>
-						Editar
+						
 					</button>
 				</div>
 				<div class="col-md-6 text-center">
@@ -32,9 +32,9 @@
 					<br/>
 					<button class="btn btn-app btn-primary no-radius show_div" data-type="manuales">
 						<i class="ace-icon fa fa-pencil-square-o bigger-230"></i>
-							Edit
+							Editar
 						<span class="badge badge-warning badge-left"><?= $total_users ?></span>
-						Editar
+						
 					</button>
 				</div>
 			</div>
