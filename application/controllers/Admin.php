@@ -29,7 +29,6 @@ class Admin extends CI_Controller {
 
      public function session_menu(){
     //armar session completa
-
       $menu  = $this->menumodel->show_menu_perfil();
 
       $html_menu = '<div id="sidebar" class="sidebar responsive ace-save-state">
@@ -71,7 +70,11 @@ class Admin extends CI_Controller {
             }
 
             if ($aux_tipo == 2) { 
-            $html_menu .= '</ul></li>';
+            $html_menu .= '</li></ul>';
+            }
+
+            if ($aux_tipo == 3) { 
+            $html_menu .= '</li></ul>';
             }
 
             $html_menu .= ' <li class="">
@@ -90,8 +93,6 @@ class Admin extends CI_Controller {
 
          $areas = explode(',', $row->id_area);
          $sub_areas = explode(',', $row->id_sub_area);
-
-
 
         foreach ($areas as $row_areas)
         {
@@ -156,10 +157,11 @@ class Admin extends CI_Controller {
            } 
          } 
 
+         $aux_tipo = 2;
+
         }//fin de id_area en null 
          /*----------------------------------------------------------------*/
-           $aux_tipo = 2;
-
+           
           foreach ($sub_areas as $row_sub_areas)
            {
               $id_sub_area = trim($row_sub_areas, "{}");
@@ -170,8 +172,7 @@ class Admin extends CI_Controller {
               $sub_menu  = $this->menumodel->show_menu_sub_area($id_area, $id_sub_area);
 
               if ($sub_menu  == TRUE) {
-                    if ($sub_menu->id_tipo == 3){ 
-
+                    
                     $ruta_link = base_url().$sub_menu->ruta;
                     $classe = 'class=""';
                     $classe_flecha = 'class=""';
@@ -188,8 +189,7 @@ class Admin extends CI_Controller {
                         <b class="arrow"></b>
                       </li></ul> ';
 
-                       $aux_tipo = 3;
-                    }    
+                       $aux_tipo = 3; 
               }  
 
              }//fin del null de sub_area 

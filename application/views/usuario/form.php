@@ -174,7 +174,7 @@
 												<img id = "imagen_login" width="170" height="170" alt="170x170" src="<?php echo base_url()?>assets_sistema/images/avatars/avatar1.png"/>
 												
 												<div class="text">
-													<div class="inner">Imagenes pichurri</div>
+													<div class="inner">Imagenes</div>
 												</div>
 											</a>
 										</li>
