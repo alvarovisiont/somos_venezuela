@@ -33,6 +33,8 @@ class Permiso extends CI_Controller {
 
     public function buscar_perfiles_ajax()
     {
+        // -- función para buscar los perfiles
+
     	$type = $this->input->get('type') === 'manuales' ? true : false;
 
     	$result = $this->permisomodel->show_perfil_by_selection($type);
@@ -42,11 +44,38 @@ class Permiso extends CI_Controller {
 
     public function buscar_modulos_ajax()
     {
+        // -- función para traer los accesos al seleccionar un perfil
+
     	$perfil = $this->input->get('perfil');
 
     	$result = $this->permisomodel->show_module_by_perfil($perfil);
 
     	echo json_encode($result);
+    }
+
+    public function buscar_modulos_ajax_user()
+    {
+        // -- función para traer los accesos al seleccionar un usuario
+
+        $user = $this->input->get('user');
+
+        $result = $this->permisomodel->show_module_by_user($user);
+
+        echo json_encode($result);
+    }
+
+    public function guardar_permisos()
+    {
+        // -- función para guardar los accesos a los perfiles
+
+        if($this->permisomodel->guardar_permisos_asignados($_POST))
+        {
+            redirect('permiso/dashboard/','refresh');
+        }
+        else
+        {
+            redirect('permiso/dashboard/','refresh');  
+        }
     }
 
 }
