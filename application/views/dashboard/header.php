@@ -20,6 +20,7 @@
 		<link rel="stylesheet" href="<?php echo base_url()?>assets_sistema/css/bootstrap-datepicker3.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url()?>assets_sistema/css/ui.jqgrid.min.css" />
 
+		<link rel="stylesheet" href="<?php echo base_url()?>assets_sistema/css/chosen.min.css" />
 
 		<!-- page specific plugin styles -->
 

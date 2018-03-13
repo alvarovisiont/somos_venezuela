@@ -84,6 +84,9 @@
 	})
 
 	$('#perfiles_select').change(function(e) {
+
+		// función al cambiar el perfil en el select
+
 		const id_perfil = e.target.value
 
 		$('#div_image').show()
@@ -101,9 +104,22 @@
 		.done(function(data) {
 			
 			let filas = print_table_acceso(data)
+			if(filas)
+			{
 
-			$('#tabla_acceso').children('tbody').html(filas)
-			$('.table').dataTable()
+				$('#tabla_acceso').children('tbody').html(filas)
+
+				$('.table').dataTable({
+					order: []
+				})
+			}
+			else
+			{
+				filas = '<tr><td colspan="10">Este elemento no posee accesos del menú asignados</td></tr>'
+				$('#tabla_acceso').children('tbody').html(filas)
+			}
+
+			
 
 			$('#div_image').hide()
 			$('body').css('opacity',1);
@@ -114,6 +130,8 @@
 
 	$('#usuario_select').change(function(e) {
 		
+		// función al cambiar el usuario en el select
+
 		const id_usuario = e.target.value
 
 		$('#div_image').show()
@@ -132,8 +150,23 @@
 
 			let filas = print_table_acceso(data)
 
-			$('#tabla_acceso').children('tbody').html(filas)
-			$('.table').dataTable()
+			if(filas)
+			{
+
+				$('#tabla_acceso').children('tbody').html(filas)
+
+				$('.table').dataTable({
+					order: []
+				})
+			}
+			else
+			{
+				filas = '<tr><td colspan="10">Este elemento no posee accesos del menú asignados</td></tr>'
+				$('#tabla_acceso').children('tbody').html(filas)
+			}
+
+				
+
 			$('#div_image').hide()
 			$('body').css('opacity',1);
 			$('#div_oculto_tablas').removeClass('hidden').addClass('animated bounceInUp')
@@ -142,6 +175,9 @@
 	});
 
 	$('#tabla_acceso').children('tbody').on('click','tr td .check_accion',function(e){
+
+		// función al cambiar algún permiso en los checkbox
+
 		let datos  = e.target.value.split('-'),
 			type   = $('#tipo_perfil').val(),
 			id     = type === 'manuales' ? $('#usuario_select').val() : $('#perfiles_select').val(),
@@ -276,7 +312,7 @@
 			}
 			else
 			{
-				filas = '<tr><td colspan="10">Este elemento aún no posee ningún acceso al menú registrado</td></tr>'
+				filas = ``
 			}
 
 			return filas

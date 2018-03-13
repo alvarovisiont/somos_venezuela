@@ -131,10 +131,7 @@
 				<script type="text/javascript">
 					try{ace.settings.loadState('sidebar')}catch(e){}
 				</script>
-			
-			<?=menu_admin()?>
-
-	        <!--menu dinamico-->
+				
 	        <?=menu()?>
 			</div>
 
