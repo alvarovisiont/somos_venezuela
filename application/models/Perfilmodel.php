@@ -16,10 +16,8 @@ class Perfilmodel extends CI_Model {
     public function show_perfil()
     {
     	$this->db->select('*');
-    	$result = $this->db->get('perfil');
       $this->db->order_by('nombre');
-
-    	return $result->result();
+    	return $this->db->get('perfil')->result();
     }
 
     public function count_perfil()

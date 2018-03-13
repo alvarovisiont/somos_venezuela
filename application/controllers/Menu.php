@@ -36,7 +36,7 @@ class Menu extends CI_Controller {
             break;
         }// fin switch
 
-         $this->session->set_userdata($data); 
+        $this->session->set_userdata($data); 
       
     	$menu    = $this->menumodel->show_menu();
     

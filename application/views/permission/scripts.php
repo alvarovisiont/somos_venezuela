@@ -129,22 +129,22 @@
 					area = area.replace('}','')
 					area = area.split(',')
 					
-					area.forEach(function(area,index){
+					area.forEach(function(area_record,index){
 
-						$(`input[name="areas_${i.id_modulo}[]"][value="${area}"]`).prop('checked',true)
+						$(`input[name="areas_${i.id_modulo}[]"][value="${area_record}"]`).prop('checked',true)
 						$('#div_areas_'+i.id_modulo).show()
 
-						let link = $(`input[name="areas_${i.id_modulo}[]"][value="${area}"]`).data('link')
+						let link = $(`input[name="areas_${i.id_modulo}[]"][value="${area_record}"]`).data('link')
 
 						if(index === 0)
 						{
-							$('#li_area_'+area).addClass('active')
-							$('#'+area).addClass('active')
+							$('#li_area_'+area_record).addClass('active')
+							$('#'+area_record).addClass('active')
 						}
 
 						if(link !== 't')
 						{
-							$('#div_sub_areas_'+area).show('slow/400/fast')
+							$('#div_sub_areas_'+area_record).show('slow/400/fast')
 
 
 
@@ -155,7 +155,7 @@
 							sub_area = sub_area.split(',')
 
 							sub_area.forEach(function(sub_area,index1){
-								$(`input[name="sub_areas_${area}[]"][value="${sub_area}"]`).prop('checked',true)
+								$(`input[name="sub_areas_${area_record}[]"][value="${sub_area}"]`).prop('checked',true)
 							})
 						}
 							
@@ -235,22 +235,22 @@
 					area = area.replace('}','')
 					area = area.split(',')
 					
-					area.forEach(function(area,index){
+					area.forEach(function(area_record,index){
 
-						$(`input[name="areas_${i.id_modulo}[]"][value="${area}"]`).prop('checked',true)
+						$(`input[name="areas_${i.id_modulo}[]"][value="${area_record}"]`).prop('checked',true)
 						$('#div_areas_'+i.id_modulo).show()
 
-						let link = $(`input[name="areas_${i.id_modulo}[]"][value="${area}"]`).data('link')
+						let link = $(`input[name="areas_${i.id_modulo}[]"][value="${area_record}"]`).data('link')
 
 						if(index === 0)
 						{
-							$('#li_area_'+area).addClass('active')
-							$('#'+area).addClass('active')
+							$('#li_area_'+area_record).addClass('active')
+							$('#'+area_record).addClass('active')
 						}
 
 						if(link !== 't')
 						{
-							$('#div_sub_areas_'+area).show('slow/400/fast')
+							$('#div_sub_areas_'+area_record).show('slow/400/fast')
 
 
 
@@ -261,7 +261,7 @@
 							sub_area = sub_area.split(',')
 
 							sub_area.forEach(function(sub_area,index1){
-								$(`input[name="sub_areas_${area}[]"][value="${sub_area}"]`).prop('checked',true)
+								$(`input[name="sub_areas_${area_record}[]"][value="${sub_area}"]`).prop('checked',true)
 							})
 						}
 

@@ -226,9 +226,9 @@
 					reporte_checked = i.r_accion === 't' ? 'checked=""' : ''
 
 				filas += `<tr>
-							<td>Modulo</td>
-							<td>Área</td>
-							<td>${i.nombre}</td>
+							<td>${i.modulo}</td>
+							<td>${i.area}</td>
+							<td>${i.sub_area}</td>
 							<td>
 								<label class="">
 									<small class="muted smaller-90"></small>

@@ -94,7 +94,7 @@
 
 <div class="row no-gutters hidden" id="div_oculto_tablas">
 	<div class="col-md-12 col-sm-12">
-		<table class="table table-bordered" id="tabla_acceso" width="100%">
+		<table class="table table-bordered table-condensed table-responsive" id="tabla_acceso" width="100%">
 			<thead>
 				<tr>
 					<th class="text-center">Módulo</th>
