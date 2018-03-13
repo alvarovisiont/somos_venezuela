@@ -82,23 +82,20 @@ class Menumodel extends CI_Model {
     }
 
 
-
      public function crear_modulo($datos)
     {
-      
-      if($datos['id_tipo'] === '2')
-      {
-        $this->db->where('id_padre',$datos['id_padre']);
-        $this->db->select_max('session');
-        $result = $this->db->get('menu');
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
-        $result = $result->row();
-        
+      if($datos['id_tipo'] === '2')
+      {    
+        $db_admin->where('id_padre',$datos['id_padre']);
+        $db_admin->select_max('session');
+        $result = $db_admin->get('menu');
+
+        $result = $result->row(); 
         $datos['session'] = $result->session ? $result->session + 1 : 1;
       }
-
-      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
-      
+    
       $result = $db_admin->insert('menu',$datos);
 
       if($result)
@@ -124,8 +121,8 @@ class Menumodel extends CI_Model {
     {
       $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
-      $this->$db_admin->where('id',$id);
-      if($this->$db_admin->update('menu',$datos))
+      $db_admin->where('id',$id);
+      if($db_admin->update('menu',$datos))
       {
         return true;
       }
@@ -137,9 +134,11 @@ class Menumodel extends CI_Model {
 
     public function destroy($id)
     {
-      $this->db->where('id_padre',$id);
-      $this->db->select('*');
-      $result = $this->db->get('menu');
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+      $db_admin->where('id_padre',$id);
+      $db_admin->select('*');
+      $result = $db_admin->get('menu');
 
       if($result->num_rows() > 0)
       {
@@ -147,8 +146,8 @@ class Menumodel extends CI_Model {
       }
       else
       {
-        $this->db->where('id',$id);
-        $this->db->delete('menu');
+        $db_admin->where('id',$id);
+        $db_admin->delete('menu');
         return true;
       }
     }
