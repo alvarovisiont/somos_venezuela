@@ -49,9 +49,9 @@
 <div class="row no-gutters" id="div_oculto" style="display: none;">
 	
 	<div class="row no-gutters">
-		<form id="form_perfil" action="<?= base_url()."index.php/permiso/guardar_permisos" ?>" method="POST">
+		<form id="form_perfil" action="">
 			<input type="hidden" id="tipo_perfil" name="tipo_perfil">
-			<input type="hidden" id="registros_link" name="registros_link">
+			
 
 			<div class="col-md-12 col-sm-12">
 				<div class="widget-box">
@@ -89,6 +89,30 @@
 				</div>
 			</div>
 		</form>
+	</div>
+</div>
+
+<div class="row no-gutters hidden" id="div_oculto_tablas">
+	<div class="col-md-12 col-sm-12">
+		<table class="table table-bordered" id="tabla_acceso" width="100%">
+			<thead>
+				<tr>
+					<th class="text-center">Módulo</th>
+					<th class="text-center">Área</th>
+					<th class="text-center">Sub Área</th>
+					<th class="text-center">Crear</th>
+					<th class="text-center">Modificar</th>
+					<th class="text-center">Ver</th>
+					<th class="text-center">Eliminar</th>
+					<th class="text-center">Reporte</th>
+					<th class="text-center">Imprimir</th>
+					<th class="text-center">Activar</th>
+				</tr>
+			</thead>
+			<tbody class="text-center">
+				
+			</tbody>
+		</table>
 	</div>
 </div>
 <!-- =============================== Gift Cargando ==================================== -->
