@@ -14,16 +14,16 @@
 							<div class="col-xs-10">
 
 							<a href="<?= base_url().'index.php/menu/index/1'?>" 
-							class="btn btn-app btn-<?php echo ($tipo_bd==1)?'primary':'default'?>">
+							class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==1)?'primary':'default'?>">
 							<i class="ace-icon fa fa-tachometer bigger-250"></i>Default&nbsp;
 							</a>
 							
-								<a href="<?= base_url().'index.php/menu/index/2'?>" class="btn btn-app btn-<?php echo ($tipo_bd==2)?'primary':'default'?>">
+								<a href="<?= base_url().'index.php/menu/index/2'?>" class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==2)?'primary':'default'?>">
 											<i class="ace-icon fa fa-eye bigger-250"></i>
 											Admin&nbsp;
 								</a>
 								
-								<a href="#" class="btn btn-app btn-<?php echo ($tipo_bd==3)?'primary':'default'?>">
+								<a href="#" class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==3)?'primary':'default'?>">
 											<i class="ace-icon fa fa-ban bigger-250"></i>
 											Bienes&nbsp;
 								</a>

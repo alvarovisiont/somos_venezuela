@@ -22,18 +22,19 @@ class Menu extends CI_Controller {
        {
         case null:
           if ($this->session->userdata('bd_activa')){
-              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'));
+              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
+              'tipo_bd' =>  $this->session->userdata('tipo_bd'));
              }else
              {
-              $data = array( 'bd_activa' => 'default');
+              $data = array( 'bd_activa' => 'default',
+              'tipo_bd' => 1);
              }
-             $tipo_bd = 1;
              break;
          case 1:
-             $data = array( 'bd_activa' => 'default');    
+             $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
             break;
          case 2:
-            $data = array( 'bd_activa' => 'admin21');
+            $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
             break;
         }// fin switch
 
@@ -43,7 +44,7 @@ class Menu extends CI_Controller {
     
     	$this->load->view('dashboard/header');
       $this->load->view('dashboard/menu',['menu' => $menu]);
-    	$this->load->view('menu/index',['menu' => $menu, 'tipo_bd' => $tipo_bd]);
+    	$this->load->view('menu/index',['menu' => $menu]);
     	$this->load->view('dashboard/footer');
       $this->load->view('menu/scripts');
     }
