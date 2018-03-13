@@ -28,7 +28,6 @@
 
 		<!-- ace styles -->
 		<link href="<?php echo base_url()?>assets_sistema/css/ace.min.css" rel="stylesheet" type="text/css">
-		<link href="<?php echo base_url()?>assets_sistema/css/styles.css" rel="stylesheet" type="text/css">
 
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
@@ -37,6 +36,10 @@
 		<link href="<?php echo base_url()?>assets_sistema/css/ace-skins.min.css" rel="stylesheet" type="text/css">
 
 		<link href="<?php echo base_url()?>assets_sistema/css/ace-rtl.min.css" rel="stylesheet" type="text/css">
+		
+		<link href="<?php echo base_url()?>assets_sistema/css/animated.css" rel="stylesheet" type="text/css">
+
+		<link href="<?php echo base_url()?>assets_sistema/css/styles.css" rel="stylesheet" type="text/css">
 
 		<!--[if lte IE 9]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />

@@ -29,4 +29,19 @@ class Acceso extends CI_Controller {
         $this->load->view('dashboard/footer');
         $this->load->view('acceso_action/scripts');
     }
+
+    public function buscar_accesos()
+    {
+        $type = $this->input->get('type');
+        $id   = $this->input->get('id');
+
+        $result = $this->accesomodel->traer_accesos($type,$id);
+
+        echo json_encode($result);
+    }
+
+    public function modificar_acceso()
+    {
+        $this->accesomodel->modificar_permiso($_POST);
+    }
 }
