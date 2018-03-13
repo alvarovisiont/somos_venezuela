@@ -29,6 +29,18 @@ class Menu extends CI_Controller {
 
     }
 
+     public function admin($mensaje = null, $clase = null) {
+
+      $menu    = $this->menumodel->show_menu_admin();
+    
+      $this->load->view('dashboard/header');
+      $this->load->view('dashboard/menu',['menu' => $menu]);
+      $this->load->view('menu/index',['menu' => $menu]);
+      $this->load->view('dashboard/footer');
+      $this->load->view('menu/scripts');
+
+    }
+
     public function create()
     {
         $ruta = base_url().'index.php/menu/store';

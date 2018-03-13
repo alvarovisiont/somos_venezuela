@@ -17,8 +17,89 @@
 					</div>
 					<div class="form-group">
 						<label for="Nombre" class="control-label col-md-2 col-sm-2 col-md-offset-2 col-sm-offset-2">Icono</label>
+						
 						<div class="col-md-4 col-sm-4">
-							<input type="text" id="icono" name="icono" required="" class="form-control" value=" <?= $register ? $register->icono : '' ?> " placeholder="ejemplo: fa-shopping-cart">
+							<select class="chosen-select form-control" id="icono" name="icono" data-placeholder="Icono">
+								
+							<option value="<?= $register ? $register->icono : '' ?>"><?= $register ? $register->icono : '' ?></option>	
+
+						    <option value="fa-adjust">fa-adjust</option>
+							<option value="fa-asterisk">fa-asterisk</option>
+							<option value="fa-ban">fa-ban</option>
+							<option value="fa-bar-chart-o">fa-bar-chart-o</option>
+							<option value="fa-barcode">fa-barcode</option>
+							<option value="fa-flask">fa-flask</option>
+							<option value="fa-beer">fa-beer</option>
+							<option value="fa-bell-o">fa-bell-o</option>
+							<option value="fa-bell">fa-bell</option>
+							<option value="fa-bolt">fa-bolt</option>
+							<option value="fa-book">fa-book</option>
+							<option value="fa-bookmark">fa-bookmark</option>
+							<option value="fa-bookmark-o">fa-bookmark-o</option>
+							<option value="fa-briefcase">fa-briefcase</option>
+							<option value="fa-bullhorn">fa-bullhorn</option>
+							<option value="fa-calendar">fa-calendar</option>
+							<option value="fa-camera">fa-camera</option>
+							<option value="fa-camera-retro">fa-camera-retro</option>
+							<option value="fa-certificate">fa-certificate</option>
+							<option value="fa-check-square-o">fa-check-square-o</option>
+							<option value="fa-square-o">fa-square-o</option>
+							<option value="fa-circle">fa-circle</option>
+							<option value="fa-circle-o">fa-circle-o</option>
+							<option value="fa-cloud">fa-cloud</option>
+							<option value="fa-cloud-download">fa-cloud-download</option>
+							<option value="fa-cloud-upload">fa-cloud-upload</option>
+							<option value="fa-coffee">fa-coffee</option>
+							<option value="fa-cog">fa-cog</option>
+							<option value="fa-cogs">fa-cogs</option>
+							<option value="fa-comment">fa-comment</option>
+							<option value="fa-comment-o">fa-comment-o</option>
+							<option value="fa-comments">fa-comments</option>
+							<option value="fa-comments-o">fa-comments-o</option>
+							<option value="fa-credit-card">fa-credit-card</option>
+							<option value="fa-tachometer">fa-tachometer</option>
+							<option value="fa-desktop">fa-desktop</option>
+							<option value="fa-arrow-circle-o-down">fa-arrow-circle-o-down</option>
+							<option value="fa-download">fa-download</option>
+							<option value="fa-pencil-square-o">fa-pencil-square-o</option>
+							<option value="fa-envelope">fa-envelope</option>
+							<option value="fa-envelope-o">fa-envelope-o</option>
+							<option value="fa-exchange">fa-exchange</option>
+							<option value="fa-exclamation-circle">fa-exclamation-circle</option>
+							<option value="fa-external-link">fa-external-link</option>
+							<option value="fa-eye-slash">fa-eye-slash</option>
+							<option value="fa-eye">fa-eye</option>
+							<option value="fa-video-camera">fa-video-camera</option>
+							<option value="fa-fighter-jet">fa-fighter-jet</option>
+							<option value="fa-film">fa-film</option>
+							<option value="fa-filter">fa-filter</option>
+							<option value="fa-fire">fa-fire</option>
+							<option value="fa-flag">fa-flag</option>
+							<option value="fa-folder">fa-folder</option>
+							<option value="fa-folder-open">fa-folder-open</option>
+							<option value="fa-folder-o">fa-folder-o</option>
+							<option value="fa-folder-open-o">fa-folder-open-o</option>
+							<option value="fa-cutlery">fa-cutlery</option>
+							<option value="fa-gift">fa-gift</option>
+							<option value="fa-glass">fa-glass</option>
+							<option value="fa-globe">fa-globe</option>
+							<option value="fa-users">fa-users</option>
+							<option value="fa-hdd-o">fa-hdd-o</option>
+							<option value="fa-headphones">fa-headphones</option>
+							<option value="fa-heart">fa-heart</option>
+							<option value="fa-heart-o">fa-heart-o</option>
+							<option value="fa-home">fa-home</option>
+							<option value="fa-inbox">fa-inbox</option>
+							<option value="fa-info-circle">fa-info-circle</option>
+							<option value="fa-key">fa-key</option>
+							<option value="fa-leaf">fa-leaf</option>
+							<option value="fa-laptop">fa-laptop</option>
+							<option value="fa-gavel">fa-gavel</option>
+							<option value="fa-lemon-o">fa-lemon-o</option>
+							<option value="fa-lightbulb-o">fa-lightbulb-o</option>
+							<option value="fa-lock">fa-lock</option>
+							<option value="fa-unlock">fa-unlock</option>
+							</select>							
 						</div>
 					</div>
 					<div class="form-group">
