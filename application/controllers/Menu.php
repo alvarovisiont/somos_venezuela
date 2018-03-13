@@ -16,29 +16,35 @@ class Menu extends CI_Controller {
     }// fin construct
 
 
-    public function index($mensaje = null, $clase = null) {
+    public function index($tipo_bd = null) {
 
-    	$menu    = $this->menumodel->show_menu();
+       switch ($tipo_bd) 
+       {
+        case null:
+          if ($this->session->userdata('bd_activa')){
+              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'));
+             }else
+             {
+              $data = array( 'bd_activa' => 'default');
+             }
+             break;
+         case 1:
+             $data = array( 'bd_activa' => 'default');    
+            break;
+         case 2:
+            $data = array( 'bd_activa' => 'admin21');
+            break;
+        }// fin switch
+
+         $this->session->set_userdata($data); 
+      
+    	$menu    = $this->menumodel->show_menu($tipo_bd);
     
-
     	$this->load->view('dashboard/header');
       $this->load->view('dashboard/menu',['menu' => $menu]);
     	$this->load->view('menu/index',['menu' => $menu]);
     	$this->load->view('dashboard/footer');
       $this->load->view('menu/scripts');
-
-    }
-
-     public function admin($mensaje = null, $clase = null) {
-
-      $menu    = $this->menumodel->show_menu_admin();
-    
-      $this->load->view('dashboard/header');
-      $this->load->view('dashboard/menu',['menu' => $menu]);
-      $this->load->view('menu/index',['menu' => $menu]);
-      $this->load->view('dashboard/footer');
-      $this->load->view('menu/scripts');
-
     }
 
     public function create()
