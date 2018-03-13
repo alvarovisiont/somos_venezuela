@@ -59,7 +59,7 @@ class Permisomodel extends CI_Model {
 
     public function show_module_by_user($user)
     {
-      $this->db->where('id_usuario',$user);
+      $this->db->where(['id_usuario' => $user, 'id_perfil' => 1]);
 
       return  $this->db->get('acceso')->result();
       $db_admin->close();

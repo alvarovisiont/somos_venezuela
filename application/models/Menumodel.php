@@ -148,7 +148,18 @@ class Menumodel extends CI_Model {
       {
         $db_admin->where('id',$id);
         $db_admin->delete('menu');
-        return true;
+
+        $db_admin->where('id_modulo',$id);
+        $db_admin->delete('acceso_accion');
+
+        $sql = "UPDATE acceso SET id_sub_area = array_remove(id_sub_area, $id), id_area = array_remove(id_area, $id)";
+        $db_admin->query($sql);
+
+        $db_admin->where('id_modulo',$id);
+        $db_admin->delete('acceso');
+
+        $db_admin->close();
+
       }
     }
 }
