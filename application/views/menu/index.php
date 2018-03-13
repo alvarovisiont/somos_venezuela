@@ -10,22 +10,34 @@
 
 
 <div class="row no-gutters">
+    <div class="row">
+							<div class="col-xs-10">
+
+							<a href="<?= base_url().'index.php/menu/index/1'?>" 
+							class="btn btn-app btn-<?php echo ($tipo_bd==1)?'primary':'default'?>">
+							<i class="ace-icon fa fa-tachometer bigger-250"></i>Default&nbsp;
+							</a>
+							
+								<a href="<?= base_url().'index.php/menu/index/2'?>" class="btn btn-app btn-<?php echo ($tipo_bd==2)?'primary':'default'?>">
+											<i class="ace-icon fa fa-eye bigger-250"></i>
+											Admin&nbsp;
+								</a>
+								
+								<a href="#" class="btn btn-app btn-<?php echo ($tipo_bd==3)?'primary':'default'?>">
+											<i class="ace-icon fa fa-ban bigger-250"></i>
+											Bienes&nbsp;
+								</a>
+							</div>
+
+
+							<div class="col-xs-2">				
+										<a href="<?= base_url().'index.php/menu/create'?>" class="btn btn-app btn-success">
+											<i class="ace-icon fa fa-fire bigger-230"></i>
+											+ Módulo&nbsp;
+										</a>
+							</div>	
+    </div>	
 	<div class="col-xs-12">
-	
-		<div class="row no-gutters">
-
-		<div class="col-xs-offset-9 col-xs-3 text-center">
-				<a href="<?= base_url().'index.php/menu/actualizar' ?>" class="btn btn-success">Actualizar Menu&nbsp;<i class="fa fa-plus"></i></a>
-			</div>
-
-        </div>
-        <br/>
-		<div class="row no-gutters">	
-
-		<div class="col-xs-offset-9 col-xs-3 text-center">
-				<a href="<?= base_url().'index.php/menu/create' ?>" class="btn btn-purple">Agregar Módulo&nbsp;<i class="fa fa-plus"></i></a>
-			</div>
-		</div>
 		<br/>
 		<table class="table table-bordered table-responsive" id="tabla">
 			<thead>

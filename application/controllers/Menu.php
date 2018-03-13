@@ -27,6 +27,7 @@ class Menu extends CI_Controller {
              {
               $data = array( 'bd_activa' => 'default');
              }
+             $tipo_bd = 1;
              break;
          case 1:
              $data = array( 'bd_activa' => 'default');    
@@ -36,13 +37,13 @@ class Menu extends CI_Controller {
             break;
         }// fin switch
 
-         $this->session->set_userdata($data); 
+      $this->session->set_userdata($data); 
       
     	$menu    = $this->menumodel->show_menu();
     
     	$this->load->view('dashboard/header');
       $this->load->view('dashboard/menu',['menu' => $menu]);
-    	$this->load->view('menu/index',['menu' => $menu]);
+    	$this->load->view('menu/index',['menu' => $menu, 'tipo_bd' => $tipo_bd]);
     	$this->load->view('dashboard/footer');
       $this->load->view('menu/scripts');
     }
@@ -112,153 +113,5 @@ class Menu extends CI_Controller {
             redirect('menu/','refresh');
         }
     }
-
-
-     public function actualizar(){
-
-        $menu    = $this->menumodel->show_menu();
-
-       $html_menu = '<div id="sidebar" class="sidebar responsive ace-save-state">
-                    <ul class="nav nav-list">';  
-
-       $aux_tipo = 0;
-        foreach ($menu as $row) 
-       {
-
-        if ($row->link == "f"){
-          $ruta_link = "#";
-          $classe = 'class="dropdown-toggle"';
-          $classe_flecha = 'class="arrow fa fa-angle-down"';
-          $icono_classe = 'class="menu-icon fa '.$row->icono.'"';
-        }else
-        {
-          $ruta_link = base_url().$row->ruta;
-          $classe = 'class=""';
-          $classe_flecha = 'class=""';
-          $icono_classe = 'class="menu-icon fa '.$row->icono.'"';
-        }
-
- /*-----------------------------------------------------------------*/
-         
-        if ($row->id_tipo == 1){ 
-
-        if ($aux_tipo == 0){
-
-         $html_menu .= '
-             <li class="">
-              <a href="'.$ruta_link.'" '.$classe.' >
-              <i '.$icono_classe.'></i>
-              <span class="menu-text">'.$row->nombre.'
-              </span>
-              <b '.$classe_flecha.'></b>
-            </a>
-            <b class="arrow"></b>';
-
-            } else { 
-
-            if ($aux_tipo == 1) { 
-            $html_menu .= '</li>';
-            }
-
-            if ($aux_tipo == 2) { 
-            $html_menu .= '</ul></li>';
-            }
-
-            $html_menu .= ' <li class="">
-              <a href="'.$ruta_link.'" '.$classe.' >
-              <i '.$icono_classe.'></i>
-              <span class="menu-text">'.$row->nombre.'
-              </span>
-              <b '.$classe_flecha.'></b>
-            </a>
-          <b class="arrow"></b>';
-
-           } 
-         }
-
-         /*-----------------------------------------------------------------*/
-
-         if ($row->id_tipo == 2){ 
-        
-         if ($aux_tipo == 2){
-
-          $html_menu .= ' </li></ul>
-          <ul class="submenu">
-           <li class="">
-             <a href="'.$ruta_link.'" '.$classe.' >
-              <i class="menu-icon fa fa-caret-right"></i>
-              <span class="menu-text">'.$row->nombre.'
-              </span>
-               <b '.$classe_flecha.'></b>
-            </a>
-            <b class="arrow"></b>';  
-
-            } 
-
-             if ($aux_tipo == 3){
-             $html_menu .= '</li></ul>';
-             $html_menu .= '<ul class="submenu">
-              <li class="">
-               <a href="'.$ruta_link.'" '.$classe.' >
-              <i class="menu-icon fa fa-caret-right"></i>
-              <span class="menu-text">'.$row->nombre.'
-              </span>
-               <b '.$classe_flecha.'></b>
-            </a>
-            <b class="arrow"></b>';
-           }
-
-            if ($aux_tipo == 1){
-            $html_menu .= '<ul class="submenu">
-              <li class="">
-               <a href="'.$ruta_link.'" '.$classe.' >
-              <i class="menu-icon fa fa-caret-right"></i>
-              <span class="menu-text">'.$row->nombre.'
-              </span>
-               <b '.$classe_flecha.'></b>
-            </a>
-            <b class="arrow"></b>';
-            }   
-        
-         } 
-
-         /*----------------------------------------------------------------*/
-
-         if ($row->id_tipo == 3){ 
-
-         $html_menu .= '<ul class="submenu">
-         <li class="">
-              <a href="'.$ruta_link.'" '.$classe.' >
-              <i class="menu-icon fa fa-caret-right"></i>
-               <span class="menu-text">'.$row->nombre.'
-              </span>
-               <b '.$classe_flecha.'></b>
-            </a>
-          
-            <b class="arrow"></b>
-          </li></ul> ';
-
-        }
-          $aux_tipo = $row->id_tipo;
-       }
-
-      if ($aux_tipo == 1)
-      {
-        $html_menu .= '</li>';  
-      }
-       if ($aux_tipo == 2) {
-        $html_menu .= '</li></ul>';
-      }
-
-       $html_menu .= '</ul> </div>';
-
-       $menu_data = array(
-         'menu_usuario' => $html_menu,
-      );
-      $this->session->set_userdata($menu_data);
-    
-       $this->index();  
-    }
-
    
 }
