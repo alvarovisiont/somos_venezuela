@@ -126,7 +126,7 @@
 														</div>
 													</div>
 												</div><!-- /.timeline-items -->
-											</div><!-- /.timeline-container -->
+							</div><!-- /.timeline-container -->
 
 
 

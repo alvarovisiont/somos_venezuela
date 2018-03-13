@@ -134,25 +134,31 @@
 						$(`input[name="areas_${i.id_modulo}[]"][value="${area}"]`).prop('checked',true)
 						$('#div_areas_'+i.id_modulo).show()
 
+						let link = $(`input[name="areas_${i.id_modulo}[]"][value="${area}"]`).data('link')
+
 						if(index === 0)
 						{
 							$('#li_area_'+area).addClass('active')
 							$('#'+area).addClass('active')
 						}
 
-						$('#div_sub_areas_'+area).show('slow/400/fast')
+						if(link !== 't')
+						{
+							$('#div_sub_areas_'+area).show('slow/400/fast')
 
 
 
-						let sub_area = i.id_sub_area
+							let sub_area = i.id_sub_area
 
-						sub_area = sub_area.replace('{','')
-						sub_area = sub_area.replace('}','')
-						sub_area = sub_area.split(',')
+							sub_area = sub_area.replace('{','')
+							sub_area = sub_area.replace('}','')
+							sub_area = sub_area.split(',')
 
-						sub_area.forEach(function(sub_area,index1){
-							$(`input[name="sub_areas_${area}[]"][value="${sub_area}"]`).prop('checked',true)
-						})
+							sub_area.forEach(function(sub_area,index1){
+								$(`input[name="sub_areas_${area}[]"][value="${sub_area}"]`).prop('checked',true)
+							})
+						}
+							
 
 					})
 				})
@@ -234,25 +240,30 @@
 						$(`input[name="areas_${i.id_modulo}[]"][value="${area}"]`).prop('checked',true)
 						$('#div_areas_'+i.id_modulo).show()
 
+						let link = $(`input[name="areas_${i.id_modulo}[]"][value="${area}"]`).data('link')
+
 						if(index === 0)
 						{
 							$('#li_area_'+area).addClass('active')
 							$('#'+area).addClass('active')
 						}
 
-						$('#div_sub_areas_'+area).show('slow/400/fast')
+						if(link !== 't')
+						{
+							$('#div_sub_areas_'+area).show('slow/400/fast')
 
 
 
-						let sub_area = i.id_sub_area
+							let sub_area = i.id_sub_area
 
-						sub_area = sub_area.replace('{','')
-						sub_area = sub_area.replace('}','')
-						sub_area = sub_area.split(',')
+							sub_area = sub_area.replace('{','')
+							sub_area = sub_area.replace('}','')
+							sub_area = sub_area.split(',')
 
-						sub_area.forEach(function(sub_area,index1){
-							$(`input[name="sub_areas_${area}[]"][value="${sub_area}"]`).prop('checked',true)
-						})
+							sub_area.forEach(function(sub_area,index1){
+								$(`input[name="sub_areas_${area}[]"][value="${sub_area}"]`).prop('checked',true)
+							})
+						}
 
 					})
 				})
@@ -302,14 +313,22 @@
 				|FUNCIÓN PARA OCULTAR Y DESCHECKEAR TODO LO REFERENTE AL MÓDULO O MOSTRARLOS|
 			=================================================================================== */
 
-		let id_modulo = e.target.value
+		let id_modulo = e.target.value,
+			input = $('#registros_link'),	
+			record_link = input.val()
 
 		if(e.target.checked)
 		{
 			let link = e.target.dataset.link
+
 			if(link.toString() !== 't')
 			{
 				$('#div_areas_'+id_modulo).show('slow/400/fast')
+			}
+			else
+			{
+				record_link+= id_modulo+','
+				input.val(record_link)
 			}
 
 			$('#div_visible_modulo_'+id_modulo).removeClass('hidden')
@@ -329,6 +348,10 @@
 			$('.check_modulo_'+id_modulo).each(function(e){
 				$(this).prop('checked',false)
 			})
+
+			record_link = record_link.replace(`${id_modulo},`,'')
+			input.val(record_link)
+			
 		}
 	})
 
@@ -338,7 +361,10 @@
 				|FUNCIÓN PARA OCULTAR Y DESCHECKEAR TODAS LAS SUB-ÁREAS REFERENTE AL ÁREA O MOSTRARLAS|
 			============================================================================================= */
 
-		let id_area = e.target.value
+		let id_area = e.target.value,
+			input = $('#registros_link'),
+			record_link = input.val()
+
 
 		if(e.target.checked)
 		{
@@ -346,6 +372,13 @@
 			if(link.toString() !== 't')
 			{
 				$('#div_sub_areas_'+id_area).show('slow/400/fast')
+			}
+			else
+			{
+				record_link+= id_area+','
+
+				input.val(record_link)
+			
 			}
 		}
 		else
@@ -355,7 +388,41 @@
 			$('.check_area_'+id_area).each(function(e){
 				$(this).prop('checked',false)
 			})
+
+			record_link = record_link.replace(`${id_area},`,'')
+			input.val(record_link)
+
 		}
 	})
+
+	$('.checkbox_sub_areas').click(function(e){
+		
+		let id_sub = e.target.value,
+			input = $('#registros_link'),
+			record_link = input.val()
+
+		if(e.target.checked)
+		{
+					
+			record_link+= id_sub+','
+			input.val(record_link)
+		}
+		else
+		{
+			record_link =  record_link.replace(`${id_sub},`,'')
+			input.val(record_link)
+		}
+	})
+
+	$('#form_perfil').submit(function(e) {
+		/* Act on the event */
+		e.preventDefault()
+		$('.modulos_visible').each(function(e){
+			$(this).prop('disabled',false)
+		})
+
+		document.getElementById('form_perfil').submit()
+
+	});
 	
 </script>

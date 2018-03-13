@@ -67,6 +67,16 @@ class Permisomodel extends CI_Model {
       $insert = [];
 
       $array_where = [];
+      $array_link = [];
+
+      if(!empty($permisos['registros_link']))
+      {
+        $array_link = substr($permisos['registros_link'], 0, strlen($permisos['registros_link']) - 1);
+
+        $array_link = explode(',', $array_link);
+      }
+
+        
 
 
       if($permisos['tipo_perfil'] === 'manuales')
@@ -87,6 +97,8 @@ class Permisomodel extends CI_Model {
         $insert['id_modulo'] = $value;
         $insert['visible'] = false;
 
+        $this->acceso_accion_insert($value,$array_link,$insert);
+
         if(array_key_exists('modulos_visible', $permisos))
         {
           if(in_array($value, $permisos['modulos_visible']))
@@ -103,6 +115,8 @@ class Permisomodel extends CI_Model {
             
             $array_areas.= $value1.',';
 
+            $this->acceso_accion_insert($value1,$array_link,$insert);
+
 
             if(array_key_exists('sub_areas_'.$value1, $permisos))
             {
@@ -112,6 +126,8 @@ class Permisomodel extends CI_Model {
                
                
                $array_sub_areas.= $value2.','; 
+
+               $this->acceso_accion_insert($value2,$array_link,$insert);
                
 
               } // fin foreach sub areas
@@ -176,6 +192,35 @@ class Permisomodel extends CI_Model {
 
       } // fin foreach modulos
 
-      return true;      
+      //return true;      
+    }
+
+    private function acceso_accion_insert($value, $array_link, $insert)
+    {
+
+      // buscar si existe el registro en acceso_accion y así no tener que volver a registralo
+      // y si no existe registralo
+
+        if(in_array($value, $array_link))
+        {
+
+          $key   =  array_key_exists('id_usuario', $insert) ? 'id_usuario' : 'id_perfil';
+
+          $valor = array_key_exists('id_usuario', $insert) ? $insert['id_usuario'] : $insert['id_perfil'];
+
+          $array_where = ['id_modulo' => $value, $key => $valor];
+
+          $this->db->where($array_where);
+          $total = $this->db->count_all_results('acceso_accion'); 
+
+          if($total < 1)
+          {
+            $array_insert = ['id_modulo' => $value, $key => $valor, 
+                             'createdat' => date('Y-m-d H:i:s'), 
+                             'updatedat' => date('Y-m-d H:i:s')];
+
+            $this->db->insert('acceso_accion',$array_insert);
+          }
+        }
     }
 }

@@ -65,6 +65,10 @@ if(!function_exists('menu_admin'))
 									<i class="menu-icon fa fa-caret-right"></i>
 									Perfiles con data table
 								</a>
+								<a href="'.base_url().'index.php/acceso"> 
+									<i class="menu-icon fa fa-caret-right"></i>
+									Acciones del Menú
+								</a>
 						 	</li>
 						</ul>
 					</li>
