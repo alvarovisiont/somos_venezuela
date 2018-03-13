@@ -38,7 +38,7 @@ class Menu extends CI_Controller {
 
          $this->session->set_userdata($data); 
       
-    	$menu    = $this->menumodel->show_menu($tipo_bd);
+    	$menu    = $this->menumodel->show_menu();
     
     	$this->load->view('dashboard/header');
       $this->load->view('dashboard/menu',['menu' => $menu]);

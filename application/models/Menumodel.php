@@ -12,7 +12,7 @@ class Menumodel extends CI_Model {
       //Revisar 
     }
 
-    public function show_menu($tipo_bd=null)
+    public function show_menu()
     {     
       $sql = "
       WITH RECURSIVE tree_table(id,nombre,id_padre,id_tipo,link,icono,ruta,con) AS 
@@ -109,22 +109,17 @@ class Menumodel extends CI_Model {
       {
         return false;
       }
-
     }
 
     public function findRegisterById($id)
     {
-      $this->db->select('*');
-      $this->db->where('id',$id);
-
-       $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
-       $result = $db_admin->get('menu');
-
-      return $result->row();
-
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+      $db_admin->select('*');
+      $db_admin->where('id',$id);
+      
+       return $db_admin->get('menu')->row();
     }
-
-   
+  
     public function actualizar_registro($id,$datos)
     {
       $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
