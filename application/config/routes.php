@@ -57,5 +57,5 @@ $route['nuevo_u'] = 'usuario/create';
 
 
 $route['default_controller'] = 'login';
-$route['404_override'] = '';
+$route['404_override'] = 'login';
 $route['translate_uri_dashes'] = FALSE;
