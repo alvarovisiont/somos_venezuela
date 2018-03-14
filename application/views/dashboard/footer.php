@@ -78,7 +78,14 @@
 
     			let type = '<?= $this->session->flashdata("type") ?>'
 
-    			
+    			if(type)
+    			{
+    				let message = '<?= $this->session->flashdata("message") ?>'
+
+    				console.log(message,type,'aqui')
+    				
+    				
+    			}
 
     			function getNotification (type,message,title) {
     			
