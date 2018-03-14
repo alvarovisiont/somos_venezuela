@@ -47,6 +47,7 @@
 		<!-- ace scripts -->
 		<script src="<?= base_url('assets_sistema/js/ace-elements.min.js') ?>"></script>
 		<script src="<?= base_url('assets_sistema/js/ace.min.js') ?>"></script>
+		<script src="<?= base_url('assets_sistema/js/bootstrap-datepicker.min.js') ?>"></script>
 		<!-- ace settings handler -->
 		<script src="<?php echo base_url()?>assets_sistema/js/ace-extra.min.js"></script>
 		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.min.js"></script>
@@ -66,7 +67,13 @@
 					"language": {url: "<?= base_url().'assets_sistema/json/esp.json' ?>"}
 				})
 
-    			$('[data-tool="tooltip"]').tooltip();
+    			$('[data-tool="tooltip"]').tooltip()
+
+    			$('.fecha').datepicker({
+    				format: 'dd-mm-yyyy',
+    				autoClose: true,
+    				language: 'es'
+    			})
 
 				var $overflow = '';
 				var colorbox_params = {

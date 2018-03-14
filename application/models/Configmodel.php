@@ -15,31 +15,41 @@ class Configmodel extends CI_Model {
 /*----------------------------------------------------------------------------------------------------*/   
 
      public function get_by_tipo($id) {
-       $this->db->select('*');
-        $this->db->where('id', $id);
-        $query = $this->db->get('config');
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+      $db_admin->select('*');
+      $db_admin->where('id', $id);
+      return $db_admin->get('config')->row();
        
-        return $query->row();
+      $db_admin->close();
     }
 /*----------------------------------------------------------------------------------------------------*/   
 
      public function update_loqueo($id, $datos)
     {
         //Función para modificar los cargos
-        $this->db->where('id', $id);
-        $this->db->update('config', $datos);
+        $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+        $db_admin->where('id', $id);
+        $db_admin->update('config', $datos);
+
+        $db_admin->close();
     }
 
 /*----------------------------------------------------------------------------------------------------*/   
 
     public function session_usuario(){
-        $this->db->where('id_usuario', $this->session->userdata('id_usuario'));    
-        $query = $this->db->get('usuario_info');     
+        
+        $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE); 
+
+        $db_admin->where('id_usuario', $this->session->userdata('id_usuario'));    
+        $query = $db_admin->get('usuario_info');     
         
         if ($query->num_rows() == 1) {
+            $db_admin->close();
             return $query->row();
         } else {
             //$this->session->set_flashdata('usuario_mensj', 'Los datos introducidos son incorrectos');
+            $db_admin->close();
             redirect(base_url() . 'index.php/error', 'refresh');
         }
     }//fin de la session_usuario

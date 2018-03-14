@@ -15,8 +15,6 @@
 
 		<link href="<?php echo base_url()?>assets_sistema/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-
-		<link rel="stylesheet" href="<?php echo base_url()?>assets_sistema/css/jquery-ui.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url()?>assets_sistema/css/bootstrap-datepicker3.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url()?>assets_sistema/css/ui.jqgrid.min.css" />
 
@@ -39,6 +37,8 @@
 		<link href="<?php echo base_url()?>assets_sistema/css/ace-rtl.min.css" rel="stylesheet" type="text/css">
 		
 		<link href="<?php echo base_url()?>assets_sistema/css/animated.css" rel="stylesheet" type="text/css">
+
+		<link href="<?php echo base_url()?>assets_sistema/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css">
 
 		<link href="<?php echo base_url()?>assets_sistema/css/styles.css" rel="stylesheet" type="text/css">
 

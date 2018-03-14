@@ -12,7 +12,7 @@ class Usuario extends CI_Controller {
          $this->load->model(array('configmodel','usuariomodel', 'perfilmodel'));
     }
 /*---------------------------------------------------------------------*/
-	public function index(){
+	public function index($tipo_bd = null){
 		//buscar tipo de logueo
 
       if (!$this->session->userdata('is_logued_in'))
@@ -20,6 +20,27 @@ class Usuario extends CI_Controller {
         redirect('login/', 'refresh');
        }else
        {
+
+        switch ($tipo_bd) 
+         {
+          case null:
+            if ($this->session->userdata('bd_activa')){
+                $data = array( 'bd_activa' => $this->session->userdata('bd_activa'));
+               }else
+               {
+                $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);
+               }
+               break;
+           case 1:
+               $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
+              break;
+           case 2:
+              $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
+              break;
+          }// fin switch
+
+          $this->session->set_userdata($data); 
+
          $usuario  = $this->usuariomodel->show_usuario();
 
          $arr_usuario = $usuario;

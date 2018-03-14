@@ -8,17 +8,17 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Acceso extends CI_Controller {
+class Usuarioinfo extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('permisomodel','perfilmodel','accesomodel','usuariomodel'));
+        $this->load->model(array('usuariomodel'));
     }// fin construct
 
 
     public function index($tipo_bd = null) 
     {
-        switch ($tipo_bd) 
+    	 switch ($tipo_bd) 
        {
         case null:
           if ($this->session->userdata('bd_activa')){
@@ -40,30 +40,39 @@ class Acceso extends CI_Controller {
 
         $this->session->set_userdata($data);
 
-        $total_perfiles = $this->perfilmodel->count_perfil();
-        $total_users = $this->usuariomodel->count_users();
+        $info = $this->usuariomodel->usuario_info($this->session->userdata('id_usuario'));
 
-        $datos = ['total_perfiles' => $total_perfiles, 'total_users' => $total_users];
+        $ruta_avatar = base_url().'assets_sistema/images/avatars/';
 
+        $ruta_img = $info->imagen ? $ruta_avatar.$info->imagen : $ruta_avatar.'avatar3.png';
+
+        $fecha1 = new DateTime($info->fecha_nacimiento);
+        $fecha2 = new DateTime();
+
+        $diff = $fecha1->diff($fecha2);
+
+        $datos = ['info' => $info,'ruta_img' => $ruta_img,'edad' => $diff->y];
+        
     	  $this->load->view('dashboard/header');
         $this->load->view('dashboard/menu');
-        $this->load->view('acceso_action/index', $datos);
+        $this->load->view('usuario_info/index', $datos);
         $this->load->view('dashboard/footer');
-        $this->load->view('acceso_action/scripts');
+        $this->load->view('usuario_info/scripts');
     }
 
-    public function buscar_accesos()
+    public function create()
     {
-        $type = $this->input->get('type');
-        $id   = $this->input->get('id');
+    	if($this->usuariomodel->guardar_informacion_usuario($_POST))
+    	{
+    		redirect('usuarioinfo/','refresh');
+    	}
 
-        $result = $this->accesomodel->traer_accesos($type,$id);
-
-        echo json_encode($result);
     }
 
-    public function modificar_acceso()
+    public function remove_img()
     {
-        $this->accesomodel->modificar_permiso($_POST);
+      
+      $this->usuariomodel->remove_img($this->session->userdata('id_usuario'));
+      redirect('usuarioinfo/','refresh');
     }
 }
