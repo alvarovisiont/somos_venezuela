@@ -29,33 +29,39 @@ class Menumodel extends CI_Model {
       ) 
       SELECT * from (SELECT * from tree_table UNION SELECT * FROM tree_table_nietos) as result ORDER BY result.con asc, result.id_tipo asc ";
 
-            $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
-            $result = $db_admin->query($sql);
-        
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+      return $db_admin->query($sql)->result();
 
-      return $result->result();
+      $db_admin->close();
     }
 
     public function show_menu_area($area)
     {
-       $this->db->select('*');
-       $this->db->where('id',$area);
-       $result =  $this->db->get('menu');
-        return $result->row();
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE); 
+
+       $db_admin->select('*');
+       $db_admin->where('id',$area);
+       return $db_admin->get('menu')->row();
+        
+        $db_admin->close();
     }  
 
     public function show_menu_sub_area($area, $sub_area)
     {
-       $this->db->select('*');
-       $this->db->where('id',$sub_area);
-       $this->db->where('id_padre',$area);
-       $result =  $this->db->get('menu');
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
-       return $result->row();
+       $db_admin->select('*');
+       $db_admin->where('id',$sub_area);
+       $db_admin->where('id_padre',$area);
+       return $db_admin->get('menu')->row();
+
+       $db_admin->close();
     }  
 
     public function show_menu_perfil()
     {
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
       $sql = "
        WITH RECURSIVE tree_table(id,nombre,id_padre,id_tipo,link,icono,ruta,con) AS 
       (
@@ -76,9 +82,9 @@ class Menumodel extends CI_Model {
       where a.id_perfil =". $this->session->userdata('id_permiso')." and a.visible = true
       ORDER BY result.con asc, result.id_tipo asc ";
 
-      $result = $this->db->query($sql);
+      return $this->db->query($sql)->result();
 
-      return $result->result();
+      $db_admin->close();
     }
 
 
@@ -96,9 +102,9 @@ class Menumodel extends CI_Model {
         $datos['session'] = $result->session ? $result->session + 1 : 1;
       }
     
-      $result = $db_admin->insert('menu',$datos);
+      
 
-      if($result)
+      if($db_admin->insert('menu',$datos))
       {
         return true;
       }
@@ -106,6 +112,8 @@ class Menumodel extends CI_Model {
       {
         return false;
       }
+
+      $db_admin->close();
     }
 
     public function findRegisterById($id)
@@ -115,6 +123,7 @@ class Menumodel extends CI_Model {
       $db_admin->where('id',$id);
       
        return $db_admin->get('menu')->row();
+       $db_admin->close();
     }
   
     public function actualizar_registro($id,$datos)
@@ -130,6 +139,8 @@ class Menumodel extends CI_Model {
       {
         return false;
       }
+
+      $db_admin->close();
     }
 
     public function destroy($id)

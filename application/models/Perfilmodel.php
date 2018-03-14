@@ -15,14 +15,19 @@ class Perfilmodel extends CI_Model {
 
     public function show_perfil()
     {
-    	$this->db->select('*');
-      $this->db->order_by('nombre');
-    	return $this->db->get('perfil')->result();
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+    	$db_admin->select('*');
+      $db_admin->order_by('nombre');
+    	return $db_admin->get('perfil')->result();
+      $db_admin->close();
     }
 
     public function count_perfil()
     {
-      return $this->db->count_all('perfil');
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+      return $db_admin->count_all('perfil');
+      $db_admin->close();
     }
 
     public function show_perfil_by_selection($manual)
@@ -30,18 +35,20 @@ class Perfilmodel extends CI_Model {
       /* ============================================================================================
                     BUSCA LOS PERFILES DE ACUERDO A LA SELECCIÓN DEL TIPO DE PERFIL
          ============================================================================================ */
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
       if($manual)
       {
-        $this->db->where('sistema',true);
+        $db_admin->where('sistema',true);
       }
       else
       {
-        $this->db->where('sistema',false); 
+        $db_admin->where('sistema',false); 
       }
 
-      return $this->db->get('perfil')->result();
+      return $db_admin->get('perfil')->result();
 
+      $db_admin->close();
 
     }
 
@@ -51,15 +58,21 @@ class Perfilmodel extends CI_Model {
                     BUSCA LOS MÓDULOS DE ACUERDO A LA SELECCIÓN DEL PERFIL
          ============================================================================================ */
 
-      $this->db->where('id_perfil',$perfil);
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
-      return  $this->db->get('acceso')->result;
+      $db_admin->where('id_perfil',$perfil);
+
+      return  $db_admin->get('acceso')->result();
+
+      $db_admin->close();
     }
 
 
     public function crear_perfil($datos)
     {
-      if($this->db->insert('perfil',$datos))
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+      if($db_admin->insert('perfil',$datos))
       {
         return true;
       }
@@ -67,6 +80,8 @@ class Perfilmodel extends CI_Model {
       {
         return false;
       }
+
+      $db_admin->close();
 
     }
 }

@@ -22,17 +22,19 @@ class Acceso extends CI_Controller {
        {
         case null:
           if ($this->session->userdata('bd_activa')){
-              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'));
+              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
+              'tipo_bd' =>  $this->session->userdata('tipo_bd'));
              }else
              {
-              $data = array( 'bd_activa' => 'default');
+              $data = array( 'bd_activa' => 'default',
+              'tipo_bd' => 1);
              }
              break;
          case 1:
-             $data = array( 'bd_activa' => 'default');    
+             $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
             break;
          case 2:
-            $data = array( 'bd_activa' => 'admin21');
+            $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
             break;
         }// fin switch
 

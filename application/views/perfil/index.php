@@ -9,18 +9,39 @@
 </div><!-- /.page-header -->
 
 <div class="row no-gutters">
-	<div class="col-xs-12">
+	<div class="col-md-10 col-sm-10">
+		<div class="row no-gutters">
+			<h4 class="">Base de datos</h4>
+			<a href="<?= base_url().'index.php/perfil/dashboard/1'?>" 
+			class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==1)?'primary':'default'?>">
+			<i class="ace-icon fa fa-tachometer bigger-250"></i>Default&nbsp;
+			</a>
+			
+				<a href="<?= base_url().'index.php/perfil/dashboard/2'?>" class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==2)?'primary':'default'?>">
+							<i class="ace-icon fa fa-eye bigger-250"></i>
+							Admin&nbsp;
+				</a>
+				
+				<a href="#" class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==3)?'primary':'default'?>">
+							<i class="ace-icon fa fa-ban bigger-250"></i>
+							Bienes&nbsp;
+				</a>
+	    </div>
+	</div>
+</div>
+<div class="row no-gutters">
+	<div class="col-md-12 col-sm-12">
+		<button type='button' data-toggle='modal' data-target='#modal_perfil' 
+		 title='Agregar Perfil' data-tool='tooltip' class="pull-right">
+		 <img src="<?php echo base_url() ?>assets/galerias/iconos/agregar.png" alt="Agregar" height="50"/>
+		</button>
+	</div>
+</div>
 
-	<button type='button' data-toggle='modal' data-target='#modal_perfil' 
-	 title='Agregar Perfil' data-tool='tooltip'>
-	 <img src="<?php echo base_url() ?>assets/galerias/iconos/agregar.png" alt="Agregar" height="50"/>
-	</button>
-
-	<br>	
-	<div class="table-header">
-		Perfiles registrados
-	</div>	
-		<table class="table table-bordered table-responsive">
+<div class="row no-gutters">
+	<div class="col-md-12 col-sm-12">
+		
+		<table class="table table-bordered table-responsive" id="tabla">
 			<thead>
 				<tr>
 					<th class="text-center">Id</th>
@@ -55,6 +76,7 @@
 		</table>
 	</div>
 </div>
+		
 
 <div id="modal_perfil" class="modal fade" role="dialog">
     <div class="modal-dialog">

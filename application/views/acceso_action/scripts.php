@@ -110,7 +110,8 @@
 				$('#tabla_acceso').children('tbody').html(filas)
 
 				$('.table').dataTable({
-					order: []
+					order: [],
+					language: {url: "<?= base_url().'assets_sistema/json/esp.json' ?>"}
 				})
 			}
 			else
@@ -156,7 +157,8 @@
 				$('#tabla_acceso').children('tbody').html(filas)
 
 				$('.table').dataTable({
-					order: []
+					order: [],
+					language: {url: "<?= base_url().'assets_sistema/json/esp.json' ?>"}
 				})
 			}
 			else

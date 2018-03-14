@@ -19,7 +19,26 @@
 			<div class="widget-body">
 				<div class="widget-main">
 					<div class="row no-gutters">
-						<div class="col-md-6 text-center">
+						<div class="col-md-6 col-sm-6">
+						<h4 class="">Base de datos</h4>
+						<a href="<?= base_url().'index.php/acceso/index/1'?>" 
+						class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==1)?'primary':'default'?>">
+						<i class="ace-icon fa fa-tachometer bigger-250"></i>Default&nbsp;
+						</a>
+						
+							<a href="<?= base_url().'index.php/acceso/index/2'?>" class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==2)?'primary':'default'?>">
+										<i class="ace-icon fa fa-eye bigger-250"></i>
+										Admin&nbsp;
+							</a>
+							
+							<a href="#" class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==3)?'primary':'default'?>">
+										<i class="ace-icon fa fa-ban bigger-250"></i>
+										Bienes&nbsp;
+							</a>
+						</div>
+				    </div>
+					<div class="row no-gutters">
+						<div class="col-md-offset-4 col-sm-offset-4 col-md-2 col-sm-2 text-center">
 							<h4 class="">Perfiles</h4>
 							<br/>
 							<button class="btn btn-app btn-danger no-radius show_div" data-type="perfiles">
@@ -29,7 +48,7 @@
 								
 							</button>
 						</div>
-						<div class="col-md-6 text-center">
+						<div class="col-md-2 col-sm-2 text-center">
 							<h4 class="">Usuario</h4>
 							<br/>
 							<button class="btn btn-app btn-danger no-radius show_div" data-type="manuales">
@@ -84,35 +103,34 @@
 								</div>
 							</div>
 							<br/>
+							<div class="row no-gutters hidden" id="div_oculto_tablas">
+								<div class="col-md-12 col-sm-12">
+									<table class="table table-bordered table-condensed table-responsive" id="tabla_acceso" width="100%">
+										<thead>
+											<tr>
+												<th class="text-center">Módulo</th>
+												<th class="text-center">Área</th>
+												<th class="text-center">Sub Área</th>
+												<th class="text-center">Crear</th>
+												<th class="text-center">Modificar</th>
+												<th class="text-center">Ver</th>
+												<th class="text-center">Eliminar</th>
+												<th class="text-center">Reporte</th>
+												<th class="text-center">Imprimir</th>
+												<th class="text-center">Activar</th>
+											</tr>
+										</thead>
+										<tbody class="text-center">
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</form>
-	</div>
-</div>
-
-<div class="row no-gutters hidden" id="div_oculto_tablas">
-	<div class="col-md-12 col-sm-12">
-		<table class="table table-bordered table-condensed table-responsive" id="tabla_acceso" width="100%">
-			<thead>
-				<tr>
-					<th class="text-center">Módulo</th>
-					<th class="text-center">Área</th>
-					<th class="text-center">Sub Área</th>
-					<th class="text-center">Crear</th>
-					<th class="text-center">Modificar</th>
-					<th class="text-center">Ver</th>
-					<th class="text-center">Eliminar</th>
-					<th class="text-center">Reporte</th>
-					<th class="text-center">Imprimir</th>
-					<th class="text-center">Activar</th>
-				</tr>
-			</thead>
-			<tbody class="text-center">
-				
-			</tbody>
-		</table>
 	</div>
 </div>
 <!-- =============================== Gift Cargando ==================================== -->

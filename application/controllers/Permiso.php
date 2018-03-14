@@ -25,14 +25,14 @@ class Permiso extends CI_Controller {
               $data = array( 'bd_activa' => $this->session->userdata('bd_activa'));
              }else
              {
-              $data = array( 'bd_activa' => 'default');
+              $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);
              }
              break;
          case 1:
-             $data = array( 'bd_activa' => 'default');    
+             $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
             break;
          case 2:
-            $data = array( 'bd_activa' => 'admin21');
+            $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
             break;
         }// fin switch
 
