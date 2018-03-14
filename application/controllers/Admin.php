@@ -217,8 +217,8 @@ class Admin extends CI_Controller {
         $data = array( 'bd_activa' => 'default', 'tipo_bd' => 1);
         $this->session->set_userdata($data);
 
-        $this->session->set_flashdata('type' => 'success');
-        $this->session->set_flashdata('message' => 'Se ha logueado correctamente');
+        $this->session->set_flashdata('type','success');
+        $this->session->set_flashdata('message','Se ha logueado correctamente');
 
          $this->session();
          $this->session_menu(1);
