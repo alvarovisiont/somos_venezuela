@@ -153,7 +153,7 @@ class Usuariomodel extends CI_Model {
       $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
       $db_admin->where('id',$this->session->userdata('id_usuario'));
-      $db_admin->update('usuario',['fecha_acceso' => date('Y-m-d H:i:s', strtotime('-6 hour')) ] );
+      $db_admin->update('usuario',['fecha_acceso' => date('Y-m-d H:i:s', strtotime('-4 hour')) ] );
     }
    
 
