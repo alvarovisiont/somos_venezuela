@@ -46,12 +46,23 @@ class Usuarioinfo extends CI_Controller {
 
         $ruta_img = $info->imagen ? $ruta_avatar.$info->imagen : $ruta_avatar.'avatar3.png';
 
-        $fecha1 = new DateTime($info->fecha_nacimiento);
-        $fecha2 = new DateTime();
+        $edad = '';
 
-        $diff = $fecha1->diff($fecha2);
+        if($info->fecha_nacimiento)
+        {
+            $fecha1 = new DateTime($info->fecha_nacimiento);
+            $fecha2 = new DateTime();
 
-        $datos = ['info' => $info,'ruta_img' => $ruta_img,'edad' => $diff->y];
+            $diff = $fecha1->diff($fecha2);
+            $edad = $diff->y;
+        }
+        else
+        {
+          $edad = 'Sin Información';
+        }
+          
+
+        $datos = ['info' => $info,'ruta_img' => $ruta_img,'edad' => $edad];
         
     	  $this->load->view('dashboard/header');
         $this->load->view('dashboard/menu');
@@ -69,10 +80,46 @@ class Usuarioinfo extends CI_Controller {
 
     }
 
-    public function remove_img()
+    public function uploadImg()
     {
-      
-      $this->usuariomodel->remove_img($this->session->userdata('id_usuario'));
-      redirect('usuarioinfo/','refresh');
+
+      if (!$this->upload->do_upload('foto')) {
+
+          $this->data['error'] = array('error' => $this->upload->display_errors('<div class="alert alert-danger">', '</div>'));
+
+          print_r($this->data['error']);
+          //error
+      } 
+      else 
+      {
+
+          $upload_data = $this->upload->data();
+          
+          
+          $imagen_nombre = $upload_data['file_name'];
+
+          //resize:
+
+          $config['image_library'] = 'gd2';
+          $config['source_image'] = $upload_data['full_path'];
+          $config['maintain_ratio'] = TRUE;
+          $config['width']     = 256;
+          $config['height']   = 256;
+
+          $this->load->library('image_lib', $config); 
+
+          $this->image_lib->resize();
+
+          //add to the DB
+          if($this->usuariomodel->uploadImg($this->session->userdata('id_usuario'), $imagen_nombre))
+          {
+            redirect('usuarioinfo','refresh');
+          }
+          else
+          {
+            redirect('usuarioinfo','refresh');
+          }
+
+        } // fin guardado imagen
     }
 }

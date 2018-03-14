@@ -72,7 +72,7 @@ class Login extends CI_Controller {
 
 		 if ($this->input->post()) {
 
-		 	$username = $this->input->post('email');
+		 	      $username = $this->input->post('email');
             $password = $this->input->post('pass');
            // $username = $username.$this->input->post('username');
 
@@ -94,7 +94,7 @@ class Login extends CI_Controller {
             }
 
             }
-		 }	
+		    }	
 		       
 
 		         $data = array(
@@ -105,8 +105,10 @@ class Login extends CI_Controller {
                 );
 
                 $this->session->set_userdata($data);	
-		        redirect('admin', 'refresh');
-	}
+
+                $this->usuariomodel->registro_ultimo_logueo();
+		            redirect('admin', 'refresh');
+	   }
   }
 /*---------------------------------------------------------------------*/
         public function salir ()

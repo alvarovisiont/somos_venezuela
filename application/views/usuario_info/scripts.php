@@ -38,5 +38,9 @@
 		$('#btn_upload_cancel').click(function(e) {
 			$('#div_acciones').hide('slow/400/fast')
 		});
+
+		$('#btn_upload_submit').click(function(e) {
+			$('#form_foto').submit()
+		});
 	})
 </script>

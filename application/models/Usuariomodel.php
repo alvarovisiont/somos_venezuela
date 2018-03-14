@@ -135,6 +135,26 @@ class Usuariomodel extends CI_Model {
       }
     }
 
+    public function uploadImg($id,$imagen)
+    {
+      // función para subir una imagen a la foto de perfil
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+      $db_admin->where('id_usuario',$id);
+      $db_admin->update('usuario_info',['imagen' => $imagen]);
+
+      $db_admin->close();
+    }
+
+    public function registro_ultimo_logueo()
+    {
+      // función para actualizar el último logueo del usuario
+
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+      $db_admin->where('id',$this->session->userdata('id_usuario'));
+      $db_admin->update('usuario',['fecha_acceso' => date('Y-m-d H:i:s', strtotime('-6 hour')) ] );
+    }
    
 
 }
