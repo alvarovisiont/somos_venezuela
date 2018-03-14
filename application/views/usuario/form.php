@@ -161,7 +161,7 @@
 					 </div>
 
 
-				   <input type="hidden" id="imagen" name="imagen" value="avatar">
+				   <input type="hidden" id="imagen" name="imagen" value="avatar.png">
 				   <div class="col-xs-12 text-center">
 	   					<button class="btn btn-rose btn-md radius-4">
 								<i class="ace-icon fa fa-floppy-o bigger-160"></i>

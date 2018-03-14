@@ -109,12 +109,18 @@ class Usuario extends CI_Controller {
 
     public function store()
     {
+
+       $cedula = $this->input->post('cedula', TRUE);
+        $nombre = $this->input->post('nombre', TRUE);
+         $apellido = $this->input->post('apellido', TRUE);
+          $imagen = $this->input->post('imagen', TRUE);
+
          $data = array(
                 'createdat' => date('Y-m-d H:i:s'),
                 'updatedat' => date('Y-m-d H:i:s'),
                 'fecha_acceso' => date('Y-m-d H:i:s'),
                 'password' => '123456',
-                'login' => $this->input->post('nombre', TRUE),
+                'login' => $this->input->post('login', TRUE),
                 'email' => $this->input->post('email', TRUE),
                 'id_permiso' => $this->input->post('id_permiso', TRUE),    
             );
@@ -123,10 +129,10 @@ class Usuario extends CI_Controller {
             $datapersonal = array(
                 'createdat' => date('Y-m-d H:i:s'),
                 'updatedat' => date('Y-m-d H:i:s'),
-                'cedula' => $this->input->post('cedula', TRUE),
-                'nombre' => $this->input->post('nombre', TRUE),
-                'apellido' => $this->input->post('apellido', TRUE),
-
+                'cedula' => $cedula,
+                'nombre' => $nombre,
+                'apellido' => $apellido,
+                'imagen' => $imagen,
             );
 
         if($this->usuariomodel->crear_usuario($data, $datapersonal))
