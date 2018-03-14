@@ -20,8 +20,6 @@ class Usuario extends CI_Controller {
         redirect('login/', 'refresh');
        }else
        {
-
-<<<<<<< HEAD
        switch ($tipo_bd) 
        {
         case null:
@@ -43,28 +41,6 @@ class Usuario extends CI_Controller {
         }// fin switch
 
         $this->session->set_userdata($data); 
-
-=======
-        switch ($tipo_bd) 
-         {
-          case null:
-            if ($this->session->userdata('bd_activa')){
-                $data = array( 'bd_activa' => $this->session->userdata('bd_activa'));
-               }else
-               {
-                $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);
-               }
-               break;
-           case 1:
-               $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
-              break;
-           case 2:
-              $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
-              break;
-          }// fin switch
-
-          $this->session->set_userdata($data); 
->>>>>>> 884c9e9edb762471ee61076dc58494c5487aa8b9
 
          $usuario  = $this->usuariomodel->show_usuario();
 

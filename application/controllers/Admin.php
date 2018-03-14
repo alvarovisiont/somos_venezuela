@@ -50,7 +50,29 @@ class Admin extends CI_Controller {
       $this->session->set_userdata($usuario_data);
     }
 
-     public function session_menu(){
+     public function session_menu($tipo_bd = null){
+
+      switch ($tipo_bd) 
+       {
+        case null:
+          if ($this->session->userdata('bd_activa')){
+              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
+              'tipo_bd' =>  $this->session->userdata('tipo_bd'));
+             }else
+             {
+              $data = array( 'bd_activa' => 'default',
+              'tipo_bd' => 1);
+             }
+             break;
+         case 1:
+             $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
+            break;
+         case 2:
+            $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
+            break;
+        }// fin switch
+
+        $this->session->set_userdata($data);
     //armar session completa
       $menu  = $this->menumodel->show_menu_perfil();
 
@@ -196,7 +218,7 @@ class Admin extends CI_Controller {
         $this->session->set_userdata($data);
 
          $this->session();
-         $this->session_menu();
+         $this->session_menu(1);
          $this->load->view('dashboard/header');
          $this->load->view('dashboard/menu');
          $this->load->view('dashboard/dashboard');

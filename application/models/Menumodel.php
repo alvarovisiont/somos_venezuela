@@ -60,6 +60,8 @@ class Menumodel extends CI_Model {
 
     public function show_menu_perfil()
     {
+       $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE); 
+       
       $sql = "
        WITH RECURSIVE tree_table(id,nombre,id_padre,id_tipo,link,icono,ruta,con) AS 
       (
@@ -80,7 +82,7 @@ class Menumodel extends CI_Model {
       where a.id_perfil =". $this->session->userdata('id_permiso')." and a.visible = true
       ORDER BY result.con asc, result.id_tipo asc ";
 
-      return $this->db->query($sql)->result();
+      return $db_admin->query($sql)->result();
 
       $db_admin->close();
     }
