@@ -52,6 +52,7 @@
 		<script src="<?php echo base_url()?>assets_sistema/js/ace-extra.min.js"></script>
 		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.min.js"></script>
 		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.bootstrap.min.js"></script>
+		<script src="<?php echo base_url()?>assets_sistema/js/bootoast.min.js"></script>
 
 		<!-- inline scripts related to this page -->
 
@@ -74,6 +75,14 @@
     				autoClose: true,
     				language: 'es'
     			})
+
+    			function getNotification (type,message) {
+    				
+    				bootoast.toast({
+					    message: message,
+						type: type
+					 });
+    			}
 
 				var $overflow = '';
 				var colorbox_params = {
@@ -128,7 +137,7 @@
 						})
 					});
 				}
-		})
+			})
 		</script>
 	</body>
 </html>
