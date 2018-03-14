@@ -83,7 +83,17 @@
     				let message = '<?= $this->session->flashdata("message") ?>'
 
     				console.log(message,type,'aqui')
-    				
+    				switch (type) {
+    					case 'success':
+    						toastr.success(message, 'Éxito')
+    					break;
+    					case 'alert':
+    						toastr.alert(message, 'Éxito')
+    					break;
+    					case 'danger':
+    						toastr.danger(message, 'Éxito')
+    					break;
+    				}
     				
     			}
 
