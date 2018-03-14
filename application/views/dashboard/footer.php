@@ -85,21 +85,23 @@
     				console.log(message,type,'aqui')
     				switch (type) {
     					case 'success':
-    						toastr.success(message, 'Éxito')
+    						toastr.success(message, 'Éxito!')
     					break;
     					case 'alert':
-    						toastr.alert(message, 'Éxito')
+    						toastr.alert(message, 'Alerta!')
     					break;
     					case 'danger':
-    						toastr.danger(message, 'Éxito')
+    						toastr.danger(message, 'Error!')
     					break;
     				}
     				
     			}
 
-    			function getNotification (type,message,title) {
-    			
-    				//toastr.[type](message, titulo)
+    			function getNotification (type,message) {
+    				
+    				let title  = type === 'success' ? 'Éxito!' : type === 'alert' ? 'Alerta!' : 'Error!'
+
+    				toastr.[type](message, titulo)
     			}
 
 				var $overflow = '';
