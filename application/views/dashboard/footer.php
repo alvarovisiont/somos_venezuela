@@ -52,7 +52,7 @@
 		<script src="<?php echo base_url()?>assets_sistema/js/ace-extra.min.js"></script>
 		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.min.js"></script>
 		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.bootstrap.min.js"></script>
-		<script src="<?php echo base_url()?>assets_sistema/js/bootoast.min.js"></script>
+		<script src="<?php echo base_url()?>assets_sistema/js/toastr.min.js"></script>
 
 		<!-- inline scripts related to this page -->
 
@@ -76,12 +76,29 @@
     				language: 'es'
     			})
 
-    			function getNotification (type,message) {
+    			let type = '<?= $this->session->flashdata('type') ?>'
+
+    			if(type)
+    			{
+    				let message = '<?= $this->session->flashdata('message') ?>'
+
+    				switch (type) {
+    					case 'success':
+    						toastr.success(message, 'Éxito')
+    					break;
+    					case 'alert'
+    						toastr.alert(message, 'Éxito')
+    					break;
+    					case 'danger':
+    						toastr.danger(message, 'Éxito')
+    					break;
+    				}
     				
-    				bootoast.toast({
-					    message: message,
-						type: type
-					 });
+    			}
+
+    			function getNotification (type,message,title) {
+    			
+    				toastr.[type](message, titulo)
     			}
 
 				var $overflow = '';

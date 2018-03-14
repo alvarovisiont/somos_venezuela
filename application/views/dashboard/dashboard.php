@@ -241,8 +241,6 @@
 								</div>
 							</div><!-- /.timeline-items -->
 						</div><!-- /.timeline-container -->
-
-
 				</div>				
 			</div>
 		</div>		

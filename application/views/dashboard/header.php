@@ -37,7 +37,7 @@
 		<link href="<?php echo base_url()?>assets_sistema/css/animated.css" rel="stylesheet" type="text/css">
 
 		<link href="<?php echo base_url()?>assets_sistema/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css">
-		<link href="<?php echo base_url()?>assets_sistema/css/bootoast.min.css" rel="stylesheet" type="text/css">
+		<link href="<?php echo base_url()?>assets_sistema/css/toastr.min.css" rel="stylesheet" type="text/css">
 
 		<link href="<?php echo base_url()?>assets_sistema/css/styles.css" rel="stylesheet" type="text/css">
 
