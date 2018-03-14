@@ -169,9 +169,9 @@ class Admin extends CI_Controller {
         redirect('login/', 'refresh');
        }else
        {
-        $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);
+        $data = array( 'bd_activa' => 'default', 'tipo_bd' => 1);
         $this->session->set_userdata($data);
-        
+
          $this->session();
          $this->session_menu();
          $this->load->view('dashboard/header');
