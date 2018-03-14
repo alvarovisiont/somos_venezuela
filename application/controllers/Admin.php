@@ -16,13 +16,36 @@ class Admin extends CI_Controller {
        
     }// fin construct
 
-    public function session(){
-    //armar session completa      
+    public function session($tipo_bd = null){
+    //armar session completa     
+       switch ($tipo_bd) 
+       {
+        case null:
+          if ($this->session->userdata('bd_activa')){
+              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
+              'tipo_bd' =>  $this->session->userdata('tipo_bd'));
+             }else
+             {
+              $data = array( 'bd_activa' => 'default',
+              'tipo_bd' => 1);
+             }
+             break;
+         case 1:
+             $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
+            break;
+         case 2:
+            $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
+            break;
+        }// fin switch
+
+        $this->session->set_userdata($data);
+
+ 
        $session_user = $this->configmodel->session_usuario(); 
        $usuario_data = array(
          'nombre_usuario' => $session_user->nombre,
          'apellido_usuario' => $session_user->apellido,
-         'imagen_personal' => $session_user->imagen,
+         'imagen_personal' => $session_user->imagen
       );
       $this->session->set_userdata($usuario_data);
     }

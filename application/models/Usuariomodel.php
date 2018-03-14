@@ -10,14 +10,22 @@ class Usuariomodel extends CI_Model {
     }
 
     public function login_usuario($username, $password) {
-        $this->db->where('email', $username);
-        $this->db->where('password', $password);
-        $query = $this->db->get('usuario');     
+        
+        $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+        $db_admin->where('email', $username);
+        $db_admin->where('password', $password);
+        $query = $db_admin->get('usuario');     
         
         if ($query->num_rows() == 1) {
+
+            $db_admin->close();
             return $query->row();
+
         } else {
 
+            $db_admin->close();
+            
             $this->session->set_flashdata('usuario_mensj', 'Los datos introducidos son incorrectos');
             redirect(base_url() . 'index.php/login', 'refresh');
         }
@@ -25,27 +33,44 @@ class Usuariomodel extends CI_Model {
 
     public function count_users()
     {
-        return $this->db->count_all('usuario');
+        $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+        return $db_admin->count_all('usuario');
+        $db_admin->close();
     }
 
 
     public function show_usuario()
     {
+<<<<<<< HEAD
        $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+=======
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+>>>>>>> 884c9e9edb762471ee61076dc58494c5487aa8b9
 
        $db_admin->select('u.*, p.nombre as permiso');
        $db_admin->from('usuario as u');
        $db_admin->join('perfil as p', 'u.id_permiso = p.id');
+<<<<<<< HEAD
 
       return $db_admin->get()->result();
 
       $db_admin->close();
+=======
+       return $db_admin->get()->result();
+
+       $db_admin->close();
+
+        
+>>>>>>> 884c9e9edb762471ee61076dc58494c5487aa8b9
     } 
 
      public function actualizar_registro($id,$datos)
     {
-      $this->db->where('id',$id);
-      if($this->db->update('usuario',$datos))
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+      $db_admin->where('id',$id);
+      if($db_admin->update('usuario',$datos))
       {
         return true;
       }
@@ -55,6 +80,7 @@ class Usuariomodel extends CI_Model {
       }
     } 
 
+<<<<<<< HEAD
 
      public function crear_usuario($datos, $datospersonal)
     {
@@ -77,6 +103,58 @@ class Usuariomodel extends CI_Model {
       {
         return false;
       }
+=======
+    public function usuario_info($id)
+    {
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+      $db_admin->where('u.id',$id);
+      $db_admin->select('u.*,ui.*,perfil.nombre as perfil');
+      $db_admin->from('usuario as u');
+      $db_admin->join('usuario_info as ui','ui.id_usuario = u.id','left');
+      $db_admin->join('perfil','perfil.id = u.id_permiso');
+      return $db_admin->get()->row();
+
+      $db_admin->close();
+      
+    } 
+
+    public function guardar_informacion_usuario($arreglo)
+    {
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+      
+      if(!empty($arreglo['password']))
+      {
+        $arreglo_user = ['password' => $arreglo['password']];
+
+        $db_admin->where('id',$arreglo['id_usuario']);
+        $db_admin->update('usuario',$arreglo_user);
+      }
+        
+      unset($arreglo['password']);
+
+      $db_admin->where('id_usuario',$arreglo['id_usuario']);
+
+      if($db_admin->update('usuario_info',$arreglo))
+      {
+        $db_admin->close(); 
+        return true;
+      }
+      else
+      {
+        $db_admin->close(); 
+        return false;
+      }
+    }
+
+    public function remove_img($id)
+    {
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+      $db_admin->where('id_usuario',$id);
+      $db_admin->update('usuario_info',['imagen' => '']);
+
+>>>>>>> 884c9e9edb762471ee61076dc58494c5487aa8b9
       $db_admin->close();
     }
 

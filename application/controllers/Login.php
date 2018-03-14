@@ -12,7 +12,26 @@ class Login extends CI_Controller {
          $this->load->model(array('configmodel','usuariomodel'));
     }
 /*---------------------------------------------------------------------*/
-	public function index(){
+	public function index($tipo_bd = null){
+        switch ($tipo_bd) 
+         {
+          case null:
+            if ($this->session->userdata('bd_activa')){
+                $data = array( 'bd_activa' => $this->session->userdata('bd_activa'));
+               }else
+               {
+                $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);
+               }
+               break;
+           case 1:
+               $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
+              break;
+           case 2:
+              $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
+              break;
+          }// fin switch
+
+          $this->session->set_userdata($data);
 		//buscar tipo de logueo
 		 $row = $this->configmodel->get_by_tipo(1);
 	     $tipo = $row->login;

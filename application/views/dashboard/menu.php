@@ -60,7 +60,7 @@
 									<ul class="dropdown-menu dropdown-navbar">
 										<li>
 											<a href="#" class="clearfix">
-												<img src="<?php echo base_url()?>assets_sistema/images/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+												<img src="<?= base_url().'assets_sistema/images/avatars/avatar1.png' ?>" class="msg-photo" alt="Alex's Avatar" />
 												<span class="msg-body">
 													<span class="msg-title">
 														<span class="blue">sistema web 21:</span>
@@ -88,7 +88,7 @@
 
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="<?php echo base_url()?>assets_sistema/images/avatars/<?php echo $this->session->userdata('imagen_personal')?>" alt="Sistema web 21" />
+								<img class="nav-user-photo" src="<?php echo base_url().'assets_sistema/images/avatars/'.$this->session->userdata('imagen_personal'); ?>" alt="Sistema web 21" />
 								<span class="user-info">
 									<small><?php echo $this->session->userdata('apellido_usuario')." ". $this->session->userdata('nombre_usuario')  ?></small>
 									Usuario
@@ -99,7 +99,7 @@
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a href="profile.html">
+									<a href="<?= base_url().'index.php/usuarioinfo' ?>">
 										<i class="ace-icon fa fa-user"></i>
 										Perfil
 									</a>
