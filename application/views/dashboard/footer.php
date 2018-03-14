@@ -76,29 +76,13 @@
     				language: 'es'
     			})
 
-    			let type = '<?= $this->session->flashdata('type') ?>'
+    			let type = '<?= $this->session->flashdata("type") ?>'
 
-    			if(type)
-    			{
-    				let message = '<?= $this->session->flashdata('message') ?>'
-
-    				switch (type) {
-    					case 'success':
-    						toastr.success(message, 'Éxito')
-    					break;
-    					case 'alert'
-    						toastr.alert(message, 'Éxito')
-    					break;
-    					case 'danger':
-    						toastr.danger(message, 'Éxito')
-    					break;
-    				}
-    				
-    			}
+    			
 
     			function getNotification (type,message,title) {
     			
-    				toastr.[type](message, titulo)
+    				//toastr.[type](message, titulo)
     			}
 
 				var $overflow = '';
