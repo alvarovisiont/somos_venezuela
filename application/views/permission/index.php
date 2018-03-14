@@ -19,20 +19,39 @@
 			<div class="widget-body">
 				<div class="widget-main">
 					<div class="row no-gutters">
-						<div class="col-md-6 text-center">
+						<div class="col-md-6 col-sm-6">
+						<h4 class="">Base de datos</h4>
+						<a href="<?= base_url().'index.php/permiso/dashboard/1'?>" 
+						class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==1)?'primary':'default'?>">
+						<i class="ace-icon fa fa-tachometer bigger-250"></i>Default&nbsp;
+						</a>
+						
+							<a href="<?= base_url().'index.php/permiso/dashboard/2'?>" class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==2)?'primary':'default'?>">
+										<i class="ace-icon fa fa-eye bigger-250"></i>
+										Admin&nbsp;
+							</a>
+							
+							<a href="#" class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==3)?'primary':'default'?>">
+										<i class="ace-icon fa fa-ban bigger-250"></i>
+										Bienes&nbsp;
+							</a>
+						</div>
+				    </div>
+					<div class="row no-gutters">
+						<div class="col-md-offset-4 col-sm-offset-4 col-md-2 col-sm-2 text-center">
 							<h4 class="">Perfiles</h4>
 							<br/>
-							<button class="btn btn-app btn-primary no-radius show_div" data-type="perfiles">
+							<button class="btn btn-app btn-purple no-radius show_div" data-type="perfiles">
 								<i class="ace-icon fa fa-pencil-square-o bigger-230"></i>
 									Editar
 								<span class="badge badge-warning badge-left"><?= $total_perfiles ?></span>
 								
 							</button>
 						</div>
-						<div class="col-md-6 text-center">
+						<div class="col-md-2 col-sm-2 text-center">
 							<h4 class="">Usuario</h4>
 							<br/>
-							<button class="btn btn-app btn-primary no-radius show_div" data-type="manuales">
+							<button class="btn btn-app btn-purple no-radius show_div" data-type="manuales">
 								<i class="ace-icon fa fa-pencil-square-o bigger-230"></i>
 									Editar
 								<span class="badge badge-warning badge-left"><?= $total_users ?></span>
@@ -60,7 +79,7 @@
 					<div class="widget-header">
 						<h3 class="widget-title">
 							Otorgar Permisos&nbsp;<i class="fa fa-lock"></i>
-							<button type="button" class="btn btn-fill btn-info show_permissions pull-right">
+							<button type="button" class="btn btn-fill btn-purple show_permissions pull-right">
 									Tipo Permisos &nbsp;<i class="fa fa-user"></i>&nbsp;<i class="fa fa-arrow-up"></i>
 							</button>
 						</h3>
@@ -161,7 +180,7 @@
 											if($value1->id_padre === $value->id)
 											{
 
-												// ===================== \ foreach areas \ ==============================
+												// ===================== \ foreach areas \ ======================
 
 												$tipo = $value1->link === 't' ? '(Link)' : '(Nivel)';
 

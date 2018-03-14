@@ -16,21 +16,37 @@ class Perfil extends CI_Controller {
     }// fin construct
 
 
-    public function dashboard() {
+    public function dashboard($tipo_bd = null) {
+
+        switch ($tipo_bd) 
+       {
+        case null:
+          if ($this->session->userdata('bd_activa')){
+              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
+              'tipo_bd' =>  $this->session->userdata('tipo_bd'));
+             }else
+             {
+              $data = array( 'bd_activa' => 'default',
+              'tipo_bd' => 1);
+             }
+             break;
+         case 1:
+             $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
+            break;
+         case 2:
+            $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
+            break;
+        }// fin switch
+
+        $this->session->set_userdata($data); 
 		
-      if (!$this->session->userdata('is_logued_in'))
-       {
-        redirect('login/', 'refresh');
-       }else
-       {
+      
          $perfil = $this->perfilmodel->show_perfil(); 
 
          $this->load->view('dashboard/header');
          $this->load->view('dashboard/menu');
          $this->load->view('perfil/index',compact('perfil',$perfil));
          $this->load->view('dashboard/footer');
-         
-		}
     }//fin index
 
      public function dashboard_table() {

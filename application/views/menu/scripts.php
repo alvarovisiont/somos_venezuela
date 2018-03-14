@@ -1,6 +1,6 @@
 <script>
 	$('.eliminar').click(function(e){
-		let agree = confirm('Esta seguro de querer eliminar este registro?'),
+		let agree = confirm('Esta seguro de querer eliminar este registro? Ten en cuenta que eliminaras todo lo relacionado'),
 		id    = e.target.dataset.eliminar,
 		ruta  = '<?= base_url()."index.php/menu/destroy/" ?>' + id
 

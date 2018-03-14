@@ -14,26 +14,66 @@ class Accesomodel extends CI_Model {
 
     public function traer_accesos($type,$id)
     {
-    	$key = $type === 'usuario' ? 'acceso_accion.id_usuario' : 'acceso_accion.id_perfil';
+       
+       $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+    	$key = $type === 'usuario' ? 'acceso.id_usuario' : 'acceso.id_perfil';
     	$valor = $id;
 
-      $this->db->where($key,$valor);
-      $this->db->select('acceso_accion.*,menu.nombre');
-      $this->db->from('acceso_accion');
-      $this->db->join('menu','menu.id = acceso_accion.id_modulo');
-      return $this->db->get()->result();
+      $sql = "SELECT acceso.*,
+              
+              CASE  
+              
+              WHEN menu.id_tipo = 3 THEN 
+                (SELECT menu1.nombre from menu as menu1 where id = (SELECT menu2.id_padre from menu as menu2 where id = menu.id_padre)
+                )
+              WHEN menu.id_tipo = 2 THEN
+                (SELECT menu1.nombre from menu as menu1 where menu1.id = menu.id_padre)
+              ELSE
+                menu.nombre
+              END AS modulo,
 
+              CASE  
+              
+              WHEN menu.id_tipo = 3 THEN 
+                (SELECT menu1.nombre from menu as menu1 where menu1.id = menu.id_padre)
+              WHEN menu.id_tipo = 2 THEN
+                menu.nombre
+              ELSE
+                ''
+              END  as area,
+
+              CASE  
+              
+              WHEN menu.id_tipo = 3 THEN 
+                menu.nombre
+              WHEN menu.id_tipo = 2 THEN
+                ''
+              ELSE
+                ''
+              END  as sub_area
+
+              from acceso_accion as acceso 
+              INNER JOIN menu ON menu.id = acceso.id_modulo
+              WHERE $key = $valor";
+      
+      return $db_admin->query($sql)->result();
+
+      $db_admin->close();
     }
 
     public function modificar_permiso($data)
     {
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
     	$key = $data['type'] === 'perfiles' ? 'id_perfil' : 'id_usuario';
     	$valor = $data['id'];
 
     	$array_where  = ['id_modulo' => $data['datos'][0], $key => $valor];
     	$array_update = [$data['datos'][1] => $data['datos'][2]];
 
-    	$this->db->where($array_where);
-    	$this->db->update('acceso_accion',$array_update);
+    	$db_admin->where($array_where);
+    	$db_admin->update('acceso_accion',$array_update);
+      $db_admin->close();
     }
 }

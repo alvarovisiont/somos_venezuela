@@ -60,6 +60,14 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
+
+				$('#tabla').dataTable({
+					"order": [],
+					"language": {url: "<?= base_url().'assets_sistema/json/esp.json' ?>"}
+				})
+
+    			$('[data-tool="tooltip"]').tooltip();
+
 				var $overflow = '';
 				var colorbox_params = {
 					rel: 'colorbox',
@@ -91,14 +99,6 @@
 				$(document).one('ajaxloadstart.page', function(e) {
 					$('#colorbox, #cboxOverlay').remove();
 			   });
-
-				$('#tabla').dataTable({
-					"order": []
-				})
-
-    			$('[data-tool="tooltip"]').tooltip();
-
-
 
     				if(!ace.vars['touch']) {
 					$('.chosen-select').chosen({allow_single_deselect:true}); 

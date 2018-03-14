@@ -16,8 +16,30 @@ class Acceso extends CI_Controller {
     }// fin construct
 
 
-    public function index() 
+    public function index($tipo_bd = null) 
     {
+        switch ($tipo_bd) 
+       {
+        case null:
+          if ($this->session->userdata('bd_activa')){
+              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
+              'tipo_bd' =>  $this->session->userdata('tipo_bd'));
+             }else
+             {
+              $data = array( 'bd_activa' => 'default',
+              'tipo_bd' => 1);
+             }
+             break;
+         case 1:
+             $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
+            break;
+         case 2:
+            $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
+            break;
+        }// fin switch
+
+        $this->session->set_userdata($data);
+
         $total_perfiles = $this->perfilmodel->count_perfil();
         $total_users = $this->usuariomodel->count_users();
 
