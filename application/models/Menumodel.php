@@ -60,8 +60,6 @@ class Menumodel extends CI_Model {
 
     public function show_menu_perfil()
     {
-      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
-
       $sql = "
        WITH RECURSIVE tree_table(id,nombre,id_padre,id_tipo,link,icono,ruta,con) AS 
       (

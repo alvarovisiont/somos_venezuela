@@ -31,13 +31,15 @@ class Usuariomodel extends CI_Model {
 
     public function show_usuario()
     {
-       $this->db->select('u.*, p.nombre as permiso');
-       $this->db->from('usuario as u');
-       $this->db->join('perfil as p', 'u.id_permiso = p.id');
+       $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
-       $result =  $this->db->get();
+       $db_admin->select('u.*, p.nombre as permiso');
+       $db_admin->from('usuario as u');
+       $db_admin->join('perfil as p', 'u.id_permiso = p.id');
 
-        return $result->result();
+      return $db_admin->get()->result();
+
+      $db_admin->close();
     } 
 
      public function actualizar_registro($id,$datos)
@@ -52,5 +54,30 @@ class Usuariomodel extends CI_Model {
         return false;
       }
     } 
+
+
+     public function crear_usuario($datos, $datospersonal)
+    {
+     $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+    if($db_admin->insert('usuario',$datos))
+      {
+        $db_admin->where('email', $datos['email']);
+        $query = $db_admin->get('usuario');
+
+        $queryresult = $query->row();
+        $datospersonal['id_usuario'] = $queryresult->id;
+
+       if($db_admin->insert('usuario_info',$datospersonal))
+      {  return true;
+      }else
+      {  return false; } 
+      
+      }else
+      {
+        return false;
+      }
+      $db_admin->close();
+    }
 
 }

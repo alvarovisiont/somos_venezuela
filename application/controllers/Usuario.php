@@ -12,7 +12,7 @@ class Usuario extends CI_Controller {
          $this->load->model(array('configmodel','usuariomodel', 'perfilmodel'));
     }
 /*---------------------------------------------------------------------*/
-	public function index(){
+	public function index($tipo_bd = null){
 		//buscar tipo de logueo
 
       if (!$this->session->userdata('is_logued_in'))
@@ -20,6 +20,30 @@ class Usuario extends CI_Controller {
         redirect('login/', 'refresh');
        }else
        {
+
+       switch ($tipo_bd) 
+       {
+        case null:
+          if ($this->session->userdata('bd_activa')){
+              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
+              'tipo_bd' =>  $this->session->userdata('tipo_bd'));
+             }else
+             {
+              $data = array( 'bd_activa' => 'default',
+              'tipo_bd' => 1);
+             }
+             break;
+         case 1:
+             $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
+            break;
+         case 2:
+            $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
+            break;
+        }// fin switch
+
+        $this->session->set_userdata($data); 
+
+
          $usuario  = $this->usuariomodel->show_usuario();
 
          $arr_usuario = $usuario;
@@ -85,5 +109,35 @@ class Usuario extends CI_Controller {
         $this->load->view('dashboard/footer');
    }
 
+    public function store()
+    {
+         $data = array(
+                'createdat' => date('Y-m-d H:i:s'),
+                'updatedat' => date('Y-m-d H:i:s'),
+                'fecha_acceso' => date('Y-m-d H:i:s'),
+                'password' => '123456',
+                'login' => $this->input->post('nombre', TRUE),
+                'email' => $this->input->post('email', TRUE),
+                'id_permiso' => $this->input->post('id_permiso', TRUE),    
+            );
 
+
+            $datapersonal = array(
+                'createdat' => date('Y-m-d H:i:s'),
+                'updatedat' => date('Y-m-d H:i:s'),
+                'cedula' => $this->input->post('cedula', TRUE),
+                'nombre' => $this->input->post('nombre', TRUE),
+                'apellido' => $this->input->post('apellido', TRUE),
+
+            );
+
+        if($this->usuariomodel->crear_usuario($data, $datapersonal))
+        {  
+            redirect('usuario/','refresh');
+        }
+        else
+        {       
+            redirect('usuario/','refresh');
+        }
+    }
 }

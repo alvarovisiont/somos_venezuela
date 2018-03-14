@@ -9,16 +9,35 @@
 </div><!-- /.page-header -->
 
 <?php //print_r ($this->session->userdata('arr_usuarios'));?>
+ <div class="row no-gutters">
+		<div class="col-md-10 col-sm-10">
 
-<div class="row no-gutters">
-	<div class="col-xs-12">
-	    <div class="row no-gutters">	
-
-		<div class="col-xs-offset-9 col-xs-3 text-center">
-				<a href="<?= base_url().'index.php/nuevo_u' ?>" class="btn btn-purple">Usuario<i class="fa fa-plus"></i></a>
-			</div>
+		<a href="<?= base_url().'index.php/usuario/index/1'?>" 
+		class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==1)?'primary':'default'?>">
+		<i class="ace-icon fa fa-tachometer bigger-250"></i>Default&nbsp;
+		</a>
+		
+			<a href="<?= base_url().'index.php/usuario/index/2'?>" class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==2)?'primary':'default'?>">
+						<i class="ace-icon fa fa-eye bigger-250"></i>
+						Admin&nbsp;
+			</a>
 		</div>
+
+
+		<div class="col-sm-2 col-md-2">				
+					<a href="<?= base_url().'index.php/nuevo_u'?>" class="btn btn-app btn-success">
+						<i class="ace-icon fa fa-fire bigger-230"></i>
+						+ Usuario&nbsp;
+					</a>
+		</div>	
+    </div>
+
+
+     
 		<br/>
+  <div class="row no-gutters">
+	<div class="col-xs-12">
+
 		<table class="table table-bordered table-responsive" id="tabla">
 			<thead>
 				<tr>
