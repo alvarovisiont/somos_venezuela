@@ -30,6 +30,8 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/assets_login1/fonts/iconic/css/material-design-iconic-font.min.css">
 
+	<link href="<?php echo base_url()?>assets_sistema/css/toastr.min.css" rel="stylesheet" type="text/css">
+
 
 
 

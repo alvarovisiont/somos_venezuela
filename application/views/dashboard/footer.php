@@ -52,6 +52,7 @@
 		<script src="<?php echo base_url()?>assets_sistema/js/ace-extra.min.js"></script>
 		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.min.js"></script>
 		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.bootstrap.min.js"></script>
+		<script src="<?php echo base_url()?>assets_sistema/js/toastr.min.js"></script>
 
 		<!-- inline scripts related to this page -->
 
@@ -74,6 +75,34 @@
     				autoClose: true,
     				language: 'es'
     			})
+
+    			let type = '<?= $this->session->flashdata("type") ?>'
+
+    			if(type)
+    			{
+    				let message = '<?= $this->session->flashdata("message") ?>'
+
+    				console.log(message,type,'aqui')
+    				switch (type) {
+    					case 'success':
+    						toastr.success(message, 'Éxito!')
+    					break;
+    					case 'alert':
+    						toastr.alert(message, 'Alerta!')
+    					break;
+    					case 'danger':
+    						toastr.danger(message, 'Error!')
+    					break;
+    				}
+    				
+    			}
+
+    			function getNotification (type,message) {
+    				
+    				let title  = type === 'success' ? 'Éxito!' : type === 'alert' ? 'Alerta!' : 'Error!'
+
+    				toastr.[type](message, titulo)
+    			}
 
 				var $overflow = '';
 				var colorbox_params = {
@@ -128,7 +157,7 @@
 						})
 					});
 				}
-		})
+			})
 		</script>
 	</body>
 </html>

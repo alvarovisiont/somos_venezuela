@@ -26,30 +26,33 @@
 						</span>
 
 						<div class="space space-4"></div>
+						<form action="<?= base_url().'index.php/usuarioinfo/uploadImg' ?>" method="POST" id="form_foto" 
+							enctype="multipart/form-data">
 
-						<a href="#" id="btn_activate_img_upload" class="btn btn-sm btn-block btn-success">
-							<i class="ace-icon fa fa-plus-circle bigger-120"></i>
-							<span class="bigger-110">Añadir Foto Perfil</span>
-						</a>
-						<input type="file" class="hidden" id="subir_img">
-						
-						<div id="div_acciones" style="display: none">
-							<br/>	
-							<button class="btn btn-default" id="btn_upload_cancel">
-								Cancelar&nbsp;<i class="fa fa-remove"></i>
-							</button>
-							<button class="btn btn-default" id="btn_upload_submit">
-								Guardar&nbsp;<i class="fa fa-thumbs-up"></i>
-							</button>
-							<br/>
-							<br/>
-						</div>
-						
+							<a href="#" id="btn_activate_img_upload" class="btn btn-sm btn-block btn-success">
+								<i class="ace-icon fa fa-plus-circle bigger-120"></i>
+								<span class="bigger-110">Añadir Foto Perfil</span>
+							</a>
+							<input type="file" name="foto" class="hidden" id="subir_img">
+							
+							<div id="div_acciones" style="display: none">
+								<br/>	
+								<button class="btn btn-default" id="btn_upload_cancel">
+									Cancelar&nbsp;<i class="fa fa-remove"></i>
+								</button>
+								<button class="btn btn-default" id="btn_upload_submit">
+									Guardar&nbsp;<i class="fa fa-thumbs-up"></i>
+								</button>
+								<br/>
+								<br/>
+							</div>
 
-						<a href="<?= base_url().'index.php/usuarioinfo/remove_img' ?>" class="btn btn-sm btn-block btn-primary" id="remove_img">
-							<i class="ace-icon fa fa-camera bigger-110"></i>
-							<span class="bigger-110">Tomar foto</span>
-						</a>
+							<a href="<?= base_url().'index.php/usuarioinfo/remove_img' ?>" class="btn btn-sm btn-block btn-primary" id="remove_img">
+								<i class="ace-icon fa fa-camera bigger-110"></i>
+								<span class="bigger-110">Tomar foto</span>
+							</a>
+
+						</form>
 					</div><!-- /.col -->
 
 					<div class="col-xs-12 col-sm-9">
@@ -88,7 +91,7 @@
 								<div class="profile-info-name"> Perfil </div>
 
 								<div class="profile-info-value">
-									<span><?= $info->perfil ?></span>
+									<span><?= $info->perfil ? $info->perfil : 'Sin Perfil'; ?></span>
 								</div>
 							</div>
 							
@@ -96,7 +99,7 @@
 								<div class="profile-info-name"> Teléfono </div>
 
 								<div class="profile-info-value">
-									<span><?= $info->telefono ?></span>
+									<span><?= $info->telefono ? $info->telefono : 'Sin Información' ?></span>
 								</div>
 							</div>
 
@@ -277,7 +280,7 @@
 												<label class="inline">
 													<input name="genero" type="radio" class="ace" 
 														<?= $info->genero === 't' ? 'checked=""' : '' ?>
-													 />
+													 value="1"/>
 													<span class="lbl middle"> Hombre</span>
 												</label>
 
@@ -285,6 +288,7 @@
 												<label class="inline">
 													<input name="genero" type="radio" class="ace"
 														<?= $info->genero === 'f' ? 'checked=""' : '' ?>
+														value="0"
 													 />
 													<span class="lbl middle"> Mujer</span>
 												</label>
