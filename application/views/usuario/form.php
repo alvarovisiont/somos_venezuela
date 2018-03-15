@@ -10,9 +10,25 @@
  	document.getElementById('imagen').value = "avatar"+id+".png";
  }
 
+  function correo()
+ {
+    var correo = document.getElementById("email").value; 
+
+   <?php foreach ($this->session->userdata('arr_usuarios') as $valor)
+    { ?>
+        var xvariable = "<?php echo $valor;?>";
+
+        if (xvariable.trim() == correo.trim() ){
+    	alert(xvariable+"---->"+correo);
+
+        }
+
+    <?php }?>  
+ }
 </script>
 
-<?php $ruta_controller = base_url() . "index.php/usuario/store";?>
+<?php 
+ $ruta_controller = base_url() . "index.php/usuario/store";?>
 
 <div class="page-header">
 	<h1>
@@ -111,10 +127,11 @@
 											<i class="light-red ace-icon fa fa-asterisk"></i>
 										</span> <br>	
 						    <span class="input-icon">
-							<input type="email" placeholder="Email" name="email" id="email" class="form-control" required="true" />
+							<input type="email" placeholder="Email" name="email" id="email" class="form-control" required="true" onchange="correo()"/>
 								<i class="ace-icon fa fa-envelope"></i>
 							</span>
-							 </div>
+							
+								 </div>
 						   </div>
 					    </div>
 				     </div>
