@@ -97,13 +97,6 @@
     				
     			}
 
-    			function getNotification (type,message) {
-    				
-    				let title  = type === 'success' ? 'Éxito!' : type === 'alert' ? 'Alerta!' : 'Error!'
-
-    				toastr.[type](message, titulo)
-    			}
-
 				var $overflow = '';
 				var colorbox_params = {
 					rel: 'colorbox',
