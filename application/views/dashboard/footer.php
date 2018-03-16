@@ -37,6 +37,8 @@
 			if('ontouchstart' in document.documentElement) 
 				document.write("<script src='<?= base_url('assets_sistema/js/jquery.mobile.custom.min.js')?>'>"+"<"+"/script>");
 		</script>
+		
+
 		<script src="<?= base_url('assets_sistema/js/bootstrap.min.js') ?>"></script>
 
 		<script src="<?= base_url('assets_sistema/js/chosen.jquery.min.js') ?>"></script>
@@ -84,7 +86,7 @@
     			{
     				let message = '<?= $this->session->flashdata("message") ?>'
 
-    				console.log(message,type,'aqui')
+    				console.log(message,type,'aquiiiiii')
     				switch (type) {
     					case 'success':
     						toastr.success(message, 'Éxito!')

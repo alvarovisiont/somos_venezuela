@@ -76,6 +76,7 @@ class Login extends CI_Controller {
 		 if ($this->input->post()) 
      {      
 
+        
         $username = $this->session->userdata('acceso') === '1' ? $this->input->post('email') : $this->input->post('username');
 
         $password = $this->input->post('pass');
@@ -83,32 +84,26 @@ class Login extends CI_Controller {
 
         $check_user = $this->usuariomodel->login_usuario($username, $password);
 
-        if ($check_user == TRUE) {
+        if ($check_user === TRUE) {
 
-         if ($check_user->correo_activo == 'f')
-          {
-              $this->session->set_flashdata('type','danger');
-              $this->session->set_flashdata('message','Debe activar su cuenta '.$username);
-              redirect(base_url() . 'index.php/login', 'refresh');
-          }
-          else
-          {
-
-            if ($check_user->usuario_activo == 'f')
+           if ($check_user->correo_activo == 'f')
             {
-              $this->session->set_flashdata('type','danger');
-              $this->session->set_flashdata('message','Su usuario esta desactivado temporalmente');
-              redirect(base_url() . 'index.php/login', 'refresh');
+                $this->session->set_flashdata('type','danger');
+                $this->session->set_flashdata('message','Debe activar su cuenta '.$username);
+                redirect(base_url() . 'index.php/login', 'refresh');
             }
+            else
+            {
 
-          }
+              if ($check_user->usuario_activo == 'f')
+              {
+                $this->session->set_flashdata('type','danger');
+                $this->session->set_flashdata('message','Su usuario esta desactivado temporalmente');
+                redirect(base_url() . 'index.php/login', 'refresh');
+              }
+
+            }
 	      }
-        else
-        {
-          $this->session->set_flashdata('type','danger');
-          $this->session->set_flashdata('message','Sus credenciales son Incorrectas');
-          redirect(base_url() . 'index.php/login', 'refresh');
-        }	
 	       
 
        $data = array(
