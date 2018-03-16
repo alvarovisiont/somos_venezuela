@@ -126,16 +126,13 @@ $query_builder = TRUE;
 	'save_queries' => TRUE
 );
 
-
-
-$db['local'] = array(
+$db['geografia'] = array(
 	'dsn'	=> '',
 	'hostname' => '127.0.0.1',
-	'username' => 'postgres',
-	'password' => '123456',
-	'database' => 'sistemaweb21',
-        //'database' => 'DIGITAL',
-	'dbdriver' => 'postgre',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'prueba21',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
@@ -150,6 +147,9 @@ $db['local'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+
+
 
 
 

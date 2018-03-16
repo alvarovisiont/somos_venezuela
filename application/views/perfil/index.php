@@ -22,21 +22,20 @@
 							Admin&nbsp;
 				</a>
 				
-				<a href="#" class="btn btn-app btn-<?php echo ($this->session->userdata('tipo_bd')==3)?'primary':'default'?>">
-							<i class="ace-icon fa fa-ban bigger-250"></i>
-							Bienes&nbsp;
-				</a>
+
 	    </div>
 	</div>
+
+	<div class="col-sm-2 col-md-2">				
+					<a href="#" class="btn btn-app btn-success" data-toggle='modal' data-target='#modal_perfil'>
+						<i class="ace-icon fa fa-fire bigger-250"></i>
+						+ Perfil&nbsp;
+					</a>
+		</div>		
+
+
 </div>
-<div class="row no-gutters">
-	<div class="col-md-12 col-sm-12">
-		<button type='button' data-toggle='modal' data-target='#modal_perfil' 
-		 title='Agregar Perfil' data-tool='tooltip' class="pull-right">
-		 <img src="<?php echo base_url() ?>assets/galerias/iconos/agregar.png" alt="Agregar" height="50"/>
-		</button>
-	</div>
-</div>
+
 
 <div class="row no-gutters">
 	<div class="col-md-12 col-sm-12">
