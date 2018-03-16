@@ -118,11 +118,15 @@ class Login extends CI_Controller {
               'bpass' => $check_user->password_activo
           );
 
+          $this->session->set_flashdata('type','success');
+          $this->session->set_flashdata('message','Ha iniciado sesión Correctamente');
+
           $this->session->set_userdata($data);	
 
           $this->usuariomodel->registro_ultimo_logueo();
           redirect('admin', 'refresh');
 	   }
+
   }
 /*---------------------------------------------------------------------*/
         public function salir ()
