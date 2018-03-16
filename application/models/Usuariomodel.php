@@ -13,7 +13,9 @@ class Usuariomodel extends CI_Model {
         
         $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
-        $db_admin->where('email', $username);
+        $campo = $this->session->userdata('acceso') === '1' ? 'email' : 'login';
+
+        $db_admin->where($campo, $username);
         $db_admin->where('password', $password);
         $query = $db_admin->get('usuario');     
         
