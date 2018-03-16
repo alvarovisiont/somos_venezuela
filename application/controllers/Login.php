@@ -75,7 +75,8 @@ class Login extends CI_Controller {
 
 		 if ($this->input->post()) 
      {      
-        $username = $this->session->userdata('acceso') === 1 ? $this->input->post('email') : $this->input->post('username');
+
+        $username = $this->session->userdata('acceso') === '1' ? $this->input->post('email') : $this->input->post('username');
 
         $password = $this->input->post('pass');
        // $username = $username.$this->input->post('username');
@@ -117,11 +118,15 @@ class Login extends CI_Controller {
               'bpass' => $check_user->password_activo
           );
 
+          $this->session->set_flashdata('type','success');
+          $this->session->set_flashdata('message','Ha iniciado sesión Correctamente');
+
           $this->session->set_userdata($data);	
 
           $this->usuariomodel->registro_ultimo_logueo();
           redirect('admin', 'refresh');
 	   }
+
   }
 /*---------------------------------------------------------------------*/
         public function salir ()
