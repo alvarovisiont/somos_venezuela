@@ -36,10 +36,13 @@ class Login extends CI_Controller {
 		 $row = $this->configmodel->get_by_tipo(1);
 	     $tipo = $row->login;
 	     $datos = [
-	     	'imagen' => pg_unescape_bytea($row->imagen),
-	     	'cintilo' => $row->cintillo,
-	     	'titulo' => $row->titulo
+	     	'imagen' => $row->imagen,
+	     	'banner' => $row->cintillo,
+	     	'titulo' => $row->titulo,
+        'logo' => $row->logo,
 	     ];
+
+       $this->session->set_userdata(['acceso' => $row->acceso]);
 
 		  $this->load->view('login/header');
 		switch ($tipo) 
@@ -70,44 +73,54 @@ class Login extends CI_Controller {
 		 //VERIFICAR
 
 
-		 if ($this->input->post()) {
+		 if ($this->input->post()) 
+     {      
+        $username = $this->session->userdata('acceso') === 1 ? $this->input->post('email') : $this->input->post('username');
 
-		 	      $username = $this->input->post('email');
-            $password = $this->input->post('pass');
-           // $username = $username.$this->input->post('username');
+        $password = $this->input->post('pass');
+       // $username = $username.$this->input->post('username');
 
-            $check_user = $this->usuariomodel->login_usuario($username, $password);
+        $check_user = $this->usuariomodel->login_usuario($username, $password);
 
-         if ($check_user == TRUE) {
+        if ($check_user == TRUE) {
 
-           if ($check_user->correo_activo == 'f')
-            {
-             $this->session->set_flashdata('usuario_mensj', 'Debe activar su cuenta '.$username);
-                             redirect(base_url() . 'index.php/login', 'refresh');
-            }else
-            {
+         if ($check_user->correo_activo == 'f')
+          {
+              $this->session->set_flashdata('type','danger');
+              $this->session->set_flashdata('message','Debe activar su cuenta '.$username);
+              redirect(base_url() . 'index.php/login', 'refresh');
+          }
+          else
+          {
 
             if ($check_user->usuario_activo == 'f')
             {
-             $this->session->set_flashdata('usuario_mensj', 'Su usuario se encuentra desactivado');
-                             redirect(base_url() . 'index.php/login', 'refresh');
+              $this->session->set_flashdata('type','danger');
+              $this->session->set_flashdata('message','Su usuario esta desactivado temporalmente');
+              redirect(base_url() . 'index.php/login', 'refresh');
             }
 
-            }
-		    }	
-		       
+          }
+	      }
+        else
+        {
+          $this->session->set_flashdata('type','danger');
+          $this->session->set_flashdata('message','Sus credenciales son Incorrectas');
+          redirect(base_url() . 'index.php/login', 'refresh');
+        }	
+	       
 
-		         $data = array(
-                    'is_logued_in' => TRUE,
-                    'id_usuario' => $check_user->id,
-                    'id_permiso' => $check_user->id_permiso,
-                    'bpass' => $check_user->password_activo
-                );
+       $data = array(
+              'is_logued_in' => TRUE,
+              'id_usuario' => $check_user->id,
+              'id_permiso' => $check_user->id_permiso,
+              'bpass' => $check_user->password_activo
+          );
 
-                $this->session->set_userdata($data);	
+          $this->session->set_userdata($data);	
 
-                $this->usuariomodel->registro_ultimo_logueo();
-		            redirect('admin', 'refresh');
+          $this->usuariomodel->registro_ultimo_logueo();
+          redirect('admin', 'refresh');
 	   }
   }
 /*---------------------------------------------------------------------*/

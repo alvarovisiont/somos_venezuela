@@ -217,9 +217,6 @@ class Admin extends CI_Controller {
         $data = array( 'bd_activa' => 'default', 'tipo_bd' => 1);
         $this->session->set_userdata($data);
 
-        $this->session->set_flashdata('type','success');
-        $this->session->set_flashdata('message','Se ha logueado correctamente');
-
          $this->session();
          $this->session_menu(1);
          $this->load->view('dashboard/header');
@@ -232,14 +229,11 @@ class Admin extends CI_Controller {
 /*------------------------------------------------------------------------------------*/  
     public function plantilla(){
 
-         $row = $this->configmodel->get_by_tipo(1);         
-         $data = array(
-          'tipo'=>  $row->login,
-          'id'=>  $row->id);
+         $row = $this->configmodel->get_by_tipo(1);       
 
          $this->load->view('dashboard/header');
          $this->load->view('dashboard/menu');
-         $this->load->view('dashboard/plantilla_login', $data);
+         $this->load->view('dashboard/plantilla_login', ['datos' => $row]);
          $this->load->view('dashboard/footer');
     }
 
@@ -255,21 +249,47 @@ class Admin extends CI_Controller {
             unset($_POST['titulo']);
         }
 
-        if(!empty($_FILES['imagen']['name']))
+        $errores = [];
+
+        foreach ($_FILES as $key => $row) 
         {
-            $_POST['imagen'] = pg_escape_bytea(file_get_contents($_FILES['imagen']['tmp_name']));
+          if(!empty($row['name']))
+          {
+              $ruta = './assets_sistema/images/gallery/complementos_login/';
+
+              $nombre_imagen = upload_image($key,$ruta);
+
+              if(is_array($nombre_imagen))
+              {
+                $errores[$key] = 'Ha ocurrido un error al tratar de subir el archivo';
+                print_r($nombre_imagen);
+                exit();
+              }
+              else
+              {
+                $_POST[$key] = $nombre_imagen;
+              }
+              
+          }
         }
 
-        if(!empty($_FILES['cintillo']['name']))
-        {
-            $_POST['cintillo'] = pg_escape_bytea(file_get_contents($_FILES['cintillo']['tmp_name']));
-        }
+        $this->session->set_flashdata('type', 'success');
+        $this->session->set_flashdata('message', 'Actualización realizada con éxito');
 
         unset($_POST['id']);
 
         $this->configmodel->update_loqueo($id, $_POST);     
 
         redirect('admin/plantilla', 'refresh');        
+     }
+
+     public function remove_img()
+     {
+        $id  = $this->input->post('id');
+        $ref = $this->input->post('ref');
+        $img = $this->input->post('img');
+
+        $this->configmodel->remove_img($id,$ref,$img);
      }
 
 

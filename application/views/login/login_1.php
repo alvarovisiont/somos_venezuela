@@ -3,12 +3,15 @@
 
 <!--===============================================================================================-->
 </head>
-<body style="background-color: #666666;">
-	
+<body style="background-color: #666666;">	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-	
+				
+				<img src="<?= base_url().'assets_sistema/images/gallery/complementos_login/'.$banner ?>" alt="" 
+				style="width: 100%; max-width: 100%; height: auto;">
+
+
 				 <form action="<?=base_url();?>index.php/login/logueo" class="login100-form validate-form" method="post">	
 
 					<span class="login100-form-title p-b-43">
@@ -73,7 +76,7 @@
 
 				</form>
 
-				<div class="login100-more" style="background-image: url('<?php echo base_url()?>assets/assets_login1/images/bg-01.jpg');">
+				<div class="login100-more" style="background-image: url('<?php echo base_url()?>assets_sistema/images/gallery/complementos_login/<?= $imagen ?>');">
 				</div>
 			</div>
 		</div>

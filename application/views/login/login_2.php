@@ -3,11 +3,16 @@
 <!--===============================================================================================-->
 </head>
 <body>
+	<header>
+		<img src="<?= base_url().'assets_sistema/images/gallery/complementos_login/'.$banner ?>" alt="" 
+				style="width: 100%; max-width: 100%; height: auto;">
+	</header>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
+
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src="<?php echo base_url()?>assets/assets_login1/images/integracion_de_sistemas.jpg" alt="IMG">
+					<img src="<?php echo base_url()?>assets_sistema/images/gallery/complementos_login/<?= $imagen ?>" alt="IMG" style="height: auto;">
 				</div>
 
 				 <form action="<?=base_url();?>index.php/login/logueo" class="login100-form validate-form" method="post">	
