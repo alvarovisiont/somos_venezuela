@@ -20,7 +20,7 @@
 
 		
 		
-		let message = '<?= $this->session->userdata("usuario_mensj") ?>'
+		let message = '<?= $this->session->flashdata("type") ?>'
 
 		if(message)
 		{

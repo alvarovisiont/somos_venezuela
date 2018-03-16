@@ -3,11 +3,14 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+	<img src="<?= base_url().'assets_sistema/images/gallery/complementos_login/'.$banner ?>" alt="" 
+		style="width: 100%; max-width: 100%; height: auto;">
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<div class="login100-form-title" style="background-image: url(<?php echo base_url()?>assets/assets_login1/images/bg-02.jpg);">
+				
+
+				<div class="login100-form-title" style="background-image: url(<?php echo base_url()?>assets_sistema/images/gallery/complementos_login/<?= $imagen ?>);">
 					<span class="login100-form-title-1">
 						<?= $titulo; ?>
 					</span>

@@ -217,9 +217,6 @@ class Admin extends CI_Controller {
         $data = array( 'bd_activa' => 'default', 'tipo_bd' => 1);
         $this->session->set_userdata($data);
 
-        $this->session->set_flashdata('type','success');
-        $this->session->set_flashdata('message','Se ha logueado correctamente');
-
          $this->session();
          $this->session_menu(1);
          $this->load->view('dashboard/header');
@@ -258,7 +255,6 @@ class Admin extends CI_Controller {
         {
           if(!empty($row['name']))
           {
-
               $ruta = './assets_sistema/images/gallery/complementos_login/';
 
               $nombre_imagen = upload_image($key,$ruta);
@@ -266,6 +262,8 @@ class Admin extends CI_Controller {
               if(is_array($nombre_imagen))
               {
                 $errores[$key] = 'Ha ocurrido un error al tratar de subir el archivo';
+                print_r($nombre_imagen);
+                exit();
               }
               else
               {
@@ -275,13 +273,23 @@ class Admin extends CI_Controller {
           }
         }
 
-        $this->session->set_flashdata('errors', $errores);
+        $this->session->set_flashdata('type', 'success');
+        $this->session->set_flashdata('message', 'Actualización realizada con éxito');
 
         unset($_POST['id']);
 
         $this->configmodel->update_loqueo($id, $_POST);     
 
         redirect('admin/plantilla', 'refresh');        
+     }
+
+     public function remove_img()
+     {
+        $id  = $this->input->post('id');
+        $ref = $this->input->post('ref');
+        $img = $this->input->post('img');
+
+        $this->configmodel->remove_img($id,$ref,$img);
      }
 
 

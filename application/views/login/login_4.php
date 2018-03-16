@@ -3,10 +3,15 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+	<header>
+		<img src="<?= base_url().'assets_sistema/images/gallery/complementos_login/'.$banner ?>" alt="">
+	</header>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-190 p-b-30">
+				<img src="<?= base_url().'assets_sistema/images/gallery/complementos_login/'.$banner ?>" alt="" 
+				style="width: 100%; max-width: 100%; height: auto;">
+				
 				 <form action="<?=base_url();?>index.php/login/logueo" class="login100-form validate-form" method="post">	
 					<div class="login100-form-avatar">
 						<img src="<?php echo base_url()?>assets/assets_login1/images/usuario.jpg" alt="AVATAR">

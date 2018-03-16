@@ -34,7 +34,7 @@ if(!function_exists('upload_image'))
 		/*
 			======================= Leyenda =============================
 
-			nombre_archivo : *| Nombre del campo file del formulario para la función du_upload |*
+			nombre_archivo : *| Nombre del campo file del formulario para la función do_upload |*
 
 			ruta  : *| String de la locación donde guardar el archivo |*
 
@@ -52,7 +52,7 @@ if(!function_exists('upload_image'))
 			$config = [];
 
 		    $config['upload_path'] = $ruta;
-		    $config['allowed_types'] = 'jpg|png|jpeg|'.$tipos;
+		    $config['allowed_types'] = 'jpg|png|jpeg'.$tipos;
 		    $config['max_size'] = '2048';
 		    $config['encrypt_name'] = TRUE;
 		    $config['overwrite'] = TRUE;

@@ -63,6 +63,8 @@
 		<script type="text/javascript">
 			jQuery(function($) {
 
+			// ======================= | FUNCIONES PARA TODO EL SISTEMA | ============================== //
+
 				$('#tabla').dataTable({
 					"order": [],
 					"language": {url: "<?= base_url().'assets_sistema/json/esp.json' ?>"}
@@ -96,6 +98,41 @@
     				}
     				
     			}
+
+    			// ======================= | FUNCIONES PARA PLANTILLA SISTEMA | ============================== //
+
+    			$('.remove_img_plantilla_img').click(function(e) {
+    				
+    				const agree = confirm('Esta seguro de querer eliminar esta imagen?')
+
+    				if(agree)
+    				{
+    					$('#div_image').show()
+						$('body').css('opacity',0.5);
+
+    					let id_remove = e.target.dataset.id,
+	    					ref       = e.target.dataset.ref,
+	    					img       = e.target.dataset.img
+
+	    				$.ajax({
+	    					url: '<?= base_url()."index.php/admin/remove_img" ?>',
+	    					type: 'POST',
+	    					data: {id : id_remove, ref, img},
+	    				})
+	    				.done(function(data) {
+	    					
+	    					$('#ref_'+ref).attr('href','')
+	    					$('#imagen_'+ref).attr('src','')
+	    					$('#div_image').hide()
+							$('body').css('opacity',1);	
+
+	    					toastr.success('Imagen removida con éxito','Éxito!')
+
+	    					e.target.style.display = 'none'
+	    				})
+    				}
+    				
+    			});
 
 				var $overflow = '';
 				var colorbox_params = {

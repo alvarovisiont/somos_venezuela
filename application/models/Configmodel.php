@@ -54,6 +54,21 @@ class Configmodel extends CI_Model {
         }
     }//fin de la session_usuario
  /*----------------------------------------------------------------------------------------------------*/   
+
+  public function remove_img($id,$ref,$img)
+  {
+
+    $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE); 
+
+    $key = $ref === 'complemento' ? 'imagen' : $ref;
+    
+
+    $db_admin->where('id',$id);
+    $db_admin->update('config',[$key => '']);
+    $db_admin->close();
+
+    unlink('assets_sistema/images/gallery/complementos_login/'.$img);
+  }
 }
 
 ?>    
