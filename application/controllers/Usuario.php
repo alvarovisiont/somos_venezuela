@@ -9,7 +9,7 @@ class Usuario extends CI_Controller {
 /*---------------------------------------------------------------------*/
     public function __construct() {
          parent::__construct();
-         $this->load->model(array('configmodel','usuariomodel', 'perfilmodel'));
+         $this->load->model(array('configmodel','usuariomodel', 'perfilmodel', 'geomodel'));
     }
 /*---------------------------------------------------------------------*/
 	public function index($tipo_bd = null){
@@ -144,4 +144,72 @@ class Usuario extends CI_Controller {
             redirect('usuario/','refresh');
         }
     }
+
+
+
+
+    /*public function store_municipio()
+    {
+
+
+
+       $data = array( 'bd_activa' => 'default');
+
+        $this->session->set_userdata($data);
+
+      $municipios = $this->geomodel->show_municipio();
+
+        foreach ($municipios as $row) 
+        {       
+
+
+
+            $user = explode(" ", $row->nombre);
+
+            $user_final = $user[0];
+
+            $data = array(
+                'createdat' => date('Y-m-d H:i:s'),
+                'updatedat' => date('Y-m-d H:i:s'),
+                'fecha_acceso' => date('Y-m-d H:i:s'),
+                'password' => '123456789',
+                'login' => $user_final,
+                'email' => $user_final."@USUARIOS.COM",
+                'id_permiso' => 5,
+                'correo_activo' => true,
+                'id_estado' => 17,      
+                'id_municipio' => $row->id_municipio,
+
+            );
+
+
+            $datapersonal = array(
+                'createdat' => date('Y-m-d H:i:s'),
+                'updatedat' => date('Y-m-d H:i:s'),
+                'fecha_nacimiento' => date('Y-m-d H:i:s'),
+                'nombre' => $user_final,
+                'apellido' => $user_final,
+                'imagen' => 'avatar.png',
+                'id_pais' => 1,
+
+            );
+
+
+
+        if($this->usuariomodel->crear_usuario($data, $datapersonal))
+        {  
+
+            echo "registro";
+        }
+        
+
+
+        } 
+
+          die();      
+
+    }//fin store 
+    */
+
+
 }
