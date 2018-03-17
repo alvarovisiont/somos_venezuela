@@ -23,12 +23,16 @@ class Geomodel extends CI_Model {
 
      public function show_municipio()
     {
-      $id_estado = 17;
+ 
+      $db_admin = $this->load->database('admin21', TRUE);
+      $db_admin->select('m.*, u.login as cuenta, u.password_activo as password_activo');
+      
+      $db_admin->from('municipio as m');
+      $db_admin->join('usuario as u','u.id_municipio = m.id_municipio','left');
 
-      $db_admin = $this->load->database('default', TRUE);
-      $db_admin->select('*');
-      $db_admin->where('id_estado', $id_estado);
-      return $db_admin->get('municipio')->result();
+      $db_admin->where('id_permiso', 5);
+
+      return $db_admin->get()->result();
       $db_admin->close();
     }
 
