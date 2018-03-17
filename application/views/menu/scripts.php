@@ -1,7 +1,5 @@
 <script>
 
-	getNotification('success','Esto es una prueba')
-
 	$('.eliminar').click(function(e){
 		let agree = confirm('Esta seguro de querer eliminar este registro? Ten en cuenta que eliminaras todo lo relacionado'),
 		id    = e.target.dataset.eliminar,
