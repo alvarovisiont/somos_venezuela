@@ -103,7 +103,7 @@ if(!function_exists('upload_image'))
 
 if(!function_exists('select_db'))
 {
-	function select_db($tipo_bd = null)
+	function select_db($tipo_bd)
 	{
 		// -----------* Función para seleccionar la bd a trabajar *------------------- //
 		$data = [];
@@ -114,9 +114,9 @@ if(!function_exists('select_db'))
 		switch ($tipo_bd) 
        {
         case null:
-          if ($this->session->userdata('bd_activa')){
-              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
-              'tipo_bd' =>  $this->session->userdata('tipo_bd'));
+          if ($CI->session->userdata('bd_activa')){
+              $data = array( 'bd_activa' => $CI->session->userdata('bd_activa'),
+              'tipo_bd' =>  $CI->session->userdata('tipo_bd'));
              }else
              {
               $data = array( 'bd_activa' => 'default',
@@ -131,7 +131,8 @@ if(!function_exists('select_db'))
             break;
         }// fin switch
 
-        $CI->session->userdata($data); 
+
+        $CI->session->set_userdata($data); 
 
         return true;
         
