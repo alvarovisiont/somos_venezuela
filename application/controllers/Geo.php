@@ -43,6 +43,7 @@ class Geo extends CI_Controller {
      public function parroquia($municipio = null) {
 
         $parroquia = $this->geomodel->show_parroquia($municipio); 
+        
         $datos = ['parroquia' => $parroquia];
 
         $this->load->view('dashboard/header');
