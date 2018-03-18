@@ -28,7 +28,6 @@ if(!function_exists('invierte_date_time'))
 
 if(!function_exists('upload_image'))
 {
-    //formateamos la fecha y la hora, función de cesarcancino.com
 	function upload_image($nombre_archivo,$ruta,$tipos = '',$resize = null, $height = null, $width = null)
 	{
 		/*
@@ -99,6 +98,43 @@ if(!function_exists('upload_image'))
 			          
 
 	        } // fin guardado imagen
+	}
+}
+
+if(!function_exists('select_db'))
+{
+	function select_db($tipo_bd = null)
+	{
+		// -----------* Función para seleccionar la bd a trabajar *------------------- //
+		$data = [];
+
+		$CI =& get_instance();
+     	$CI->load->library('session');
+
+		switch ($tipo_bd) 
+       {
+        case null:
+          if ($this->session->userdata('bd_activa')){
+              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
+              'tipo_bd' =>  $this->session->userdata('tipo_bd'));
+             }else
+             {
+              $data = array( 'bd_activa' => 'default',
+              'tipo_bd' => 1);
+             }
+             break;
+         case 1:
+             $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
+            break;
+         case 2:
+            $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
+            break;
+        }// fin switch
+
+        $CI->session->userdata($data); 
+
+        return true;
+        
 	}
 }
 
