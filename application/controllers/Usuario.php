@@ -146,9 +146,8 @@ class Usuario extends CI_Controller {
     }
 
 
-
-
-    /*public function store_municipio()
+ /*
+    public function store_municipio()
     {
 
 
@@ -166,7 +165,7 @@ class Usuario extends CI_Controller {
 
             $user = explode(" ", $row->nombre);
 
-            $user_final = $user[0];
+            $user_final = "MUNICIPIO".$user[0];
 
             $data = array(
                 'createdat' => date('Y-m-d H:i:s'),

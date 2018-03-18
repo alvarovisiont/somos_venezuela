@@ -24,13 +24,13 @@ class Geomodel extends CI_Model {
      public function show_municipio()
     {
  
-      $db_admin = $this->load->database('admin21', TRUE);
+      $db_admin = $this->load->database('default', TRUE);
       $db_admin->select('m.*, u.login as cuenta, u.password_activo as password_activo');
       
       $db_admin->from('municipio as m');
       $db_admin->join('usuario as u','u.id_municipio = m.id_municipio','left');
 
-      $db_admin->where('id_permiso', 5);
+      $db_admin->where('id_permiso', 5); 
 
       return $db_admin->get()->result();
       $db_admin->close();
