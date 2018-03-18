@@ -24,7 +24,24 @@
 					</tr>
 				</thead>
 				<tbody class="text-center">
-					
+					<?
+						foreach ($municipio as $row) 
+						{
+							$button = '<a href="'.base_url().'index.php/dashboard_parroquias'.'" 
+										class="btn btn-info btn-sm">
+										Ver <i class="fa fa-eyes-open"></i>
+										</a>';
+
+							echo 	"<tr>
+										<td>{$row->municipio}</td>
+										<td>5</td>
+										<td>50</td>
+										<td>40</td>
+										<td>80</td>
+										<td>{$button}</td>
+									</tr>";
+						}
+					?>
 				</tbody>
 			</table>
 		</div>
