@@ -48,7 +48,7 @@ class Usuarioinfo extends CI_Controller {
 
         $edad = '';
 
-        if($info->fecha_nacimiento)
+        if(!empty($info->fecha_nacimiento))
         {
             $fecha1 = new DateTime($info->fecha_nacimiento);
             $fecha2 = new DateTime();

@@ -107,7 +107,7 @@
 								<div class="profile-info-name"> Género </div>
 
 								<div class="profile-info-value">
-									<span><?= $info->genero === 't' ? 'Mascúlino' : 'Femenino' ?></span>
+									<span><?= $info->genero === 't' ? 'Mascúlino' : $info->genero === null || '' ? 'Sin Identificación' : 'Femenino' ?></span>
 								</div>
 							</div>
 

@@ -67,7 +67,7 @@ class Menu extends CI_Controller {
         $_POST['updatedat']  = date('Y-m-d H:i:s');
 
         if($this->menumodel->crear_modulo($_POST))
-        {
+        {   
             
             redirect('menu/','refresh');
         }
