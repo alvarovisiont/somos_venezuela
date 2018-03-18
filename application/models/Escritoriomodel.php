@@ -12,13 +12,20 @@ class Escritoriomodel extends CI_Model {
       //Revisar 
     }
 
-    public function dashboard_data()
+    public function dashboard_data($permiso)
     {
         //$db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
         $db_admin = $this->load->database('admin21', TRUE);
+        $sql = '';
 
-        $sql = "SELECT m.municipio, m.id_municipio from municipios as m where id_estado = 17";
+        switch ($permiso) {
+          case '4':
+          
+            $sql = "SELECT m.municipio, m.id_municipio from municipios as m where id_estado = 17";
+          break;
+          
+        }
 
         return $db_admin->query($sql)->result();
 

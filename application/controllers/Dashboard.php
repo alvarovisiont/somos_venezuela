@@ -26,7 +26,7 @@ class Dashboard extends CI_Controller {
 
         if($permiso === '4')
         {
-            $datos['municipio'] = $this->escritoriomodel->dashboard_data();
+            $datos['municipio'] = $this->escritoriomodel->dashboard_data($permiso);
         }
 
     	$this->load->view('dashboard/header');
@@ -34,7 +34,7 @@ class Dashboard extends CI_Controller {
 
         switch ($permiso) {
             case '4':
-                $this->load->view('escritorio/index');
+                $this->load->view('escritorio/index', $datos);
             break;
             
             default:
