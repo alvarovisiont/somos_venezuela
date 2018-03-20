@@ -18,16 +18,15 @@ class Dashboard extends CI_Controller {
 
     public function index($tipo_bd = null) {
 
-        
-        select_db($tipo_bd);
-
         $permiso = $this->session->userdata('id_permiso');
         $datos = [];
 
-        if($permiso === '4')
+        if($permiso === '2')
         {
 
-            $datos['municipio'] = $this->escritoriomodel->dashboard_data($permiso);
+           // $datos['municipio'] = $this->escritoriomodel->dashboard_data($permiso);
+
+            $datos['data'] = $this->escritoriomodel->dashboard_data($permiso);
 
         }
 
@@ -37,6 +36,8 @@ class Dashboard extends CI_Controller {
         switch ($permiso) {
             case '4':
 
+
+            case '2':
                 $this->load->view('escritorio/index', $datos);
             break;
             
@@ -47,6 +48,37 @@ class Dashboard extends CI_Controller {
 
         $this->load->view('dashboard/footer');
         $this->load->view('escritorio/scripts');
+    }
+
+    public function municipio($municipio)
+    {
+        $municipio = base64_decode($municipio);
+        $datos = [];
+        $datos['municipio'] = $municipio;
+        $datos['data'] = $this->escritoriomodel->datos_municipio($municipio);
+
+
+
+        $this->load->view('dashboard/header');
+        $this->load->view('dashboard/menu');
+        $this->load->view('escritorio/municipio', $datos);
+        $this->load->view('dashboard/footer');
+        $this->load->view('escritorio/scripts');
+    }
+
+    public function parroquia($municipio,$parroquia)
+    {
+        
+        $municipio = base64_decode($municipio); /* decode base 64*/  $parroquia = base64_decode($parroquia);
+
+        $datos = [];
+        $datos['data'] = $this->escritoriomodel->datos_parroquia($municipio,$parroquia);
+
+    }
+
+    public function centro_medico($municipio,$parroquia)
+    {
+
     }
 
     

@@ -54,6 +54,7 @@
 		<script src="<?php echo base_url()?>assets_sistema/js/ace-extra.min.js"></script>
 		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.min.js"></script>
 		<script src="<?php echo base_url()?>assets_sistema/js/jquery.dataTables.bootstrap.min.js"></script>
+		<script src="<?= base_url().'assets_sistema/js/jquery.maskedinput.min.js' ?>"></script>
 		<script src="<?php echo base_url()?>assets_sistema/js/toastr.min.js"></script>
 
 		<!-- inline scripts related to this page -->
@@ -66,6 +67,10 @@
 			jQuery(function($) {
 
 			// ======================= | FUNCIONES PARA TODO EL SISTEMA | ============================== //
+
+				$.mask.definitions['~']='[+-]';
+				$('.input-mask-date').mask('99/99/9999');
+				$('.input-mask-phone').mask('(999) 999-9999');
 
 				$('#tabla').dataTable({
 					"order": [],
@@ -86,7 +91,7 @@
     			{
     				let message = '<?= $this->session->flashdata("message") ?>'
 
-    				console.log(message,type,'aquiiiiii')
+    				
     				switch (type) {
     					case 'success':
     						toastr.success(message, 'Éxito!')
