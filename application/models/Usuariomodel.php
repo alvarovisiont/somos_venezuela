@@ -110,6 +110,20 @@ class Usuariomodel extends CI_Model {
       
     } 
 
+    public function usuario_user($id)
+    {
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+
+      $db_admin->select('u.*');
+      $db_admin->from('usuario as u');
+      $db_admin->where('u.id',$id);
+
+      return $db_admin->get()->row();
+
+      $db_admin->close();
+      
+    } 
+
     public function guardar_informacion_usuario($arreglo)
     {
       $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
@@ -158,6 +172,10 @@ class Usuariomodel extends CI_Model {
       $db_admin->where('id',$this->session->userdata('id_usuario'));
       $db_admin->update('usuario',['fecha_acceso' => date('Y-m-d H:i:s', strtotime('-4 hour')) ] );
     }
+
+
+
+
    
 
 }

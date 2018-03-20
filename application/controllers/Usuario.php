@@ -146,26 +146,23 @@ class Usuario extends CI_Controller {
     }
 
 
- /*
-    public function store_municipio()
+
+ 
+    /*public function store_municipio($municipio)
     {
-
-
-
-       $data = array( 'bd_activa' => 'default');
-
+        $data = array( 'bd_activa' => 'default');
         $this->session->set_userdata($data);
 
-      $municipios = $this->geomodel->show_municipio();
+        $municipios_login = $this->geomodel->usuario_user_municipio($municipio);
+
+        $user_final_aux = $municipios_login->login;
+
+        $municipios = $this->geomodel->show_parroquia_mun($municipio);
 
         foreach ($municipios as $row) 
-        {       
-
-
-
-            $user = explode(" ", $row->nombre);
-
-            $user_final = "MUNICIPIO".$user[0];
+        {
+            $user_final = "";
+            $user_final = $user_final_aux."_P_".$row->id_parroquia;
 
             $data = array(
                 'createdat' => date('Y-m-d H:i:s'),
@@ -174,10 +171,11 @@ class Usuario extends CI_Controller {
                 'password' => '123456789',
                 'login' => $user_final,
                 'email' => $user_final."@USUARIOS.COM",
-                'id_permiso' => 5,
+                'id_permiso' => 6,
                 'correo_activo' => true,
                 'id_estado' => 17,      
                 'id_municipio' => $row->id_municipio,
+                'id_parroquia' => $row->id_parroquia,
 
             );
 

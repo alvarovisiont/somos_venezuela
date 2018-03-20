@@ -17,7 +17,7 @@
 		
 		<div class="col-md-9 col-sm-9">
  		<li class="text-warning bigger-200 orange">
-		 <i class="ace-icon fa fa-circle"></i>Estado Sucre</li>
+		 <i class="ace-icon fa fa-circle"></i>Estado Sucre  <i class="ace-icon fa fa-share green bigger-70"></i> Municipios Todos</li></li>
 		</div>
 																
 		<div class="col-md-2 col-sm-2">
