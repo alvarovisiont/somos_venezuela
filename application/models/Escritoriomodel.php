@@ -14,23 +14,34 @@ class Escritoriomodel extends CI_Model {
 
     public function dashboard_data($permiso)
     {
-        //$db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
-
-        $db_admin = $this->load->database('admin21', TRUE);
+        
         $sql = '';
 
         switch ($permiso) {
-          case '4':
-          
-            $sql = "SELECT m.municipio, m.id_municipio from municipios as m where id_estado = 17";
+          case '2':
+            $sql = "SELECT m.nombre, m.id_municipio from municipio as m where m.id_estado = 17";
           break;
           
         }
 
-        return $db_admin->query($sql)->result();
+        return $this->db->query($sql)->result();
 
-        $db_admin->close();
+        $this->db->close();
 
+    }
+
+    public function datos_municipio($municipio)
+    {
+      $sql = "SELECT p.id, p.nombre, p.id_parroquia from parroquia as p where p.id_estado = 17 and p.id_municipio = $municipio";
+
+      return $this->db->query($sql)->result();
+
+      $this->db->close();
+    }
+
+    public function datos_parroquia($municipio,$parroquia)
+    {
+      
     }
 }
 

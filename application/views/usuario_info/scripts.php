@@ -1,9 +1,6 @@
-<script src="<?= base_url().'assets_sistema/js/jquery.maskedinput.min.js' ?>"></script>
+
 <script>
 	$(function(){
-		$.mask.definitions['~']='[+-]';
-		$('.input-mask-date').mask('99/99/9999');
-		$('.input-mask-phone').mask('(999) 999-9999');
 
 		$('#form_info').submit(function(e) {
 			
