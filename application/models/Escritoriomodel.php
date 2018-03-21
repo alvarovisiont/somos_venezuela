@@ -11,7 +11,7 @@ class Escritoriomodel extends CI_Model {
       //Codeigniter : Write Less Do More
       //Revisar 
     }
-
+    
     public function dashboard_data()
     {
         
@@ -24,7 +24,7 @@ class Escritoriomodel extends CI_Model {
               where u.id_municipio = m.id_municipio)
               as censados
               from municipio as m";
-          
+        
         return $this->db->query($sql)->result();
 
         $this->db->close();

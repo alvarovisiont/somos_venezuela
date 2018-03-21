@@ -27,7 +27,19 @@ class Dashboard extends CI_Controller {
 
     	$this->load->view('dashboard/header');
         $this->load->view('dashboard/menu');
-        $this->load->view('escritorio/index', $datos);
+
+        switch ($permiso) {
+            case '4':
+
+
+            case '2':
+                $this->load->view('escritorio/index', $datos);
+            break;
+            
+            default:
+                
+            break;
+        }
         $this->load->view('dashboard/footer');
         $this->load->view('escritorio/scripts');
     }
