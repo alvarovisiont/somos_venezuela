@@ -10,25 +10,10 @@
  	document.getElementById('imagen').value = "avatar"+id+".png";
  }
 
-  function correo()
- {
-    var correo = document.getElementById("email").value; 
-
-   <?php foreach ($this->session->userdata('arr_usuarios') as $valor)
-    { ?>
-        var xvariable = "<?php echo $valor;?>";
-
-        if (xvariable.trim() == correo.trim() ){
-    	alert(xvariable+"---->"+correo);
-
-        }
-
-    <?php }?>  
- }
 </script>
 
 <?php 
- $ruta_controller = base_url() . "index.php/usuario/store";?>
+ $ruta_controller = $ruta;?>
 
 <div class="page-header">
 	<h1>
@@ -54,9 +39,9 @@
 								 <div class="widget-main">
 									<ul class="ace-thumbnails clearfix text-center" style="list-style-type: none;">
 										<li class="">		
-											<a id="ref_login" href="<?php echo base_url()?>assets_sistema/images/avatars/avatar.png" data-rel="colorbox" class="text-center">
+											<a id="ref_login" href="<?php echo base_url()?>assets_sistema/images/avatars/hospital.png" data-rel="colorbox" class="text-center">
 												
-							<img id = "imagen_login" name= "imagen_login" width="170" height="170" alt="170x170" src="<?php echo base_url()?>assets_sistema/images/avatars/avatar.png"/>
+							<img id = "imagen_login" name= "imagen_login" width="170" height="170" alt="170x170" src="<?php echo base_url()?>assets_sistema/images/avatars/hospital.png"/>
 												
 												<div class="text">
 													<div class="inner">Imagenes</div>
@@ -109,7 +94,8 @@
 										<span class="badge badge-transparent">
 											<i class="light-red ace-icon fa fa-asterisk"></i>
 										</span>
-										<input type="text" class="form-control" placeholder="Login" name="login" id="login" required="true">
+										<input  readonly="" type="text" class="form-control" placeholder="Login" 
+										name="login" id="login" required="true" value=<?php echo $logincentro;?>>
 								     </div>	
 							     </div>
 							  </div>
@@ -122,12 +108,8 @@
 							<div class="widget-body">
 							<div class="widget-main">
 
-							<label for="form-field-select-1">Requerido</label>
-										<span class="badge badge-transparent">
-											<i class="light-red ace-icon fa fa-asterisk"></i>
-										</span> <br>	
 						    <span class="input-icon">
-							<input type="email" placeholder="Email" name="email" id="email" class="form-control" required="true" onchange="correo()"/>
+							<input type="email" placeholder="Email" name="email" id="email" class="form-control"  onchange="correo()"/>
 								<i class="ace-icon fa fa-envelope"></i>
 							</span>
 							
@@ -136,29 +118,11 @@
 					    </div>
 				     </div>
 
-				      <div class="col-xs-12 col-sm-4">
-
-				      	 <div class="widget-box">
-							<div class="widget-header">
-								<h4 class="widget-title">Cédula</h4>
-							</div>	
-							 <div class="widget-body">
-								 <div class="widget-main">
-									<div>
-										<label for="form-field-select-1">Requerido</label>
-										<span class="badge badge-transparent">
-											<i class="light-red ace-icon fa fa-asterisk"></i>
-										</span>
-										<input type="text" class="form-control" placeholder="Cédula" name="cedula" id="cedula" required="true">
-								     </div>	
-							     </div>
-							  </div>
-					    </div>
-						
+				      <div class="col-xs-12 col-sm-4">			
 					   
 					   <div class="widget-box">
 							<div class="widget-header">
-								<h4 class="widget-title">Nombre y Apellido</h4>
+								<h4 class="widget-title">Nombre Centro Médico</h4>
 							</div>	
 							 <div class="widget-body">
 								 <div class="widget-main">
@@ -169,16 +133,32 @@
 										</span>
 										<input type="text" class="form-control" placeholder="Nombre" name="nombre" id="nombre" required="true">
 								     </div>	
-								     <div> <br>
-										<input type="text" class="form-control" placeholder="Apellido" name="apellido" id="apellido" required="true">
+							     </div>
+							  </div>
+					    </div>
+
+					     <div class="widget-box">
+							<div class="widget-header">
+								<h4 class="widget-title">Dirección Centro Médico</h4>
+							</div>	
+							 <div class="widget-body">
+								 <div class="widget-main">
+									<div>
+										<label for="form-field-select-1">Requerido</label>
+										<span class="badge badge-transparent">
+											<i class="light-red ace-icon fa fa-asterisk"></i>
+										</span>
+
+										<textarea class="form-control" placeholder="Dirección" name="direccion" id="direccion" required="true"></textarea>
 								     </div>	
 							     </div>
 							  </div>
 					    </div>
+
 					 </div>
 
 
-				   <input type="hidden" id="imagen" name="imagen" value="avatar.png">
+				   <input type="hidden" id="imagen" name="imagen" value="hospital.png">
 				   <div class="col-xs-12 text-center">
 	   					<button class="btn btn-rose btn-md radius-4">
 								<i class="ace-icon fa fa-floppy-o bigger-160"></i>
@@ -204,7 +184,7 @@
 	            		<div class="modal-body">
 					<div class="col-md-12 col-sm-12">
 	            		
-	            		<?php for ($i = 1; $i <= 11; $i++) { ?>
+	            		<?php for ($i = 1; $i <= 10; $i++) { ?>
 
 	            		<img id = "imagen_ciclo" name = "imagen_ciclo" width="50" height="50" alt="50x50" src="<?php echo base_url()?>assets_sistema/images/avatars/avatar<?=$i?>.png" onclick="activate_match(<?=$i?>)"/>
 	            	    <?php }?>
