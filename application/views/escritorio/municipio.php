@@ -1,7 +1,22 @@
-<div class="page-header">
-	<h1 class="text-center">
-		<span class="label label-xlg-personal label-primary arrowed arrowed-right">Sala situacional: <b>ESTADO SUCRE</b></span>
-	</h1>
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Sistema</a>
+		</li>
+
+		<li>
+			<a href="#">Escritorio</a>
+		</li>
+		<li class="active">Municipios</li>
+	</ul><!-- /.breadcrumb -->					
+</div>
+
+<div class="page-header text-center">
+	<li class="text-purlple bigger-200 purple">
+	 	<i class="ace-icon fa fa-circle"></i>
+	 	Sala Situacional: <b><?= $this->session->userdata('membrete') ?></b>
+	</li>
 </div><!-- /.page-header -->
 
 <div class="row no-gutters">
@@ -9,7 +24,7 @@
     	<button class="btn btn-app btn-purple btn-block">
     		<i class="ace-icon fa fa-medkit bigger-250"></i>
     		Centros
-    		<span class="badge badge-warning badge-left"><?= 5 ?></span>
+    		<span class="badge badge-warning badge-left"><?= $totales->centros_medicos ?></span>
     	</button>	
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-user bigger-250"></i>
@@ -24,8 +39,21 @@
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-users bigger-250"></i>
     		Censados
-    		<span class="badge badge-warning badge-left"><?= 80 ?></span>
-    	</button>	
+    		<span class="badge badge-warning badge-left"><?= $totales->censados ?></span>
+    	</button>
+    	<?
+    	if($this->session->userdata('id_permiso') === '4')
+    	{
+    	?>
+    		<a href="<?= base_url().'index.php/dashboard' ?>" class="btn btn-app btn-pink pull-right" data-tool="tooltip" title="Volver al dashboard de estado">
+	    		<i class="ace-icon fa fa-undo bigger-250"></i>
+	    		Estado
+	    		<span class="badge badge-warning badge-left"></span>
+	    	</a>
+	    <?	
+    	}
+    	?>
+	    	
     </div>
 </div>
 <br/><br/>
@@ -46,7 +74,7 @@
 				<?
 					foreach ($data as $row) 
 					{
-						$button = '<a <a href="'.base_url().'index.php/dashboard/parroquia/'.base64_encode($municipio).'/'.base64_encode($row->id).'" 
+						$button = '<a <a href="'.base_url().'index.php/dashboard/parroquia/'.base64_encode($municipio).'/'.base64_encode($row->id_parroquia).'" 
 									class="btn btn-info btn-sm"
 									data-tool="tooltip"
 									title="Ver datos de la Parroquia">
@@ -55,10 +83,10 @@
 
 						echo 	"<tr>
 									<td>{$row->nombre}</td>
-									<td>5</td>
+									<td>{$row->centro_medico}</td>
 									<td>50</td>
 									<td>40</td>
-									<td>80</td>
+									<td>{$row->censados}</td>
 									<td>{$button}</td>
 								</tr>";
 					}

@@ -104,13 +104,33 @@ class Login extends CI_Controller {
 
             }
 	      }
-	       
+        
+        $membrete = '';
+
+        switch ($check_user->id_permiso) {
+                  case '4':
+                    $membrete = 'Estado Sucre';
+                  break;
+
+                  case '5':
+                    $membrete = 'Municipio '.$check_user->municipio.", Estado Sucre";
+                  break;
+
+                  case '6':
+                    $membrete = 'Parroquia '.$check_user->parroquia.", Municipio: ".$check_user->municipio.", Estado Sucre";
+                  break;
+
+                  case '2':
+                    $membrete = 'Administrador del Sistema';
+                  break;
+        }	       
 
        $data = array(
               'is_logued_in' => TRUE,
               'id_usuario' => $check_user->id,
               'id_permiso' => $check_user->id_permiso,
-              'bpass' => $check_user->password_activo
+              'bpass' => $check_user->password_activo,
+              'membrete' => $membrete
           );
 
           $this->session->set_flashdata('type','success');

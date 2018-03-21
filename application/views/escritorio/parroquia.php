@@ -1,16 +1,28 @@
-<div class="page-header">
-	<h1 class="text-center">
-		<span class="label label-xlg-personal label-primary arrowed arrowed-right">Sala situacional: <b>ESTADO SUCRE</b></span>
-	</h1>
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Sistema</a>
+		</li>
+
+		<li>
+			<a href="#">Escritorio</a>
+		</li>
+		<li class="active">Parroquias</li>
+	</ul><!-- /.breadcrumb -->					
+</div>
+
+<div class="page-header text-center">
+	<li class="bigger-200 orange">
+	 	<i class="ace-icon fa fa-circle"></i>
+	 	Sala Situacional: <b class=""><?= $this->session->userdata('membrete') ?></b>
+	 	<br>
+	</li>
+
 </div><!-- /.page-header -->
 
 <div class="row no-gutters">
     <div class="col-md-12 col-sm-12 pull-right">
-    	<button class="btn btn-app btn-purple btn-block">
-    		<i class="ace-icon fa fa-medkit bigger-250"></i>
-    		Centros
-    		<span class="badge badge-warning badge-left"><?= 5 ?></span>
-    	</button>	
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-user bigger-250"></i>
     		Registrador
@@ -24,7 +36,7 @@
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-users bigger-250"></i>
     		Censados
-    		<span class="badge badge-warning badge-left"><?= 80 ?></span>
+    		<span class="badge badge-warning badge-left"><?= $totales->censados ?></span>
     	</button>	
     </div>
 </div>
@@ -56,8 +68,7 @@
 									<td>{$row->nombre}</td>
 									<td>5</td>
 									<td>50</td>
-									<td>40</td>
-									<td>80</td>
+									<td>{$row->censados}</td>
 									<td>{$button}</td>
 								</tr>";
 					}

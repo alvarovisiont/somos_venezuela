@@ -21,14 +21,9 @@ class Dashboard extends CI_Controller {
         $permiso = $this->session->userdata('id_permiso');
         $datos = [];
 
-        if($permiso === '2')
-        {
-
-           // $datos['municipio'] = $this->escritoriomodel->dashboard_data($permiso);
-
-            $datos['data'] = $this->escritoriomodel->dashboard_data($permiso);
-
-        }
+        $datos['data'] = $this->escritoriomodel->dashboard_data();
+        $datos['totales'] = $this->escritoriomodel->totales_estado();
+        
 
     	$this->load->view('dashboard/header');
         $this->load->view('dashboard/menu');
@@ -45,7 +40,6 @@ class Dashboard extends CI_Controller {
                 
             break;
         }
-
         $this->load->view('dashboard/footer');
         $this->load->view('escritorio/scripts');
     }
@@ -56,6 +50,7 @@ class Dashboard extends CI_Controller {
         $datos = [];
         $datos['municipio'] = $municipio;
         $datos['data'] = $this->escritoriomodel->datos_municipio($municipio);
+        $datos['totales'] = $this->escritoriomodel->totales_municipio($municipio);
 
 
 
@@ -73,6 +68,15 @@ class Dashboard extends CI_Controller {
 
         $datos = [];
         $datos['data'] = $this->escritoriomodel->datos_parroquia($municipio,$parroquia);
+        $datos['totales'] = $this->escritoriomodel->totales_parroquia($municipio,$parroquia);
+
+
+        $this->load->view('dashboard/header');
+        $this->load->view('dashboard/menu');
+        $this->load->view('escritorio/parroquia', $datos);
+        $this->load->view('dashboard/footer');
+        $this->load->view('escritorio/scripts');
+
 
     }
 

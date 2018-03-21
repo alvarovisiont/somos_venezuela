@@ -1,9 +1,22 @@
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Sistema</a>
+		</li>
+
+		<li>
+			<a href="#">Censo</a>
+		</li>
+		<li class=""><a href="#">Vivienda</a></li>
+		<li class="active">Jefe Familia</li>
+	</ul><!-- /.breadcrumb -->					
+</div>
 <div class="page-header text-center">
 	<li class="bigger-200 orange">
 	 	<i class="ace-icon fa fa-circle"></i>
-	 	Sala Situacional: <b class="">Estado Sucre</b>
+	 	Sala Situacional: <b class=""><?= $this->session->userdata('membrete') ?></b>
 	 	<br>
-	 	<span style="text-decoration: underline;">Jefes de Familia</span>
 	</li>
 
 </div><!-- /.page-header -->
