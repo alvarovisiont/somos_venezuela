@@ -17,6 +17,9 @@ class Usuariomodel extends CI_Model {
 
         $db_admin->where($campo, $username);
         $db_admin->where('password', $password);
+        $db_admin->select('usuario.*,m.nombre as municipio,p.nombre as parroquia');
+        $db_admin->join('municipio as m','m.id_municipio = usuario.id_municipio and m.id_estado = 17','left');
+        $db_admin->join('parroquia as p','p.id_municipio = usuario.id_municipio and p.id_parroquia = usuario.id_parroquia and  p.id_estado = 17','left');
         $query = $db_admin->get('usuario');     
         
         if ($query->num_rows() == 1) {

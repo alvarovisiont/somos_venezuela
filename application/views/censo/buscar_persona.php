@@ -1,3 +1,25 @@
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Sistema</a>
+		</li>
+
+		<li>
+			<a href="#">Censo</a>
+		</li>
+		<li class="active">Buscar Registros</li>
+	</ul><!-- /.breadcrumb -->					
+</div>
+<div class="page-header text-center">
+	<li class="bigger-200 orange">
+	 	<i class="ace-icon fa fa-circle"></i>
+	 	Sala Situacional: <b class=""><?= $this->session->userdata('membrete') ?></b>
+	 	<br>
+	</li>
+
+</div><!-- /.page-header -->
+
 <div class="row no-gutters">
 	<div class="col-md-12 col-sm-12">
 		<form action="#" class="form-horizontal" id="form_buscar">

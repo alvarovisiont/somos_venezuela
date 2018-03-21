@@ -1,9 +1,23 @@
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Sistema</a>
+		</li>
+
+		<li>
+			<a href="#">Censo</a>
+		</li>
+		<li class=""><a href="#">Vivienda</a></li>
+		<li class=""><a href="#">Jefe Familia</a></li>
+		<li class="active">Registrar Jefe Familiar</li>
+	</ul><!-- /.breadcrumb -->					
+</div>
 <div class="page-header text-center">
 	<li class="bigger-200 orange">
 	 	<i class="ace-icon fa fa-circle"></i>
-	 	Sala Situacional: <b class="">Estado Sucre</b>
+	 	Sala Situacional: <b class=""><?= $this->session->userdata('membrete') ?></b>
 	 	<br>
-	 	<span style="text-decoration: underline;">Jefes de Familia</span>
 	</li>
 
 </div><!-- /.page-header -->
@@ -44,7 +58,7 @@
 				</div>
 				<label for="fecha_nac" class="control-label col-md-2 col-sm-2">Fecha Nacimiento</label>
 				<div class="col-md-4 col-sm-4">
-					<input type="date" id="fecha_nac" name="fecha_nac" required="" class="form-control" value="<?= $edit ? date('Y-m-d', strtotime($carga->fecha_nac)) : '' ?>">
+					<input type="date" id="fecha_nac" name="fecha_nac" required="" class="form-control" value="<?= $edit ? date('Y-m-d', strtotime($jefe->fecha_nac)) : '' ?>">
 				</div>
 			</div>
 			<div class="form-group">
@@ -117,12 +131,11 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-md-offset-3 col-sm-offset-3 col-md-3 col-sm-3">
-					<button type="reset" class="btn btn-info btn-block">Limpiar&nbsp;<i class="fa fa-refresh"></i></button>
-				</div>
-				<div class="col-md-3 col-sm-3">
+				<div class="form-group">
+				<div class=" col-md-offset-4 col-sm-offset-4 col-md-4 col-sm-4">
 					<button type="submit" class="btn btn-pink btn-block">Guardar&nbsp;<i class="fa fa-check"></i></button>
 				</div>
+			</div>
 			</div>
 			<div class="form-group">
 				<div class="col-md-4 col-sm-4 col-sm-offset-4 col-md-offset-4">

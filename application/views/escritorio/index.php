@@ -1,8 +1,24 @@
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Sistema</a>
+		</li>
+
+		<li>
+			<a href="#">Escritorio</a>
+		</li>
+		<li class="active">Estado</li>
+	</ul><!-- /.breadcrumb -->					
+</div>
+
 <div class="page-header text-center">
-	<li class="text-purlple bigger-200 purple">
+	<li class="bigger-200 orange">
 	 	<i class="ace-icon fa fa-circle"></i>
-	 	Sala Situacional: <b>Estado Sucre</b>
+	 	Sala Situacional: <b class=""><?= $this->session->userdata('membrete') ?></b>
+	 	<br>
 	</li>
+
 </div><!-- /.page-header -->
 
 <div class="row no-gutters">
@@ -10,7 +26,7 @@
     	<button class="btn btn-app btn-purple btn-block">
     		<i class="ace-icon fa fa-medkit bigger-250"></i>
     		Centros
-    		<span class="badge badge-warning badge-left"><?= 5 ?></span>
+    		<span class="badge badge-warning badge-left"><?= $totales->centros_medicos ?></span>
     	</button>	
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-user bigger-250"></i>
@@ -25,7 +41,7 @@
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-users bigger-250"></i>
     		Censados
-    		<span class="badge badge-warning badge-left"><?= 80 ?></span>
+    		<span class="badge badge-warning badge-left"><?= $totales->censados ?></span>
     	</button>	
     </div>
 </div>
@@ -56,10 +72,10 @@
 
 						echo 	"<tr>
 									<td>{$row->nombre}</td>
-									<td>5</td>
+									<td>{$row->centro_medico}</td>
 									<td>50</td>
 									<td>40</td>
-									<td>80</td>
+									<td>{$row->censados}</td>
 									<td>{$button}</td>
 								</tr>";
 					}

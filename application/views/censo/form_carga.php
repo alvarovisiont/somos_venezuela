@@ -1,9 +1,25 @@
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+	<ul class="breadcrumb">
+		<li>
+			<i class="ace-icon fa fa-home home-icon"></i>
+			<a href="#">Sistema</a>
+		</li>
+
+		<li>
+			<a href="#">Censo</a>
+		</li>
+		<li class=""><a href="#">Vivienda</a></li>
+		<li class=""><a href="#">Jefe Familia</a></li>
+		<li class=""><a href="#">Carga Familiar</a></li>
+		<li class="active">Registrar Carga</li>
+	</ul><!-- /.breadcrumb -->					
+</div>
+
 <div class="page-header text-center">
 	<li class="bigger-200 orange">
 	 	<i class="ace-icon fa fa-circle"></i>
-	 	Sala Situacional: <b class="">Estado Sucre</b>
+	 	Sala Situacional: <b class=""><?= $this->session->userdata('membrete') ?></b>
 	 	<br>
-	 	<span style="text-decoration: underline;">Carga Familiar</span>
 	</li>
 
 </div><!-- /.page-header -->
@@ -136,10 +152,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-md-offset-3 col-sm-offset-3 col-md-3 col-sm-3">
-					<button type="reset" class="btn btn-info btn-block">Limpiar&nbsp;<i class="fa fa-refresh"></i></button>
-				</div>
-				<div class="col-md-3 col-sm-3">
+				<div class=" col-md-offset-4 col-sm-offset-4 col-md-4 col-sm-4">
 					<button type="submit" class="btn btn-pink btn-block">Guardar&nbsp;<i class="fa fa-check"></i></button>
 				</div>
 			</div>

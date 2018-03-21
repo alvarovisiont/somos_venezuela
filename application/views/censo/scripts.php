@@ -78,5 +78,9 @@
 			
 			$('#pensionado').val(e.target.value)
 		});
+
+		$('.limpiar').click(function(){
+			$('#form_jefe')[0].reset()
+		})
 	})
 </script>
