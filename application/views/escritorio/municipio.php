@@ -15,7 +15,7 @@
 <div class="page-header text-center">
 	<li class="text-purlple bigger-200 purple">
 	 	<i class="ace-icon fa fa-circle"></i>
-	 	Sala Situacional: <b><?= $this->session->userdata('membrete') ?></b>
+	 	<?= $this->session->userdata('membrete') ?>
 	</li>
 </div><!-- /.page-header -->
 
@@ -29,12 +29,12 @@
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-user bigger-250"></i>
     		Registrador
-    		<span class="badge badge-warning badge-left"><?= 50 ?></span>
+    		<span class="badge badge-warning badge-left"><?= $totales->registradores ?></span>
     	</button>	
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-user-md bigger-250"></i>
     		Doctores
-    		<span class="badge badge-warning badge-left"><?= 40 ?></span>
+    		<span class="badge badge-warning badge-left"><?= $totales->medicos ?></span>
     	</button>	
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-users bigger-250"></i>
@@ -84,8 +84,8 @@
 						echo 	"<tr>
 									<td>{$row->nombre}</td>
 									<td>{$row->centro_medico}</td>
-									<td>50</td>
-									<td>40</td>
+									<td>{$row->registradores}</td>
+									<td>{$row->medicos}</td>
 									<td>{$row->censados}</td>
 									<td>{$button}</td>
 								</tr>";

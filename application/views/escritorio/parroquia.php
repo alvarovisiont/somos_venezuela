@@ -15,7 +15,7 @@
 <div class="page-header text-center">
 	<li class="bigger-200 orange">
 	 	<i class="ace-icon fa fa-circle"></i>
-	 	Sala Situacional: <b class=""><?= $this->session->userdata('membrete') ?></b>
+	 	<?= $this->session->userdata('membrete') ?>
 	 	<br>
 	</li>
 
@@ -26,18 +26,30 @@
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-user bigger-250"></i>
     		Registrador
-    		<span class="badge badge-warning badge-left"><?= 50 ?></span>
+    		<span class="badge badge-warning badge-left"><?= $totales->registradores ?></span>
     	</button>	
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-user-md bigger-250"></i>
     		Doctores
-    		<span class="badge badge-warning badge-left"><?= 40 ?></span>
+    		<span class="badge badge-warning badge-left"><?= $totales->medicos ?></span>
     	</button>	
     	<button class="btn btn-app btn-purple">
     		<i class="ace-icon fa fa-users bigger-250"></i>
     		Censados
     		<span class="badge badge-warning badge-left"><?= $totales->censados ?></span>
     	</button>	
+    	<?
+    	if($this->session->userdata('id_permiso') >= '4' &&  $this->session->userdata('id_permiso') <= '5')
+    	{
+    	?>
+    		<a href="<?= base_url().'index.php/dashboard/municipio/'.$municipio ?>" class="btn btn-app btn-pink pull-right" data-tool="tooltip" title="Volver al dashboard de Municipios">
+	    		<i class="ace-icon fa fa-undo bigger-250"></i>
+	    		Municipio
+	    		<span class="badge badge-warning badge-left"></span>
+	    	</a>
+	    <?	
+    	}
+    	?>
     </div>
 </div>
 <br/><br/>
@@ -57,7 +69,7 @@
 				<?
 					foreach ($data as $row) 
 					{
-						$button = '<a <a href="'.base_url().'index.php/dashboard/centro_medico/'.base64_encode($row->id_municipio).'/'.base64_encode($row->id_parroquia).'/'.base64_encode($row->id).'" 
+						$button = '<a <a href="'.base_url().'index.php/dashboard/centro_medico/'.base64_encode($row->id).'" 
 									class="btn btn-info btn-sm"
 									data-tool="tooltip"
 									title="Ver datos del Centro Médico">
@@ -66,8 +78,8 @@
 
 						echo 	"<tr>
 									<td>{$row->nombre}</td>
-									<td>5</td>
-									<td>50</td>
+									<td>{$row->registradores}</td>
+									<td>{$row->medicos}</td>
 									<td>{$row->censados}</td>
 									<td>{$button}</td>
 								</tr>";

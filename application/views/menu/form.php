@@ -116,6 +116,7 @@
 								<option value="fa-user-md">fa-user-md</option>
 								<option value="fa-file-text-o">fa-file-text-o</option>
 								<option value="fa-file-pdf-o">fa-file-pdf-o</option>
+								<option value="fa-search">fa-search</option>
 							</select>							
 						</div>
 					</div>

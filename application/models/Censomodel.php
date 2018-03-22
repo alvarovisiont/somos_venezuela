@@ -11,10 +11,8 @@ class Censomodel extends CI_Model {
 
 // ================================ | VIVIENDAS | ============================================= //
 
-    public function ver_viviendas()
+    public function ver_viviendas($id)
     {
-        $id = $this->session->userdata('id_usuario');
-
         $sql = "SELECT *, (SELECT COUNT(*) from censo where id_vivienda = vivienda.id and id_padre = 0 ) as jefes 
                 from vivienda 
                 where id_registrador = $id";
@@ -137,6 +135,20 @@ class Censomodel extends CI_Model {
 
         return $this->db->query($sql)->result();
         $this->db->close();
+    }
+
+    public function store_estructura($estr)
+    {
+        $this->db->where('cedula',$estr['cedula']);
+        if($this->db->count_all_results('estructura') > 0)
+        {
+            return false;
+        }
+        else
+        {
+            $this->db->insert('estructura',$estr);
+            return true;
+        }
     }
 
 }

@@ -18,13 +18,14 @@ class Censo extends CI_Controller {
 
 // ================================ | VIVIENDA | ============================================= //
 
-    public function index() 
-    {
-
+    public function index($id = null) 
+    {   
+        $id_busqueda = $id ? base64_decode($id) : $this->session->userdata('id_usuario');
+        
         $datos = [];
 
-        $datos['data'] = $this->censomodel->ver_viviendas();
-        $datos['registrador'] = $this->session->userdata('id_usuario');
+        $datos['data'] = $this->censomodel->ver_viviendas($id_busqueda);
+        $datos['registrador'] = $id_busqueda;
 
         $this->load->view('dashboard/header');
         $this->load->view('dashboard/menu');
@@ -269,6 +270,20 @@ class Censo extends CI_Controller {
         $result = $this->censomodel->buscar_familia($ced,$type);
 
         echo json_encode($result);
+    }
+
+// ================================ | ESTRUCTURA CENTRO MEDICO | ============================================= //
+
+    public function store_estructura()
+    {
+        if($this->censomodel->store_estructura($this->input->post()))
+        {
+            echo json_encode(['r' => true]);
+        }
+        else
+        {
+            echo json_encode(['r' => false]);
+        }
     }
     
 

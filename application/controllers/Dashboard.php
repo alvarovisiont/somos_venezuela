@@ -69,6 +69,7 @@ class Dashboard extends CI_Controller {
         $datos = [];
         $datos['data'] = $this->escritoriomodel->datos_parroquia($municipio,$parroquia);
         $datos['totales'] = $this->escritoriomodel->totales_parroquia($municipio,$parroquia);
+        $datos['municipio'] = base64_encode($municipio);
 
 
         $this->load->view('dashboard/header');
@@ -80,9 +81,25 @@ class Dashboard extends CI_Controller {
 
     }
 
-    public function centro_medico($municipio,$parroquia)
+    public function centro_medico($id)
     {
+        $id = base64_decode($id);
 
+        $datos['data'] = $this->escritoriomodel->centros_medicos($id);
+        $datos['totales'] = $this->escritoriomodel->totales_centro_medico($id);
+        
+        $datos['estructura'] = $this->escritoriomodel->centro_medico_estructura($id);
+
+        $datos['municipio'] = base64_encode($datos['data'][0]->muni);
+        $datos['parroquia'] = base64_encode($datos['data'][0]->parro);
+        
+
+
+        $this->load->view('dashboard/header');
+        $this->load->view('dashboard/menu');
+        $this->load->view('escritorio/centro_medico', $datos);
+        $this->load->view('dashboard/footer');
+        $this->load->view('escritorio/scripts');
     }
 
     
