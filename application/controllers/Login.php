@@ -61,7 +61,10 @@ class Login extends CI_Controller {
                 break;
             case 5:
 		         $this->load->view('login/login_5',$datos);
-                break;    
+                break; 
+                case 6:
+             $this->load->view('login/login_6',$datos);
+                break;       
         }// fin switch
 
         $this->load->view('login/footer');

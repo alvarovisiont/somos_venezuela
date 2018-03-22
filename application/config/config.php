@@ -37,8 +37,6 @@ else
 }
 */
 
-
-
 $config['base_url'] = "https://sistemaweb21.herokuapp.com/";
 
 
