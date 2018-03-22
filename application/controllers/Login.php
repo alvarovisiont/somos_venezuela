@@ -82,6 +82,8 @@ class Login extends CI_Controller {
         
         $username = $this->session->userdata('acceso') === '1' ? $this->input->post('email') : $this->input->post('username');
 
+        $username = strtoupper($username);
+
         $password = $this->input->post('pass');
        // $username = $username.$this->input->post('username');
 
