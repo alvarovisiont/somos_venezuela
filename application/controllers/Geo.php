@@ -16,6 +16,9 @@ class Geo extends CI_Controller {
     }// fin construct
 
 
+     //-------------------------------------------------------------------------
+
+
      public function index() {
        
          $permiso = $this->session->userdata('id_permiso');
@@ -35,7 +38,15 @@ class Geo extends CI_Controller {
                        $this->centro_medico($usuario->id_municipio, $usuario->id_parroquia);
          }
 
+         if ($permiso == 7)
+         {
+             $this->centro_personal($this->session->userdata('id_usuario'));
+         }
+
     }
+
+     //-------------------------------------------------------------------------
+
 
     public function estado() {
         $estados = $this->geomodel->show_estado(); 
@@ -49,6 +60,9 @@ class Geo extends CI_Controller {
         $this->load->view('permission/scripts');
     }
 
+     //-------------------------------------------------------------------------
+
+
      public function municipio() {
         
         $municipios = $this->geomodel->show_municipio(); 
@@ -61,6 +75,9 @@ class Geo extends CI_Controller {
         $this->load->view('dashboard/footer');
         $this->load->view('permission/scripts');
     }
+
+     //-------------------------------------------------------------------------
+
 
      public function parroquia($municipio = null) {
 
@@ -85,6 +102,9 @@ class Geo extends CI_Controller {
         $this->load->view('permission/scripts');
     }
 
+     //-------------------------------------------------------------------------
+
+
      public function centro_medico($municipio = null, $parroquia = null) {
 
         if ($parroquia == null){
@@ -105,5 +125,32 @@ class Geo extends CI_Controller {
         $this->load->view('dashboard/footer');
         $this->load->view('permission/scripts');
     }
+
+    //-------------------------------------------------------------------------
+
+    public function centro_personal($id_centro = null) {
+
+        if ($id_centro == null){
+
+             $nombre_centro = "Todas";
+        }else
+        {   
+            //consulta
+            $nombre_centro = "fulano"; 
+        }
+
+        $trabajadores = $this->geomodel->show_centro_personal($id_centro); 
+
+     
+        $datos = ['trabajadores' => $trabajadores, 'nombre_centro' => $nombre_centro];
+
+        $this->load->view('dashboard/header');
+        $this->load->view('dashboard/menu');
+        $this->load->view('geo/personal',$datos);
+        $this->load->view('dashboard/footer');
+        $this->load->view('permission/scripts');
+    }
+
+
 
 }

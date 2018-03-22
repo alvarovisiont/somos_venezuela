@@ -61,7 +61,10 @@ class Login extends CI_Controller {
                 break;
             case 5:
 		         $this->load->view('login/login_5',$datos);
-                break;    
+                break; 
+                case 6:
+             $this->load->view('login/login_6',$datos);
+                break;       
         }// fin switch
 
         $this->load->view('login/footer');
@@ -78,6 +81,8 @@ class Login extends CI_Controller {
 
         
         $username = $this->session->userdata('acceso') === '1' ? $this->input->post('email') : $this->input->post('username');
+
+        $username = strtoupper($username);
 
         $password = $this->input->post('pass');
        // $username = $username.$this->input->post('username');
@@ -191,15 +196,7 @@ class Login extends CI_Controller {
          }
   }
 /*---------------------------------------------------------------------*/
-    public function salir ()
-    {
-        $this->session->set_userdata('is_logued_in', FALSE);
-        $this->session->sess_destroy();
-        redirect(base_url() . 'index.php/login', 'refresh');
-    }
-
-
-    public function session($tipo_bd = null){
+  public function session($tipo_bd = null){
   //armar session completa     
      switch ($tipo_bd) 
      {
@@ -230,6 +227,7 @@ class Login extends CI_Controller {
        'apellido_usuario' => $session_user->apellido,
        'imagen_personal' => $session_user->imagen
     );
+
     $this->session->set_userdata($usuario_data);
   }
 
@@ -387,6 +385,13 @@ class Login extends CI_Controller {
       );
       $this->session->set_userdata($menu_data);
 
+  }
+  
+    public function salir ()
+    {
+        $this->session->set_userdata('is_logued_in', FALSE);
+        $this->session->sess_destroy();
+        redirect(base_url() . 'index.php/login', 'refresh');
     }
 
 }

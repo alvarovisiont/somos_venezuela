@@ -136,19 +136,30 @@
 					<th class="text-center">Teléfono</th>
 					<th class="text-center">Correo</th>
 					<th class="text-center">Cargo</th>
+					<th class="text-center">Acción</th>
 				</tr>
 			</thead>
 			<tbody class="text-center">
 				<?
 					foreach ($estructura as $row) 
 					{
+						$edit = '<button class="btn btn-xs btn-pink" data-tool="tooltip" title="Editar Registro">
+									<i class="fa fa-edit"></i>
+								</button>';
+						
+						$eliminar = '<button class="btn btn-xs btn-purple eliminar" data-tool="tooltip" title="Eliminar Registro"
+										data-id="'.$row->id.'">
+										<i class="fa fa-trahs"></i>
+									</button>';
+
 						echo "	<tr>
 									<td>{$row->cedula}</td>
 									<td>{$row->nombre}</td>
 									<td>{$row->apellido}</td>
 									<td>{$row->telefono}</td>
-									<td>{$row->correo}</td>
+									<td>{$row->email}</td>
 									<td><span class='label label-lg label-yellow arrowed-in arrowed-in-right'>{$row->cargo}</span></td>
+									<td>{$eliminar}</td>
 								</tr>";
 					}
 				?>
@@ -204,7 +215,7 @@
 	            	</div>
 	            </div><!-- fin modal-body -->
 	            <div class="modal-footer">
-	                <button type="submit" class="btn btn-pink">Grabar</button>
+	                <button type="submit" class="btn btn-pink" id="btn_guardar">Grabar</button>
 	                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 	            </div>
 	        </form>

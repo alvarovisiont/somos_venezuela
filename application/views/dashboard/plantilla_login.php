@@ -60,7 +60,7 @@
 										<select class="form-control" id="login" name="login"
 										onchange="activate_match()">
 											
-										<?php for ($i = 1; $i <= 5; $i++) { 
+										<?php for ($i = 1; $i <= 6; $i++) { 
 
 										if ($tipo == $i){?>
 										<option value=<?php echo $i;?> selected> Tipo <?php echo $i;?> </option>	   

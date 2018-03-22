@@ -145,5 +145,45 @@ class Geomodel extends CI_Model {
 
     }
 
+
+     public function show_parroquia_mun($id)
+    {
+ 
+      $db_admin = $this->load->database('default', TRUE);
+      
+      $db_admin->select('m.*');
+      $db_admin->from('parroquia as m');
+      $db_admin->where('m.id_municipio', $id); 
+
+      return $db_admin->get()->result();
+      
+      $db_admin->close();
+    }
+
+
+    //****************************************************************
+
+
+    public function show_centro_personal($id_centro)
+    {
+
+      $db_admin = $this->load->database('default', TRUE);
+
+      $db_admin->select('u.*, u.login as cuenta, 
+        u.password_activo as password_activo, uf.cedula cedula, uf.nombre nombre_p,
+        uf.apellido apellido_p, p.nombre as tipo');
+
+       $db_admin->from('usuario as u');
+
+      $db_admin->join('usuario_info as uf','uf.id_usuario = u.id');
+      $db_admin->join('perfil as p','p.id = u.id_permiso');
+
+      $db_admin->where('uf.id_centro', $id_centro);             
+           
+      return $db_admin->get()->result();
+      $db_admin->close();
+
+    }
+
   
 }

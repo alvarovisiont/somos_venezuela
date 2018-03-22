@@ -19,6 +19,8 @@
 		$('#form_estructura').submit(function(e) {
 			
 			e.preventDefault()
+			
+			$('#btn_guardar').text('Guardando...')
 
 			$.ajax({
 				url: $(this).attr('action'),
@@ -27,9 +29,24 @@
 				data: $(this).serialize(),
 			})
 			.done(function(data) {
-				
+				if(data.r)
+				{
+					$('#form_estructura')[0].reset()
+					$('#btn_guardar').text('Guardar')
+					alert('Registro Agregado con Éxito')
+				}
+				else
+				{
+					alert('Ya este registro existe y no ha podido guardarse')
+					$('#form_estructura')[0].reset()
+					$('#btn_guardar').text('Guardar')
+				}
 			})
 			
 		});
+
+		$('#modal_estructura').on('hide.bs.modal',function(){
+			window.location.reload()
+		})
 	})
 </script>

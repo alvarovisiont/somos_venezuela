@@ -139,6 +139,9 @@ class Censomodel extends CI_Model {
 
     public function store_estructura($estr)
     {
+        $estr['createdat'] = date('Y-m-d',strtotime('-4 hour'));
+        $estr['updatedat'] = date('Y-m-d',strtotime('-4 hour'));
+
         $this->db->where('cedula',$estr['cedula']);
         if($this->db->count_all_results('estructura') > 0)
         {
