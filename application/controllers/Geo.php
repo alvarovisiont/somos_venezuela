@@ -110,14 +110,16 @@ class Geo extends CI_Controller {
         if ($parroquia == null){
 
              $nombre_parroquia = "Todas";
+              $id_municipio_l = $municipio;
         }else
         {    $nombre_p = $this->geomodel->show_parroquia_id($parroquia); 
-            $nombre_parroquia = $nombre_p->nombre;
+             $nombre_parroquia = $nombre_p->nombre;
+             $id_municipio_l = $nombre_p->id_municipio;
         }
 
         $centro = $this->geomodel->show_centro($municipio, $parroquia); 
      
-        $datos = ['centro' => $centro, 'nombre_parroquia' => $nombre_parroquia];
+        $datos = ['centro' => $centro, 'nombre_parroquia' => $nombre_parroquia, 'id_municipio_l' => $id_municipio_l];
 
         $this->load->view('dashboard/header');
         $this->load->view('dashboard/menu');
@@ -132,17 +134,19 @@ class Geo extends CI_Controller {
 
         if ($id_centro == null){
 
-             $nombre_centro = "Todas";
+             $nombre_centro = "Todoss";
+             $id_municipio_l = 0;
         }else
         {   
-            //consulta
-            $nombre_centro = "fulano"; 
+            $user = $this->usuariomodel->usuario_info($id_centro); 
+            $nombre_centro =  $user->centro;
+            $id_municipio_l = $user->id_municipio;
         }
 
         $trabajadores = $this->geomodel->show_centro_personal($id_centro); 
 
      
-        $datos = ['trabajadores' => $trabajadores, 'nombre_centro' => $nombre_centro];
+        $datos = ['trabajadores' => $trabajadores, 'nombre_centro' => $nombre_centro, 'id_municipio_l' => $id_municipio_l];
 
         $this->load->view('dashboard/header');
         $this->load->view('dashboard/menu');

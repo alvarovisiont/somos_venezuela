@@ -103,7 +103,7 @@ class Usuariomodel extends CI_Model {
       $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
       $db_admin->where('u.id',$id);
-      $db_admin->select('u.*,ui.*,perfil.nombre as perfil');
+      $db_admin->select('u.*,ui.*,perfil.nombre as perfil, ui.nombre as centro');
       $db_admin->from('usuario as u');
       $db_admin->join('usuario_info as ui','ui.id_usuario = u.id','left');
       $db_admin->join('perfil','perfil.id = u.id_permiso');

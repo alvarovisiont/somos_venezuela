@@ -27,6 +27,15 @@
 		</div>
 		<?php }?>
 
+		<?php if ($this->session->userdata('id_permiso') == 5){ ?>
+		<div class="col-md-2 col-sm-2">
+			<a href="<?= base_url().'index.php/geo/parroquia/'.$id_municipio_l?>" class="btn btn-app btn-primary">
+						<i class="ace-icon fa fa-eye bigger-250"></i>
+						Parroquia&nbsp;
+			</a>
+		</div>
+		<?php }?>
+
 		<?php if ($this->session->userdata('id_permiso') == 6){ ?>
 
 		<div class="col-sm-2 col-md-2">				
@@ -82,7 +91,7 @@
 						</td>
 						
 						<td class="hidden-480">
-								<a href="<?= base_url().'index.php/geo/parroquia/'?><?=$row->id_municipio?>">
+								<a href="<?= base_url().'index.php/geo/centro_personal/'?><?=$row->id?>">
 									<i class="btn btn-xs no-hover btn-primary fa fa-eye"></i>
 									Trabajadores
 								</span>
