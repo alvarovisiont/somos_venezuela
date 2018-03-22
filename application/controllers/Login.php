@@ -125,6 +125,18 @@ class Login extends CI_Controller {
                     $membrete = 'Parroquia '.$check_user->parroquia.", Municipio: ".$check_user->municipio.", Estado Sucre";
                   break;
 
+                  case '7':
+                    $membrete = 'Centro Médico: '.$check_user->nombre;
+                  break;
+
+                  case '8':
+                    $membrete = 'Médico : '.$check_user->nombre;
+                  break;
+
+                  case '9':
+                    $membrete = 'Registrador: '.$check_user->nombre;
+                  break;
+
                   case '2':
                     $membrete = 'Administrador del Sistema';
                   break;
@@ -137,7 +149,8 @@ class Login extends CI_Controller {
               'bpass' => $check_user->password_activo,
               'membrete' => $membrete,
               'municipio' => $check_user->id_municipio,
-              'parroquia' => $check_user->id_parroquia
+              'parroquia' => $check_user->id_parroquia,
+              'id_centro' => $check_user->id_centro
           );
 
           $this->session->set_flashdata('type','success');
@@ -187,39 +200,17 @@ class Login extends CI_Controller {
             break;
 
             case '8':
-              $this->load->view('escritorio/registradores');
+              redirect('dashboard/medicos/','refresh');
             break;
 
             case '9':
-              $this->load->view('escritorio/medicos');
+              redirect('dashboard/registradores','refresh');
             break;
          }
   }
 /*---------------------------------------------------------------------*/
   public function session($tipo_bd = null){
   //armar session completa     
-     switch ($tipo_bd) 
-     {
-      case null:
-        if ($this->session->userdata('bd_activa')){
-            $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
-            'tipo_bd' =>  $this->session->userdata('tipo_bd'));
-           }else
-           {
-            $data = array( 'bd_activa' => 'default',
-            'tipo_bd' => 1);
-           }
-           break;
-       case 1:
-           $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
-          break;
-       case 2:
-          $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
-          break;
-      }// fin switch
-
-      $this->session->set_userdata($data);
-
 
      $session_user = $this->configmodel->session_usuario(); 
      $usuario_data = array(
@@ -233,27 +224,7 @@ class Login extends CI_Controller {
 
   public function session_menu($tipo_bd = null){
 
-      switch ($tipo_bd) 
-       {
-        case null:
-          if ($this->session->userdata('bd_activa')){
-              $data = array( 'bd_activa' => $this->session->userdata('bd_activa'),
-              'tipo_bd' =>  $this->session->userdata('tipo_bd'));
-             }else
-             {
-              $data = array( 'bd_activa' => 'default',
-              'tipo_bd' => 1);
-             }
-             break;
-         case 1:
-             $data = array( 'bd_activa' => 'default', 'tipo_bd' => $tipo_bd);    
-            break;
-         case 2:
-            $data = array( 'bd_activa' => 'admin21', 'tipo_bd' => $tipo_bd);
-            break;
-        }// fin switch
-
-        $this->session->set_userdata($data);
+      
       //armar session completa
         $menu  = $this->menumodel->show_menu_perfil();
 

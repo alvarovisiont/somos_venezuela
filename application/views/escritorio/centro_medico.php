@@ -43,16 +43,24 @@
 		}
 		?>
 
-		<button class="btn btn-app btn-primary pull-right" data-tool="tooltip" title="Agregar Estructura"
-			data-toggle="modal" data-target="#modal_estructura">
-    		<i class="ace-icon fa fa-user-plus bigger-250"></i>
-    		Estructura
-    	</button>
+    	<? 
+    	if($this->session->userdata('id_permiso') === '7')
+    	{
+    	?>
+			<button class="btn btn-app btn-primary pull-right" data-tool="tooltip" title="Agregar Estructura"
+				data-toggle="modal" data-target="#modal_estructura">
+				<i class="ace-icon fa fa-user-plus bigger-250"></i>
+				Estructura
+			</button>
+    	<?
+    	}
+    	?>
+
     	<button class="btn btn-app btn-success pull-right" data-tool="tooltip" title="Mostrar Estructura" id="btn_mostrar_estructura">
     		<i class="ace-icon fa fa-user bigger-250"></i>
     		Estructura
     		<span class="badge badge-warning badge-left"><?= count($estructura) ?></span>
-    	</button>	
+    	</button>
     	<button class="btn btn-app btn-success pull-right" data-tool="tooltip" title="Mostrar Tabla" id="btn_mostrar_tabla" style="display: none">
     		<i class="ace-icon fa fa-list bigger-250"></i>
     		Tabla
@@ -91,7 +99,7 @@
 
 						if($row->tipo === 'Registrador')
 						{
-							$button = '<a <a href="'.base_url().'index.php/censo/index/'.base64_encode($row->id).'" 
+							$button = '<a <a href="'.base_url().'index.php/censo/index/'.base64_encode($row->id).'/'.base64_encode($centro).'" 
 									class="btn btn-info btn-sm"
 									data-tool="tooltip"
 									title="Ver datos del Censo">
@@ -143,14 +151,30 @@
 				<?
 					foreach ($estructura as $row) 
 					{
-						$edit = '<button class="btn btn-xs btn-pink" data-tool="tooltip" title="Editar Registro">
-									<i class="fa fa-edit"></i>
-								</button>';
-						
-						$eliminar = '<button class="btn btn-xs btn-purple eliminar" data-tool="tooltip" title="Eliminar Registro"
-										data-id="'.$row->id.'">
-										<i class="fa fa-trahs"></i>
+						$edit = '';
+						$eliminar = '';
+
+						if($this->session->userdata('id_permiso') === '7')
+						{
+							$edit = '<button class="btn btn-xs btn-warning editar" data-tool="tooltip" title="Editar Registro"
+									data-id="'.$row->id.'"
+									data-nombre="'.$row->nombre.'"
+									data-apellido="'.$row->apellido.'"
+									data-cedula="'.$row->cedula.'"
+									data-telefono="'.$row->telefono.'"
+									data-email="'.$row->email.'"
+									data-cargo="'.$row->cargo.'"
+									>
+										<i class="fa fa-edit"></i>
 									</button>';
+							
+							$eliminar = '<button class="btn btn-xs btn-purple eliminar" data-tool="tooltip" title="Eliminar Registro"
+											data-id="'.$row->id.'"
+											data-centro="'.$centro.'">
+											<i class="fa fa-trash"></i>
+										</button>';
+						}
+							
 
 						echo "	<tr>
 									<td>{$row->cedula}</td>
@@ -159,7 +183,7 @@
 									<td>{$row->telefono}</td>
 									<td>{$row->email}</td>
 									<td><span class='label label-lg label-yellow arrowed-in arrowed-in-right'>{$row->cargo}</span></td>
-									<td>{$eliminar}</td>
+									<td>{$edit} {$eliminar}</td>
 								</tr>";
 					}
 				?>
@@ -168,7 +192,7 @@
 	</div>
 </div>
 
-<!-- ==================================== MODAL AGG ESTRUCTURA =================================================== -->
+<!-- ==================================== MODALS ESTRUCTURA =================================================== -->
 
 <div id="modal_estructura" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -181,7 +205,62 @@
             <form action="<?= base_url().'index.php/censo/store_estructura' ?>" class="form-horizontal" id="form_estructura"
             	method="POST">
 	            <div class="modal-body">
-	            	<input type="hidden" name="id_centro" value="<?= $this->session->userdata('id_usuario') ?>">
+	            	<input type="hidden" name="id_centro" value="<?= $centro ?>">
+	            	<div class="form-group">
+	            		<label for="cedula" class="control-label col-md-2 col-sm-2">Cédula</label>
+	            		<div class="col-md-4 col-sm-4">
+	            			<input type="number" name="cedula" required="" class="form-control" value="">
+	            		</div>
+	            		<label for="" class="col-md-2 col-sm-2 control-label">Nombre</label>
+	            		<div class="col-md-4 col-sm-4">
+	            			<input type="text" name="nombre" class="form-control" required="">
+	            		</div>
+	            		
+	            	</div>
+	            	<div class="form-group">
+	            		<label for="" class="col-md-2 col-sm-2 control-label">Apellido</label>
+	            		<div class="col-md-4 col-sm-4">
+	            			<input type="text" name="apellido" class="form-control" required="">
+	            		</div>
+	            		<label for="telefono" class="control-label col-md-2 col-sm-2">Teléfono</label>
+	            		<div class="col-md-4 col-sm-4">
+	            			<input type="text" name="telefono" required="" class="form-control input-mask-phone" value="">
+	            		</div>
+	            	</div>
+	            	<div class="form-group">
+	            		<label for="email" class="control-label col-md-2 col-sm-2">Correo</label>
+	            		<div class="col-md-4 col-sm-4">
+	            			<input type="text" name="email" class="form-control">
+	            		</div>
+	            		<label for="cargo" class="control-label col-md-2 col-sm-2">Cargo</label>
+	            		<div class="col-md-4 col-sm-4">
+	            			<input type="text" name="cargo" required="" class="form-control">
+	            		</div>
+	            	</div>
+	            </div><!-- fin modal-body -->
+	            <div class="modal-footer">
+	                <button type="submit" class="btn btn-pink" id="btn_guardar">Grabar</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	            </div>
+	        </form>
+        </div><!-- fin modal-content -->
+    </div><!-- fin modal-dialog -->
+</div> <!-- fin modal -->
+
+<div id="modal_editar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header modalHeader">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Editar Integrante&nbsp;<i class="fa fa-pencil"></i></h4>
+            </div>
+            <form action="<?= base_url().'index.php/censo/edit_estructura' ?>" class="form-horizontal" id="form_estructura_edit"
+            	method="POST">
+	            <div class="modal-body">
+	            	<input type="hidden" name="id_centro" value="<?= $centro ?>">
+	            	<input type="hidden" id="id_edit" name="id_edit" value="">
+	            	<input type="hidden" name="updatedat" value="<?= date('Y-m-d',strtotime('-4 hour')) ?>">
 	            	<div class="form-group">
 	            		<label for="cedula" class="control-label col-md-2 col-sm-2">Cédula</label>
 	            		<div class="col-md-4 col-sm-4">
@@ -200,7 +279,7 @@
 	            		</div>
 	            		<label for="telefono" class="control-label col-md-2 col-sm-2">Teléfono</label>
 	            		<div class="col-md-4 col-sm-4">
-	            			<input type="text" id="telefono_estruc" name="telefono" required="" class="form-control" value="">
+	            			<input type="text" id="telefono_estruc" name="telefono" required="" class="form-control input-mask-phone" value="">
 	            		</div>
 	            	</div>
 	            	<div class="form-group">

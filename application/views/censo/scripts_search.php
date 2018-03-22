@@ -30,6 +30,7 @@
 									<td>${i.cedula}</td>
 									<td>${i.telefono}</td>
 									<td>${i.condicion}</td>
+									<td>${i.vivienda}</td>
 									<td><span class="label label-sm label-primary arrowed arrowed-right">${i.nivel}</span></td>
 								</tr>`
 					})

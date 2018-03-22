@@ -44,9 +44,10 @@ class Dashboard extends CI_Controller {
         $this->load->view('escritorio/scripts');
     }
 
-    public function municipio($municipio)
+    public function municipio($municipio = null)
     {
-        $municipio = base64_decode($municipio);
+        $municipio = $municipio ? base64_decode($municipio) : $this->session->userdata('municipio');
+
         $datos = [];
         $datos['municipio'] = $municipio;
         $datos['data'] = $this->escritoriomodel->datos_municipio($municipio);
@@ -61,10 +62,12 @@ class Dashboard extends CI_Controller {
         $this->load->view('escritorio/scripts');
     }
 
-    public function parroquia($municipio,$parroquia)
+    public function parroquia($municipio = null,$parroquia = null)
     {
         
-        $municipio = base64_decode($municipio); /* decode base 64*/  $parroquia = base64_decode($parroquia);
+        $municipio = $municipio ? base64_decode($municipio) : $this->session->userdata('municipio');
+
+        $parroquia = $parroquia ? base64_decode($parroquia) : $this->session->userdata('parroquia');
 
         $datos = [];
         $datos['data'] = $this->escritoriomodel->datos_parroquia($municipio,$parroquia);
@@ -81,9 +84,10 @@ class Dashboard extends CI_Controller {
 
     }
 
-    public function centro_medico($id)
+    public function centro_medico($id = null)
     {
-        $id = base64_decode($id);
+
+        $id = $id ? base64_decode($id) : $this->session->userdata('id_usuario');
 
         $datos['data'] = $this->escritoriomodel->centros_medicos($id);
         $datos['totales'] = $this->escritoriomodel->totales_centro_medico($id);
@@ -92,6 +96,7 @@ class Dashboard extends CI_Controller {
 
         $datos['municipio'] = base64_encode($datos['data'][0]->muni);
         $datos['parroquia'] = base64_encode($datos['data'][0]->parro);
+        $datos['centro'] = $id;
         
 
 
@@ -102,6 +107,24 @@ class Dashboard extends CI_Controller {
         $this->load->view('escritorio/scripts');
     }
 
-    
+    public function registradores()
+    {
+        $datos['data'] = $this->escritoriomodel->datos_censo();
+        $this->load->view('dashboard/header');
+        $this->load->view('dashboard/menu');
+        $this->load->view('escritorio/registradores', $datos);
+        $this->load->view('dashboard/footer');
+        $this->load->view('escritorio/scripts');
+    }
+
+    public function medicos()
+    {
+        $datos['data'] = $this->escritoriomodel->datos_verificados();
+        $this->load->view('dashboard/header');
+        $this->load->view('dashboard/menu');
+        $this->load->view('escritorio/medico', $datos);
+        $this->load->view('dashboard/footer');
+        $this->load->view('escritorio/scripts');
+    }
    
 }

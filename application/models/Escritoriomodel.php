@@ -40,7 +40,8 @@ class Escritoriomodel extends CI_Model {
               (
                 SELECT count(*) from censo 
                 INNER JOIN usuario as u ON u.id = censo.id_registrador
-                where u.id_municipio = m.id_municipio
+                INNER JOIN usuario_info as ui ON ui.id_usuario = u.id
+                where ui.id_centro IN (SELECT id from usuario where id_permiso = 7 and usuario.id_municipio = m.id_municipio)
               )
               as censados
 
@@ -92,7 +93,12 @@ class Escritoriomodel extends CI_Model {
               (
                 SELECT count(*) from censo 
                 INNER JOIN usuario as u ON u.id = censo.id_registrador
-                where u.id_municipio = p.id_municipio and u.id_parroquia = p.id_parroquia
+                INNER JOIN usuario_info as ui ON ui.id_usuario = u.id
+                where ui.id_centro IN 
+                (
+                  SELECT id from usuario where id_permiso = 7 
+                  and usuario.id_municipio = p.id_municipio and usuario.id_parroquia = p.id_parroquia
+                )
               )
                 as censados
              from parroquia as p where p.id_estado = 17 and p.id_municipio = $municipio";
@@ -129,7 +135,12 @@ class Escritoriomodel extends CI_Model {
 
               from censo
               INNER JOIN usuario as u ON u.id = censo.id_registrador
-              WHERE u.id_municipio = $municipio";
+              INNER JOIN usuario_info as ui ON ui.id_usuario = u.id
+              WHERE ui.id_centro IN 
+                (
+                  SELECT id from usuario where id_permiso = 7 
+                  and usuario.id_municipio = $municipio
+                )";
 
       return $this->db->query($sql)->row();
       $this->db->close();
@@ -141,9 +152,15 @@ class Escritoriomodel extends CI_Model {
               
               (
                 SELECT count(*) from censo 
-                where censo.id_registrador = u.id
+                INNER JOIN usuario as u1 ON u1.id = censo.id_registrador
+                INNER JOIN usuario_info as ui1 ON ui1.id_usuario = u1.id
+                where ui1.id_centro IN 
+                (
+                  SELECT id from usuario where id_permiso = 7 
+                  and usuario.id = u.id
+                )
               )
-              as censados,
+                as censados,
               (
                 SELECT count(ui.*) as total from  usuario_info as ui
                 WHERE (u.id = ui.id_centro)
@@ -187,7 +204,12 @@ class Escritoriomodel extends CI_Model {
 
               from censo
               INNER JOIN usuario as u ON u.id = censo.id_registrador
-              WHERE u.id_municipio = $municipio and u.id_parroquia = $parroquia";
+              INNER JOIN usuario_info as ui ON ui.id_usuario = u.id
+              WHERE ui.id_centro IN 
+                (
+                  SELECT id from usuario where id_permiso = 7 
+                  and usuario.id_municipio = $municipio and usuario.id_parroquia = $parroquia
+                )";
 
       return $this->db->query($sql)->row();
       $this->db->close();
@@ -239,6 +261,48 @@ class Escritoriomodel extends CI_Model {
     {
       $this->db->where('id_centro',$id);
       return $this->db->get('estructura')->result();
+      $this->db->close();
+    }
+
+    public function datos_censo()
+    {
+      $id_registrador = $this->session->userdata('id_usuario');
+
+      $sql = "
+            WITH RECURSIVE 
+            padre(id,nombre,apellido,cedula,telefono,fecha_nac,pensionado,condicion,nivel,con,id_padre, vivienda)
+            AS
+            (
+                
+                SELECT censo.id,nombre,apellido,cedula,telefono,fecha_nac,pensionado,censo.condicion,'Jefe Familia', censo.id as con, 0,
+                
+                concat(vivienda.direccion,' ',vivienda.nro) as vivienda
+
+                from censo 
+                INNER JOIN vivienda ON id_vivienda = vivienda.id
+                WHERE id_padre = 0 and censo.id_registrador = $id_registrador
+                
+                UNION ALL 
+                SELECT censo.id,censo.nombre,censo.apellido,censo.cedula,censo.telefono,censo.fecha_nac,
+                       censo.pensionado,censo.condicion,'Carga Familiar', padre.con, censo.id_padre,
+                       ''
+                from censo 
+                JOIN padre ON censo.id_padre = padre.id
+            ) 
+            SELECT * from padre ORDER BY padre.con asc";
+
+      return $this->db->query($sql)->result();
+      $this->db->close();
+    }
+
+    public function datos_verificados()
+    {
+      $id = $this->session->userdata('id_usuario'); 
+
+      $this->db->where('id_medico',$id);
+      $this->db->select("c.*, concat(v.direccion,' ',v.piso,'-',v.nro) as vivienda");
+      $this->db->join('vivienda as v','v.id = c.id_vivienda');
+      return $this->db->get('censo as c')->result();
       $this->db->close();
     }
 }

@@ -13,9 +13,10 @@
 	</ul><!-- /.breadcrumb -->					
 </div>
 <div class="page-header text-center">
-	<li class="bigger-200 purple">
+	<li class="bigger-200 orange">
 	 	<i class="ace-icon fa fa-circle"></i>
-	 	Sala Situacional: <b class="">Estado Sucre</b>
+	 	<?= $this->session->userdata('membrete') ?>
+	 	<br>
 	</li>
 
 </div><!-- /.page-header -->

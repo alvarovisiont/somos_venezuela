@@ -18,7 +18,7 @@ class Censo extends CI_Controller {
 
 // ================================ | VIVIENDA | ============================================= //
 
-    public function index($id = null) 
+    public function index($id = null,$centro = null) 
     {   
         $id_busqueda = $id ? base64_decode($id) : $this->session->userdata('id_usuario');
         
@@ -26,6 +26,7 @@ class Censo extends CI_Controller {
 
         $datos['data'] = $this->censomodel->ver_viviendas($id_busqueda);
         $datos['registrador'] = $id_busqueda;
+        $datos['centro'] = $centro;
 
         $this->load->view('dashboard/header');
         $this->load->view('dashboard/menu');
@@ -285,6 +286,20 @@ class Censo extends CI_Controller {
             echo json_encode(['r' => false]);
         }
     }
-    
+
+    public function edit_estructura()
+    {
+        $this->censomodel->edit_estructura($this->input->post());
+
+        redirect('dashboard/centro_medico/'.base64_encode($this->input->post('id_centro')),'refresh');
+    }
+
+    public function estructura_delete($id,$centro)
+    {
+        $this->censomodel->delete_estructura($id);
+
+        redirect('dashboard/centro_medico/'.base64_encode($centro),'refresh');
+    }
+
 
 }

@@ -15,7 +15,7 @@
 <div class="page-header text-center">
 	<li class="bigger-200 orange">
 	 	<i class="ace-icon fa fa-circle"></i>
-	 	Sala Situacional: <b class=""><?= $this->session->userdata('membrete') ?></b>
+	 	<?= $this->session->userdata('membrete') ?>
 	 	<br>
 	</li>
 

@@ -45,8 +45,42 @@
 			
 		});
 
+
 		$('#modal_estructura').on('hide.bs.modal',function(){
 			window.location.reload()
+		})
+
+		$('.editar').click(function(e){
+
+
+			let x = e.target.dataset.id 
+				$('#id_edit').val(x)
+				x = e.target.dataset.nombre 
+				$('#nombre_estruc').val(x)
+				x = e.target.dataset.apellido 
+				$('#apellido_estruc').val(x)
+				x = e.target.dataset.cedula 
+				$('#cedula_estruc').val(x)
+				x = e.target.dataset.email 
+				$('#email_estruc').val(x)
+				x = e.target.dataset.cargo 
+				$('#cargo_estruc').val(x)
+				x = e.target.dataset.telefono 
+				$('#telefono_estruc').val(x)
+
+			$('#modal_editar').modal('show')	
+		})
+
+		$('.eliminar').click(function(e){
+			let agree = confirm('Esta seguro de querer eliminar este registro?')
+
+			if(agree)
+			{
+				let id = e.target.dataset.id,
+					centro = e.target.dataset.centro
+
+				window.location.href = '<?= base_url()."index.php/censo/estructura_delete/" ?>'+id+'/'+centro
+			}
 		})
 	})
 </script>

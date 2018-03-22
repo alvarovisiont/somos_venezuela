@@ -8,19 +8,25 @@
 		{
 			parent::__construct();
 			//Do your magic here
-			$this->load->model([''])
+			$this->load->model(['censomodel']);
 		}
 
-		public function verificar()
+		public function no_verificados()
 		{
-			
+			$datos['data'] = $this->censomodel->no_verificados();
+
+			$this->load->view('dashboard/header');
+	        $this->load->view('dashboard/menu');
+	        $this->load->view('verificar/no_verificados',$datos);
+	        $this->load->view('dashboard/footer');
+	        $this->load->view('censo/scripts');
 		}
 	
 	}
 	
 	/* End of file Verificar.php */
 	/* Location: ./application/controllers/Verificar.php */
-}
 
 /* End of file Verificar.php */
 /* Location: ./application/controllers/Verificar.php */
+?>

@@ -14,7 +14,7 @@
 <div class="page-header text-center">
 	<li class="bigger-200 orange">
 	 	<i class="ace-icon fa fa-circle"></i>
-	 	Sala Situacional: <b class=""><?= $this->session->userdata('membrete') ?></b>
+	 	<?= $this->session->userdata('membrete') ?>
 	 	<br>
 	</li>
 
@@ -63,6 +63,7 @@
 					<th class="text-center">Cédula</th>
 					<th class="text-center">Teléfono</th>
 					<th class="text-center">Condición</th>
+					<th class="text-center">Vivienda</th>
 					<th class="text-center">Nivel</th>
 				</tr>
 			</thead>

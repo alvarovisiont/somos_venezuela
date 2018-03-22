@@ -110,24 +110,35 @@ class Censomodel extends CI_Model {
 
         if($type === '1')
         {
-            $sql = "WITH RECURSIVE padre(id,nombre,apellido,cedula,telefono,fecha_nac,genero,condicion,embarazada,nivel,id_padre) AS(
+            $sql = "WITH RECURSIVE padre(id,nombre,apellido,cedula,telefono,condicion,nivel,con,vivienda) AS(
                 
-                SELECT id,nombre,apellido,cedula,telefono,fecha_nac,genero,condicion,embarazada,'Jefe Familia', id_padre from censo where cedula = $ced and id_padre = 0
+                SELECT censo.id,nombre,apellido,cedula,telefono,censo.condicion,'Jefe Familia', censo.id as con, concat(vivienda.direccion,' ',vivienda.nro) as vivienda
+                from censo 
+                INNER JOIN vivienda ON vivienda.id = censo.id_vivienda
+                where cedula = $ced and id_padre = 0
+                
                 UNION ALL 
-                SELECT censo.id,censo.nombre,censo.apellido,censo.cedula,censo.telefono,censo.fecha_nac,censo.genero,censo.condicion,censo.embarazada,'Carga Familiar', censo.id_padre from censo 
+                SELECT censo.id,censo.nombre,censo.apellido,censo.cedula,censo.telefono,censo.condicion,'Carga Familiar', padre.con, '' 
+                from censo 
                 JOIN padre ON censo.id_padre = padre.id
             ) 
-            SELECT * from padre";
+            SELECT * from padre ORDER BY con asc";
         }  
         else
         {
-            $sql = "WITH RECURSIVE padre(id,nombre,apellido,cedula,telefono,fecha_nac,genero,condicion,embarazada,nivel,id_padre) AS(
+            $sql = "WITH RECURSIVE padre(id,nombre,apellido,cedula,telefono,condicion,nivel,id_padre,con,vivienda) AS(
                 
-                SELECT id,nombre,apellido,cedula,telefono,fecha_nac,genero,condicion,embarazada,'Carga Familiar', id_padre from censo where cedula = $ced and censo.id_padre > 0
+                SELECT censo.id,nombre,apellido,cedula,telefono,censo.condicion,'Carga Familiar',id_padre, id_padre as con,
+                concat(vivienda.direccion,' ',vivienda.nro) as vivienda
+                from censo 
+                INNER JOIN vivienda ON vivienda.id = censo.id_vivienda
+                where cedula = $ced and censo.id_padre > 0
 
                 UNION ALL 
 
-                SELECT censo.id,censo.nombre,censo.apellido,censo.cedula,censo.telefono,censo.fecha_nac,censo.genero,censo.condicion,censo.embarazada,'Jefe Familia', censo.id_padre from censo 
+                SELECT censo.id,censo.nombre,censo.apellido,censo.cedula,censo.telefono,censo.condicion,
+                'Jefe Familia',censo.id_padre, censo.id as con, ''
+                from censo 
                 JOIN padre ON censo.id = padre.id_padre
             ) 
             SELECT * from padre";
@@ -136,6 +147,8 @@ class Censomodel extends CI_Model {
         return $this->db->query($sql)->result();
         $this->db->close();
     }
+
+// ========================= ESTRUCTURAS CENTROS MEDICOS ==========================================
 
     public function store_estructura($estr)
     {
@@ -152,6 +165,35 @@ class Censomodel extends CI_Model {
             $this->db->insert('estructura',$estr);
             return true;
         }
+    }
+
+    public function edit_estructura($data)
+    {
+        $id = $data['id_edit'];
+        unset($data['id_edit']);
+
+        $this->db->where('id',$id);
+        $this->db->update('estructura',$data);
+        $this->db->close();
+    }
+
+    public function delete_estructura($id)
+    {
+        $this->db->delete('estructura',['id' => $id]);
+    }
+
+// ============================ VERIFICAR MEDICO ==============================================
+
+    public function no_verificados()
+    {
+        $id_centro = $this->session->userdata('id_centro'); 
+
+        $this->db->where("c.id_medico = 0 and ui.id_centro = $id_centro");
+        $this->db->select("c.*, concat(v.direccion,' ',v.piso,'-',v.nro) as vivienda");
+        $this->db->join('vivienda as v','v.id = c.id_vivienda');
+        $this->db->join('usuario_info as ui','ui.id_usuario = c.id_registrador');
+        return $this->db->get('censo as c')->result();
+        $this->db->close();
     }
 
 }

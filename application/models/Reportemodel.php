@@ -21,9 +21,76 @@ class Reportemodel extends CI_Model {
 
 	public function datos_pdf($where)
 	{
-		$sql = "SELECT * from censo as c 
+		
+		$muni = $this->session->userdata('municipio');
+		$parr = $this->session->userdata('parroquia');
+		$id   = $this->session->userdata('id_usuario');
+
+		switch ($this->session->userdata('id_permiso')) {
+
+			case '5':
+				if(!empty($where))
+				{
+					$where.= ' AND (u.id_municipio = $muni)';
+				}
+				else
+				{
+					$where = 'WHERE u.id_municipio = $muni';
+				}
+			break;
+
+			case '6':
+				if(!empty($where))
+				{
+					$where.= ' AND (u.id_municipio = $muni and u.id_parroquia = $parr)';
+				}
+				else
+				{
+					$where = 'WHERE u.id_municipio = $muni and u.id_parroquia = $parr';
+				}
+			break;
+
+			case '7':
+				if(!empty($where))
+				{
+					$where.= " AND (ui.id_centro IN (SELECT id from usuario where id = $id) )";
+				}
+				else
+				{
+					$where = "WHERE ui.id_centro IN (SELECT id from usuario where id = $id)";
+				}
+			break;
+
+			case '8':
+				if(!empty($where))
+				{
+					$where.= ' AND u.id = $id';
+				}
+				else
+				{
+					$where = 'WHERE u.id = $id';
+				}
+			break;
+
+			case '9':
+				if(!empty($where))
+				{
+					$where.= " AND u.id = $id";
+				}
+				else
+				{
+					$where = "WHERE u.id = $id";
+				}
+			break;
+		}
+
+		
+
+		$sql = "SELECT c.* from censo as c 
 				INNER JOIN usuario as u ON u.id = c.id_registrador
-				$where";
+				INNER JOIN usuario_info ui ON ui.id_usuario = u.id
+				$where
+				ORDER BY c.fecha_nac desc";
 
 		return $this->db->query($sql)->result();
 

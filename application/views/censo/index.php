@@ -13,12 +13,27 @@
 </div>
 
 <div class="page-header text-center">
-	<li class="bigger-200 orange">
-	 	<i class="ace-icon fa fa-circle"></i>
-	 	Sala Situacional: <b class=""><?= $this->session->userdata('membrete') ?></b>
-	 	<br>
-	</li>
-
+	<div class="row no-gutters">
+		<div class="col-md-12 col-sm-12">
+			<li class="bigger-200 orange">
+			 	<i class="ace-icon fa fa-circle"></i>
+			 	<?= $this->session->userdata('membrete') ?>
+			 	
+			 	<?
+		    	if($this->session->userdata('id_permiso') <= '7')
+		    	{
+		    	?>
+		    		<a href="<?= base_url().'index.php/dashboard/centro_medico/'.$centro ?>" class="btn btn-app btn-yellow btn-xs pull-right" data-tool="tooltip" title="Volver al dashboard de Centro Medico">
+			    		<i class="ace-icon fa fa-undo bigger-250"></i>
+			    		Centro
+			    		<span class="badge badge-warning badge-left"></span>
+			    	</a>
+			    <?	
+		    	}
+		    	?>
+			</li>	
+		</div>
+	</div>
 </div><!-- /.page-header -->
 
 
@@ -70,7 +85,14 @@
 					</select>
 				</div>
 				<div class="col-md-3 col-sm-3 col-md-offset-3 col-sm-offset-3">
-					<button class="btn btn-purple btn-block">Registrar Vivienda&nbsp;<i class="fa fa-check"></i></button>
+					<?
+		    		if($this->session->userdata('id_permiso') === '9')
+		    		{
+		    		?>
+						<button class="btn btn-purple btn-block">Registrar Vivienda&nbsp;<i class="fa fa-check"></i></button>
+					<?
+					}
+					?>
 				</div>
 			</div>
 		</form>
