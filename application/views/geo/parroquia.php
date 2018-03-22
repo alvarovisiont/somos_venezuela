@@ -33,10 +33,21 @@
 
 		<?php }?>
 
-		<?php if (($this->session->userdata('id_permiso') == 4) or ($this->session->userdata('id_permiso') == 5)){ ?>
+		<?php if ($this->session->userdata('id_permiso') == 4){ ?>
 
 		<div class="col-md-1 col-sm-1">
 			<a href="<?= base_url().'index.php/geo/centro_medico'?>" class="btn btn-app btn-primary">
+						<i class="ace-icon fa fa-eye bigger-250"></i>
+						C. Médicos&nbsp;
+			</a>
+		</div>
+
+		<?php }?>
+
+		<?php if ($this->session->userdata('id_permiso') == 5){ ?>
+
+		<div class="col-md-1 col-sm-1">
+			<a href="<?= base_url().'index.php/geo/centro_medico/'.$id_municipio?>" class="btn btn-app btn-primary">
 						<i class="ace-icon fa fa-eye bigger-250"></i>
 						C. Médicos&nbsp;
 			</a>

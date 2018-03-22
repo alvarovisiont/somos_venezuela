@@ -64,7 +64,40 @@ class Usuario extends CI_Controller {
 	}// fin index
 
 /*---------------------------------------------------------------------*/
+    public function listado(){
+        //buscar tipo de logueo
 
+      if (!$this->session->userdata('is_logued_in'))
+       {
+        redirect('login/', 'refresh');
+       }else
+       {
+         $data = array( 'bd_activa' => 'default',
+              'tipo_bd' => 1);
+         $this->session->set_userdata($data); 
+
+         $usuario  = $this->usuariomodel->show_usuario();
+
+         $arr_usuario = $usuario;
+         $correo_usuario = array();
+
+         foreach ( $arr_usuario  as $row) 
+         array_push($correo_usuario, $row->email);
+
+         $usuario_data = array(
+         'arr_usuarios' => $correo_usuario
+         );
+         $this->session->set_userdata($usuario_data);
+
+         $this->load->view('dashboard/header');
+         $this->load->view('dashboard/menu');
+         $this->load->view('usuario/index2',['usuario' => $usuario]);
+         $this->load->view('dashboard/footer');
+        }
+    
+    }// fin index
+
+/*---------------------------------------------------------------------*/
        public function usuario_activo($id,$estatus){
 
        if (!$this->session->userdata('is_logued_in'))
@@ -85,11 +118,11 @@ class Usuario extends CI_Controller {
         {
             //registro modificado;
              $this->session->set_flashdata('usuario_mensj', 'Cambiado el estatus');
-            redirect('usuario/','refresh');
+            redirect('usuario/listado','refresh');
         }
         else
         {
-            redirect('usuario/','refresh');
+            redirect('usuario/listado','refresh');
         }
        }
 

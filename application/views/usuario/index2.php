@@ -1,9 +1,9 @@
 <div class="page-header">
 	<h1>
-		Cuentas
+		Dashboard
 		<small>
 			<i class="ace-icon fa fa-angle-double-right"></i>
-			Municipios
+			Menú
 		</small>
 	</h1>
 </div><!-- /.page-header -->
@@ -12,23 +12,17 @@
  <div class="row no-gutters">
 
  		<div class="col-md-1 col-sm-1">
-
  		</div>	
 		
 		<div class="col-md-9 col-sm-9">
  		<li class="text-warning bigger-200 orange">
-		 <i class="ace-icon fa fa-circle"></i>Estado Sucre  <i class="ace-icon fa fa-share green bigger-70"></i> Municipios Todos</li>
+		 <i class="ace-icon fa fa-circle"></i>Estado Sucre  <i class="ace-icon fa fa-share green bigger-70"></i> Usuarios Todos</li>
 		</div>
 																
 		<div class="col-md-2 col-sm-2">
-			<a href="<?= base_url().'index.php/geo/parroquia'?>" class="btn btn-app btn-primary">
-						<i class="ace-icon fa fa-eye bigger-250"></i>
-						Parroquia&nbsp;
-			</a>
 		</div>
     </div>
- 
-	<br/>
+		<br/>
   <div class="row no-gutters">
 	<div class="col-xs-12">
 
@@ -36,25 +30,41 @@
 			<thead>
 				<tr>
 					<th class="text-center">Id</th>
-					<th class="text-center">Municipio</th>
 					<th class="text-center">Login</th>
+					<th class="text-center">Correo</th>
+					<th class="text-center">Permiso</th>
+					<th class="text-center">Estatus</th>
 					<th class="text-center">Acceso Sistema</th>
-					<th class="text-center">Acción</th>
+					<th class="text-center">Fecha Acceso</th>
 				</tr>
 			</thead>
 			<tbody class="text-center">
-				<? foreach ($municipio as $row) 
+				<? foreach ($usuario as $row) 
 				{ ?>
 					<tr>
 						<td class="hidden-480">
 						  <?php echo $row->id; ?>
 						</td>
 						<td class="hidden-480">
-						  <?php echo $row->nombre; ?>
+						  <?php echo $row->login; ?>
+						</td>
+						<td class="hidden-480">
+						  <?php echo $row->email; ?>
+						</td>
+						<td class="hidden-480">
+						  <?php echo $row->permiso; ?>
 						</td>
 
 						<td class="hidden-480">
-						  <?php echo $row->cuenta; ?>
+						  <?php $res = ($row->usuario_activo == 'f') ? "denegado.png" : "activo.jpeg";?>
+						  <?php $titulo = ($row->usuario_activo == 'f') ? "Acceso Denegado" : "Activado";?>
+						 
+						   <?php 
+                           $label = "<img src='".base_url()."assets/galerias/sistema/".$res."'  
+						   height='35' title='".$titulo."' data-tool='tooltip'/>";
+                           echo anchor(site_url('usuario/usuario_activo/'.$row->id.'/'.$row->usuario_activo), $label, 'onclick="javasciprt: 
+                           	   return confirm(\'Esta seguro de Cambiarle el estatus?\')"');
+                           ?>
 						</td>
 						<td class="hidden-480">
 						  <?php $res = ($row->password_activo == 'f') ? "inactivo.png" : "activo.jpeg";?>
@@ -62,13 +72,8 @@
 						   <img src="<?php echo base_url() ?>assets/galerias/sistema/<?php echo $res;?>"  height="35"
 						    title='<?php echo $titulo;?>' data-tool='tooltip'/>
 						</td>
-						
 						<td class="hidden-480">
-								<a href="<?= base_url().'index.php/geo/parroquia/'?><?=$row->id_municipio?>">
-									<i class="btn btn-xs no-hover btn-primary fa fa-eye"></i>
-									Parroquia
-								</span>
-							</a>
+						   <?=invierte_date_time($row->fecha_acceso)?>
 						</td>
 					</tr>
 				<?php }

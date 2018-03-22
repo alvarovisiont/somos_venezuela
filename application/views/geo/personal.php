@@ -18,6 +18,33 @@
 		 <i class="ace-icon fa fa-circle"></i> Centros Médicos <?php echo $nombre_centro?></li>
 		</div>
 
+		<?php if ($this->session->userdata('id_permiso') == 4){ ?>
+		<div class="col-md-2 col-sm-2">
+			<a href="<?= base_url().'index.php/geo/parroquia'?>" class="btn btn-app btn-primary">
+						<i class="ace-icon fa fa-eye bigger-250"></i>
+						Parroquia&nbsp;
+			</a>
+		</div>
+		<?php }?>
+
+		<?php if ($this->session->userdata('id_permiso') == 5){ ?>
+		<div class="col-md-2 col-sm-2">
+			<a href="<?= base_url().'index.php/geo/parroquia/'.$id_municipio_l?>" class="btn btn-app btn-primary">
+						<i class="ace-icon fa fa-eye bigger-250"></i>
+						Parroquia&nbsp;
+			</a>
+		</div>
+		<?php }?>
+
+		<?php if ($this->session->userdata('id_permiso') == 6){ ?>
+		<div class="col-md-2 col-sm-2">
+			<a href="<?= base_url().'index.php/geo/index'?>" class="btn btn-app btn-primary">
+						<i class="ace-icon fa fa-eye bigger-250"></i>
+						C. Médicos&nbsp;
+			</a>
+		</div>
+		<?php }?>
+
 		<?php if ($this->session->userdata('id_permiso') == 7){ ?>
 
 		<div class="col-sm-2 col-md-2">				
@@ -43,7 +70,9 @@
 					<th class="text-center">Tipo</th>
 					<th class="text-center">Login</th>
 					<th class="text-center">Acceso Sistema</th>
+					<?php if ($this->session->userdata('id_permiso') == 7){ ?>
 					<th class="text-center">Acción</th>
+					<?php }?>
 				</tr>
 			</thead>
 			<tbody class="text-center">
@@ -77,13 +106,18 @@
 						    title='<?php echo $titulo;?>' data-tool='tooltip'/>
 						</td>
 						
+						<?php if ($this->session->userdata('id_permiso') == 7){ ?>
+
 						<td class="hidden-480">
+							<span>
 								<a href="<?= base_url().'index.php/geo/parroquia/'?><?=$row->id_municipio?>">
 									<i class="btn btn-xs no-hover btn-primary fa fa-eye"></i>
 									Ver
 								</span>
 							</a>
 						</td>
+						<?php }?>
+
 					</tr>
 				<?php }
 				?>

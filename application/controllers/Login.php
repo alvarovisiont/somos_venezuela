@@ -76,9 +76,9 @@ class Login extends CI_Controller {
 		 //VERIFICAR
 
 
+
 		 if ($this->input->post()) 
      {      
-
         
         $username = $this->session->userdata('acceso') === '1' ? $this->input->post('email') : $this->input->post('username');
 
@@ -89,7 +89,7 @@ class Login extends CI_Controller {
 
         $check_user = $this->usuariomodel->login_usuario($username, $password);
 
-        if ($check_user === TRUE) {
+        if ($check_user) {
 
            if ($check_user->correo_activo == 'f')
             {

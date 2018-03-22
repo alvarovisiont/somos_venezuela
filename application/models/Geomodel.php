@@ -184,6 +184,5 @@ class Geomodel extends CI_Model {
       $db_admin->close();
 
     }
-
   
 }
