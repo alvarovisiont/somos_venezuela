@@ -32,7 +32,7 @@ class Perfilmodel extends CI_Model {
 
       $db_admin->where('id', $para1);
       if ($para2 <> null){
-        $db_admin->where('id', $para2);        
+        $db_admin->or_where('id', $para2);        
       }
 
       $db_admin->order_by('nombre');

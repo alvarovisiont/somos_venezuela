@@ -80,7 +80,7 @@ class Usuariomodel extends CI_Model {
 
     if($db_admin->insert('usuario',$datos))
       {
-        $db_admin->where('email', $datos['email']);
+        $db_admin->select_max('id');
         $query = $db_admin->get('usuario');
 
         $queryresult = $query->row();

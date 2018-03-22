@@ -222,6 +222,63 @@ class Usuario extends CI_Controller {
 
 
 
+     public function create_personal()
+   {
+      $perfil = $this->perfilmodel->show_perfil_id(8, 9);
+
+      $ruta = base_url().'index.php/usuario/store_personal';
+        $this->load->view('dashboard/header');
+        $this->load->view('dashboard/menu');
+        $this->load->view('geo/form_personal',['ruta' => $ruta,'register' => null, 'perfil' => $perfil]);
+        $this->load->view('dashboard/footer');
+   }
+
+    public function store_personal()
+    {
+
+          $cedula = $this->input->post('cedula', TRUE);
+          $nombre = $this->input->post('nombre', TRUE);
+          $apellido = $this->input->post('apellido', TRUE);
+          $imagen = $this->input->post('imagen', TRUE);
+          $telefono = $this->input->post('telefono', TRUE);
+
+          $email = "";
+          $email = $this->input->post('email', TRUE);
+
+         $data = array(
+                'createdat' => date('Y-m-d H:i:s'),
+                'updatedat' => date('Y-m-d H:i:s'),
+                'fecha_acceso' => date('Y-m-d H:i:s'),
+                'password' => '123456',
+                'login' => $cedula,
+                'email' => $email,
+                'correo_activo' => true,
+                'id_permiso' => $this->input->post('id_permiso', TRUE),    
+            );
+
+
+            $datapersonal = array(
+                'createdat' => date('Y-m-d H:i:s'),
+                'updatedat' => date('Y-m-d H:i:s'),
+                'cedula' => $cedula,
+                'nombre' => $nombre,
+                'apellido' => $apellido,
+                'imagen' => $imagen,
+                'telefono' => $telefono,
+                'id_centro' => $this->session->userdata('id_usuario'),
+            );
+
+        if($this->usuariomodel->crear_usuario($data, $datapersonal))
+        {  
+            redirect('geo/','refresh');
+        }
+        else
+        {       
+            redirect('geo/','refresh');
+        }
+    }
+
+
 
  
     /*public function store_municipio($municipio)

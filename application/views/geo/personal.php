@@ -17,6 +17,16 @@
  		<li class="text-warning bigger-200 orange">
 		 <i class="ace-icon fa fa-circle"></i> Centros Médicos <?php echo $nombre_centro?></li>
 		</div>
+
+		<?php if ($this->session->userdata('id_permiso') == 7){ ?>
+
+		<div class="col-sm-2 col-md-2">				
+					<a href="<?= base_url().'index.php/usuario/create_personal'?>" class="btn btn-app btn-success">
+						<i class="ace-icon fa fa-fire bigger-230"></i>
+						+ Personal&nbsp;
+					</a>
+		</div>	
+		<?php }?>
 		
     </div> 
 	<br/>
