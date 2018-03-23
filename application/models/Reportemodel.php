@@ -23,7 +23,7 @@ class Reportemodel extends CI_Model {
 	{
 		
 		$muni = $this->session->userdata('municipio');
-		$parr = $this->session->userdata('parroquia');
+		$parro = $this->session->userdata('parroquia');
 		$id   = $this->session->userdata('id_usuario');
 
 		switch ($this->session->userdata('id_permiso')) {
@@ -31,26 +31,26 @@ class Reportemodel extends CI_Model {
 			case '5':
 				if(!empty($where))
 				{
-					$where.= ' AND (u.id_municipio = $muni)';
+					$where.= " AND (ui.id_centro IN (SELECT id from usuario where id_municipio = $muni))";
 				}
 				else
 				{
-					$where = 'WHERE u.id_municipio = $muni';
+					$where = "WHERE ui.id_centro IN (SELECT id from usuario where id_municipio = $muni)";
 				}
 			break;
 
-			case '6':
+			case "6":
 				if(!empty($where))
 				{
-					$where.= ' AND (u.id_municipio = $muni and u.id_parroquia = $parr)';
+					$where.= " AND (ui.id_centro IN (SELECT id from usuario where id_municipio = $muni and id_parroquia = $parro))";
 				}
 				else
 				{
-					$where = 'WHERE u.id_municipio = $muni and u.id_parroquia = $parr';
+					$where = "WHERE ui.id_centro IN (SELECT id from usuario where id_municipio = $muni and id_parroquia = $parro)";
 				}
 			break;
 
-			case '7':
+			case "7":
 				if(!empty($where))
 				{
 					$where.= " AND (ui.id_centro IN (SELECT id from usuario where id = $id) )";
@@ -61,14 +61,14 @@ class Reportemodel extends CI_Model {
 				}
 			break;
 
-			case '8':
+			case "8":
 				if(!empty($where))
 				{
-					$where.= ' AND u.id = $id';
+					$where.= " AND c.id_medico = $id";
 				}
 				else
 				{
-					$where = 'WHERE u.id = $id';
+					$where = "WHERE c.id_medico = $id";
 				}
 			break;
 
@@ -85,12 +85,10 @@ class Reportemodel extends CI_Model {
 		}
 
 		
-
 		$sql = "SELECT c.* from censo as c 
 				INNER JOIN usuario as u ON u.id = c.id_registrador
 				INNER JOIN usuario_info ui ON ui.id_usuario = u.id
-				$where
-				ORDER BY c.fecha_nac desc";
+				$where";
 
 		return $this->db->query($sql)->result();
 

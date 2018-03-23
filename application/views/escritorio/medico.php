@@ -13,7 +13,7 @@
 </div>
 
 <div class="page-header text-center">
-	<li class="bigger-200 orange">
+	<li class="bigger-200 purple">
 	 	<i class="ace-icon fa fa-circle"></i>
 	 	<?= $this->session->userdata('membrete') ?>
 	 	<br>
@@ -23,11 +23,23 @@
 
 <div class="row no-gutters">
     <div class="col-md-12 col-sm-12 pull-right">
-    	<button class="btn btn-app btn-purple btn-block">
+    	<button class="btn btn-app btn-purple btn-block" data-tool="tooltip" title="No Verificados">
     		<i class="ace-icon fa fa-users bigger-250"></i>
-    		Censo
-    		<span class="badge badge-warning badge-left"><?= count($data) ?></span>
+    		Censados
+    		<span class="badge badge-warning badge-left"><?= $total->total ?></span>
     	</button>	
+        <?
+        if($this->session->userdata('id_permiso') <= '7')
+        {
+        ?>
+            <a href="<?= base_url().'index.php/dashboard/centro_medico/'.$centro ?>" class="btn btn-app btn-pink pull-right" data-tool="tooltip" title="Volver al dashboard de Centro Médico">
+                <i class="ace-icon fa fa-undo bigger-250"></i>
+                Centro
+                <span class="badge badge-warning badge-left"></span>
+            </a>
+        <?  
+        }
+        ?>
     </div>
 </div>
 <br/><br/>

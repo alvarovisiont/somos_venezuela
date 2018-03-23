@@ -15,7 +15,7 @@
 <div class="page-header text-center">
 	<div class="row no-gutters">
 		<div class="col-md-12 col-sm-12">
-			<li class="bigger-200 orange">
+			<li class="bigger-200 purple">
 			 	<i class="ace-icon fa fa-circle"></i>
 			 	<?= $this->session->userdata('membrete') ?>
 			 	
@@ -131,26 +131,29 @@
 									title="Jefes de Familia">
 									<i class="fa fa-eye"></i>
 									</a>';
-
-						if($row->jefes < 1)
+						if($this->session->userdata('id_permiso') === '9')
 						{
-							$eliminar =	'<a href="'.base_url().'index.php/censo/vivienda_delete/'.base64_encode($row->id).'" 
-											class="btn btn-danger btn-sm eliminar"
-											data-tool="tooltip"
-											title="Eliminar Vivienda">
-											<i class="fa fa-trash"></i>
-										</a>';
+							if($row->jefes < 1)
+							{
+								$eliminar =	'<a href="'.base_url().'index.php/censo/vivienda_delete/'.base64_encode($row->id).'" 
+												class="btn btn-danger btn-sm eliminar"
+												data-tool="tooltip"
+												title="Eliminar Vivienda">
+												<i class="fa fa-trash"></i>
+											</a>';
+							}
+							else
+							{
+								$eliminar =	'<a href="#" 
+												class="btn btn-danger btn-sm"
+												data-tool="tooltip"
+												title="No puede eliminar la vivienda porque tiene habitantes"
+												disabled="">
+												<i class="fa fa-trash"></i>
+											</a>';
+							}
 						}
-						else
-						{
-							$eliminar =	'<a href="#" 
-											class="btn btn-danger btn-sm"
-											data-tool="tooltip"
-											title="No puede eliminar la vivienda porque tiene habitantes"
-											disabled="">
-											<i class="fa fa-trash"></i>
-										</a>';
-						}
+							
 							
 
 						$tipo = $row->tipo_vivienda === 't' ? 'Casa' : 'Apartamento';

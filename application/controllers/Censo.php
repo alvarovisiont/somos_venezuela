@@ -273,6 +273,15 @@ class Censo extends CI_Controller {
         echo json_encode($result);
     }
 
+    public function censados_modal_centro_medico()
+    {
+        $centro = $this->input->get('centro');
+
+        echo json_encode($this->censomodel->censados_modal($centro));
+
+        
+    }
+
 // ================================ | ESTRUCTURA CENTRO MEDICO | ============================================= //
 
     public function store_estructura()

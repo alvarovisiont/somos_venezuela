@@ -110,15 +110,15 @@ class Censomodel extends CI_Model {
 
         if($type === '1')
         {
-            $sql = "WITH RECURSIVE padre(id,nombre,apellido,cedula,telefono,condicion,nivel,con,vivienda) AS(
+            $sql = "WITH RECURSIVE padre(id,nombre,apellido,cedula,telefono,condicion,nivel,verificado,con,vivienda) AS(
                 
-                SELECT censo.id,nombre,apellido,cedula,telefono,censo.condicion,'Jefe Familia', censo.id as con, concat(vivienda.direccion,' ',vivienda.nro) as vivienda
+                SELECT censo.id,nombre,apellido,cedula,telefono,censo.condicion,'Jefe Familia',censo.verificado, censo.id as con, concat(vivienda.direccion,' ',vivienda.nro) as vivienda
                 from censo 
                 INNER JOIN vivienda ON vivienda.id = censo.id_vivienda
                 where cedula = $ced and id_padre = 0
                 
                 UNION ALL 
-                SELECT censo.id,censo.nombre,censo.apellido,censo.cedula,censo.telefono,censo.condicion,'Carga Familiar', padre.con, '' 
+                SELECT censo.id,censo.nombre,censo.apellido,censo.cedula,censo.telefono,censo.condicion,'Carga Familiar', censo.verificado, padre.con, '' 
                 from censo 
                 JOIN padre ON censo.id_padre = padre.id
             ) 
@@ -126,9 +126,9 @@ class Censomodel extends CI_Model {
         }  
         else
         {
-            $sql = "WITH RECURSIVE padre(id,nombre,apellido,cedula,telefono,condicion,nivel,id_padre,con,vivienda) AS(
+            $sql = "WITH RECURSIVE padre(id,nombre,apellido,cedula,telefono,condicion,nivel,verificado,id_padre,con,vivienda) AS(
                 
-                SELECT censo.id,nombre,apellido,cedula,telefono,censo.condicion,'Carga Familiar',id_padre, id_padre as con,
+                SELECT censo.id,nombre,apellido,cedula,telefono,censo.condicion,'Carga Familiar',censo.verificado,id_padre, id_padre as con,
                 concat(vivienda.direccion,' ',vivienda.nro) as vivienda
                 from censo 
                 INNER JOIN vivienda ON vivienda.id = censo.id_vivienda
@@ -137,7 +137,7 @@ class Censomodel extends CI_Model {
                 UNION ALL 
 
                 SELECT censo.id,censo.nombre,censo.apellido,censo.cedula,censo.telefono,censo.condicion,
-                'Jefe Familia',censo.id_padre, censo.id as con, ''
+                'Jefe Familia',censo.verificado,censo.id_padre, censo.id as con, ''
                 from censo 
                 JOIN padre ON censo.id = padre.id_padre
             ) 
@@ -145,6 +145,28 @@ class Censomodel extends CI_Model {
         }
 
         return $this->db->query($sql)->result();
+        $this->db->close();
+    }
+
+    public function censados_modal($centro)
+    {
+        $sql = "concat(c.nombre,' ',c.apellido) as nombre, ui.nombre as registrador, p.nombre as pefil,
+                c.condicion, c.embarazada, c.verificado, c.cedula, c.telefono, 
+                CASE v.tipo_vivienda WHEN true THEN
+                concat(v.direccion,'<br/> nª: ',v.nro)
+                WHEN false THEN
+                concat(v.direccion,'<br/> piso: ',v.piso,'<br/> nª: ',v.nro)
+                END as vivienda, 
+                c.pensionado";
+
+        $this->db->where('ui.id_centro',$centro);
+        $this->db->select($sql);
+        $this->db->from('censo as c');
+        $this->db->join('vivienda as v', 'v.id = c.id_vivienda');
+        $this->db->join('usuario_info as ui', 'ui.id_usuario = c.id_registrador');
+        $this->db->join('usuario as u', 'u.id = ui.id_usuario');
+        $this->db->join('perfil as p', 'p.id = u.id_permiso');
+        return $this->db->get()->result();
         $this->db->close();
     }
 
@@ -182,18 +204,6 @@ class Censomodel extends CI_Model {
         $this->db->delete('estructura',['id' => $id]);
     }
 
-// ============================ VERIFICAR MEDICO ==============================================
-
-    public function no_verificados()
-    {
-        $id_centro = $this->session->userdata('id_centro'); 
-
-        $this->db->where("c.id_medico = 0 and ui.id_centro = $id_centro");
-        $this->db->select("c.*, concat(v.direccion,' ',v.piso,'-',v.nro) as vivienda");
-        $this->db->join('vivienda as v','v.id = c.id_vivienda');
-        $this->db->join('usuario_info as ui','ui.id_usuario = c.id_registrador');
-        return $this->db->get('censo as c')->result();
-        $this->db->close();
-    }
+   
 
 }

@@ -14,7 +14,7 @@
 </div>
 
 <div class="page-header text-center">
-	<li class="bigger-200 orange">
+	<li class="bigger-200 purple">
 	 	<i class="ace-icon fa fa-circle"></i>
 	 	<?= $this->session->userdata('membrete') ?>
 	 	<br>
@@ -24,7 +24,7 @@
 
 <div class="row no-gutters">
     <div class="col-md-12 col-sm-12 pull-right">
-    	<button class="btn btn-app btn-purple">
+    	<button class="btn btn-app btn-purple" data-target="#modal_censados" data-toggle="modal" data-centro="<?= $centro ?>">
     		<i class="ace-icon fa fa-users bigger-250"></i>
     		Censados
     		<span class="badge badge-warning badge-left"><?= $totales->censados ?></span>
@@ -81,7 +81,6 @@
 					<th class="text-center">Tipo</th>
 					<th class="text-center">Censados</th>
 					<th class="text-center">Verificados</th>
-					<th class="text-center">Ver</th>
 				</tr>
 			</thead>
 			<tbody class="text-center">
@@ -96,25 +95,6 @@
 
 						$verificados = $row->tipo === 'Medico' ? $row->contados : $verificados;
 						$button = '';
-
-						if($row->tipo === 'Registrador')
-						{
-							$button = '<a <a href="'.base_url().'index.php/censo/index/'.base64_encode($row->id).'/'.base64_encode($centro).'" 
-									class="btn btn-info btn-sm"
-									data-tool="tooltip"
-									title="Ver datos del Censo">
-									Ver <i class="fa fa-eye"></i>
-									</a>';
-						}
-						else
-						{
-							$button = '<a <a href="'.base_url().'index.php/verificar/index/'.base64_encode($row->id).'" 
-									class="btn btn-info btn-sm"
-									data-tool="tooltip"
-									title="Ver datos de los Verificados">
-									Ver <i class="fa fa-eye"></i>
-									</a>';
-						}
 							
 
 						echo 	"<tr>
@@ -122,7 +102,6 @@
 									<td>{$row->tipo}</td>
 									<td>{$registrados}</td>
 									<td>{$verificados}</td>
-									<td>{$button}</td>
 								</tr>";
 					}
 				?>
@@ -301,3 +280,56 @@
         </div><!-- fin modal-content -->
     </div><!-- fin modal-dialog -->
 </div> <!-- fin modal -->
+
+<!-- MODAL CENSADOS -->
+
+<div id="modal_censados" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 100%">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header modalHeader">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title text-center">Censados del Centro Medico&nbsp;<i class="fa fa-users"></i></h4>
+            </div>
+            <div class="modal-body">
+            	<div class="row no-gutters">
+            		<div class="col-sm-12 col-md-12">
+            			<table class="table table-bordered table-responsive" id="tabla_censados">
+		            		<thead>
+		            			<tr>
+		            				<th class="text-center">Nombre</th>
+		            				<th class="text-center">Cédula</th>
+		            				<th class="text-center">Teléfono</th>
+		            				<th class="text-center">Dirección</th>
+		            				<th class="text-center">Pensionado</th>
+		            				<th class="text-center">Embarazada</th>
+		            				<th class="text-center">Verificado</th>
+		            				<th class="text-center">Condición</th>
+		            				<th class="text-center">Registrador</th>
+		            			</tr>
+		            		</thead>
+		            		<tbody class="text-center">
+		            			
+		            		</tbody>
+		            	</table>
+            		</div>
+            	</div>
+            </div><!-- fin modal-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div><!-- fin modal-content -->
+    </div><!-- fin modal-dialog -->
+</div> <!-- fin modal -->
+
+<!-- =============================== Gift Cargando ==================================== -->
+
+	<div class="row no-gutters loading_gift" id="div_image" style="display: none;">
+		<div class="col-md-4 col-sm-4 col-md-offset-4 col-sm-offset-4">
+			<div class="">
+				<img src="<?= base_url().'assets_sistema/images/gift/cargando.gif' ?>" alt="">
+				<br/>
+				Cargando...
+			</div>
+		</div>
+	</div>

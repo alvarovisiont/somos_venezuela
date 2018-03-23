@@ -232,7 +232,7 @@ class Escritoriomodel extends CI_Model {
 
               CASE 
                 WHEN u.id_permiso = 8 THEN 
-                  (SELECT count(*) from censo where id_registrador = u.id)
+                  (SELECT count(*) from censo where id_medico = u.id and verificado = true)
                 WHEN u.id_permiso = 9 THEN
                   (SELECT count(*) from censo where id_registrador = u.id)
               END as contados
@@ -295,11 +295,10 @@ class Escritoriomodel extends CI_Model {
       $this->db->close();
     }
 
-    public function datos_verificados()
+    public function datos_verificados($id)
     {
-      $id = $this->session->userdata('id_usuario'); 
 
-      $this->db->where('id_medico',$id);
+      $this->db->where(['id_medico' => $id, 'c.verificado' => true]);
       $this->db->select("c.*, concat(v.direccion,' ',v.piso,'-',v.nro) as vivienda");
       $this->db->join('vivienda as v','v.id = c.id_vivienda');
       return $this->db->get('censo as c')->result();

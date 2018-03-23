@@ -122,7 +122,7 @@ class Login extends CI_Controller {
                   break;
 
                   case '6':
-                    $membrete = 'Parroquia '.$check_user->parroquia.", Municipio: ".$check_user->municipio.", Estado Sucre";
+                    $membrete = 'Parroquia '.$check_user->parroquia.", Municipio: ".$check_user->municipio;
                   break;
 
                   case '7':

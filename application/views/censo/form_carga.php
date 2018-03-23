@@ -16,7 +16,7 @@
 </div>
 
 <div class="page-header text-center">
-	<li class="bigger-200 orange">
+	<li class="bigger-200 purple">
 	 	<i class="ace-icon fa fa-circle"></i>
 	 	<?= $this->session->userdata('membrete') ?>
 	 	<br>

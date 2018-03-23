@@ -12,7 +12,7 @@
 	</ul><!-- /.breadcrumb -->					
 </div>
 <div class="page-header text-center">
-	<li class="bigger-200 orange">
+	<li class="bigger-200 purple">
 	 	<i class="ace-icon fa fa-circle"></i>
 	 	<?= $this->session->userdata('membrete') ?>
 	 	<br>
@@ -64,6 +64,7 @@
 					<th class="text-center">Teléfono</th>
 					<th class="text-center">Condición</th>
 					<th class="text-center">Vivienda</th>
+					<th class="text-center">Verificado</th>
 					<th class="text-center">Nivel</th>
 				</tr>
 			</thead>

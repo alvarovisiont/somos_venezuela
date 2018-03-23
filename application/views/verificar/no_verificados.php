@@ -15,7 +15,7 @@
 <div class="row no-gutters">
 	<br/>
 	<div class="col-md-12 col-sm-12">
-		<table class="table table-responsive table-bordered">
+		<table class="table table-responsive table-bordered" id="tabla">
 			<thead>
 				<tr>
 					<th class="text-center">Nombre</th>
@@ -32,14 +32,16 @@
 					{
 						echo "	<tr>
 									<td>{$row->nombre} {$row->apellido}</td>
-									<td>{$row->cedula}</td>
+									<td>
+										<span class='label label-lg label-success arrowed-in arrowed-in-right'>{$row->cedula}</span>
+									</td>
 									<td>{$row->telefono}</td>
-									<td>{$row->direccion}</td>
+									<td>{$row->vivienda}</td>
 									<td>{$row->condicion}</td>
 									<td>
 										<label class='inline'>
 											<small class='muted smaller-90'></small>
-											<input id='id-button-borders' type='checkbox' class='ace ace-switch ace-switch-5' value='{$row->id}' />
+											<input id='id-button-borders' type='checkbox' class='ace ace-switch ace-switch-5 verificar' value='{$row->id}' />
 											<span class='lbl middle'></span>
 										</label>
 									</td>
