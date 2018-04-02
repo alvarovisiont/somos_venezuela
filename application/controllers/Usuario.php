@@ -312,70 +312,18 @@ class Usuario extends CI_Controller {
     }
 
 
-
- 
-    /*public function store_municipio($municipio)
+    public function cambiar_contra()
     {
-        $data = array( 'bd_activa' => 'default');
-        $this->session->set_userdata($data);
+        $contra = $this->input->post('pass');
 
-        $municipios_login = $this->geomodel->usuario_user_municipio($municipio);
-
-        $user_final_aux = $municipios_login->login;
-
-        $municipios = $this->geomodel->show_parroquia_mun($municipio);
-
-        foreach ($municipios as $row) 
-        {
-            $user_final = "";
-            $user_final = $user_final_aux."_P_".$row->id_parroquia;
-
-            $data = array(
-                'createdat' => date('Y-m-d H:i:s'),
-                'updatedat' => date('Y-m-d H:i:s'),
-                'fecha_acceso' => date('Y-m-d H:i:s'),
-                'password' => '123456789',
-                'login' => $user_final,
-                'email' => $user_final."@USUARIOS.COM",
-                'id_permiso' => 6,
-                'correo_activo' => true,
-                'id_estado' => 17,      
-                'id_municipio' => $row->id_municipio,
-                'id_parroquia' => $row->id_parroquia,
-
-            );
-
-
-            $datapersonal = array(
-                'createdat' => date('Y-m-d H:i:s'),
-                'updatedat' => date('Y-m-d H:i:s'),
-                'fecha_nacimiento' => date('Y-m-d H:i:s'),
-                'nombre' => $user_final,
-                'apellido' => $user_final,
-                'imagen' => 'avatar.png',
-                'id_pais' => 1,
-
-            );
-
-
-
-                
-
-
-        if($this->usuariomodel->crear_usuario($data, $datapersonal))
-        {  
-
-            echo "registro";
+        if($this->usuariomodel->cambiar_constraseña($contra))
+        {   
+            echo json_encode(['r' => true]);
         }
-        
-
-
-        } 
-
-          die();      
-
-    }//fin store 
-    */
-
-
+        else
+        {
+            echo json_encode(['r' => false]);   
+        }
+    }
+ 
 }

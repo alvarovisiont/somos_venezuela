@@ -45,7 +45,7 @@
 				else
 				{
 					$('#tabla_familia').children('tbody').empty()
-					alert('No sen encontraron coincidencias en la busqueda')
+					toastr.error('No se encontraron registros coincidentes', 'Lo sentimos!')	
 					
 				}
 			})

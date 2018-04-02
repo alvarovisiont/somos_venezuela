@@ -101,4 +101,14 @@ class Perfilmodel extends CI_Model {
       $db_admin->close();
 
     }
+
+    public function update_perfil($id,$data)
+    {
+      $this->db->where('id', $id);
+      $this->db->update('perfil', $data);
+
+      $this->session->set_flashdata('type', 'success');
+      $this->session->set_flashdata('message', 'Perfil editado con éxito');
+    }
+
 }

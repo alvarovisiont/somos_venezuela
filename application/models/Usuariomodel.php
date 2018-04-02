@@ -77,25 +77,34 @@ class Usuariomodel extends CI_Model {
 
      public function crear_usuario($datos, $datospersonal)
     {
-     $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
+      $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
-    if($db_admin->insert('usuario',$datos))
-      {
-        $db_admin->select_max('id');
-        $query = $db_admin->get('usuario');
+        if($db_admin->insert('usuario',$datos))
+        {
+          $db_admin->select_max('id');
+          $query = $db_admin->get('usuario');
 
-        $queryresult = $query->row();
-        $datospersonal['id_usuario'] = $queryresult->id;
+          $queryresult = $query->row();
+          $datospersonal['id_usuario'] = $queryresult->id;
 
-       if($db_admin->insert('usuario_info',$datospersonal))
-      {  return true;
-      }else
-      {  return false; } 
-      
-      }else
-      {
-        return false;
-      }
+          if($db_admin->insert('usuario_info',$datospersonal))
+          {  
+              $this->session->set_flashdata('type','success');
+              $this->session->set_flashdata('message', 'El usuario ha sido registrado con éxito');
+
+              return true;
+          }
+          else
+          {  
+            $this->session->set_flashdata('type','danger');
+            $this->session->set_flashdata('message', 'Ha ocurrido un error al crear el usuario');
+            return false; 
+          }
+        }
+        else
+        {
+          return false;
+        }
     }
 
 
@@ -177,7 +186,25 @@ class Usuariomodel extends CI_Model {
       $db_admin->update('usuario',['fecha_acceso' => date('Y-m-d H:i:s', strtotime('-4 hour')) ] );
     }
 
+    public function cambiar_constraseña($pass)
+    {
+      $id = $this->session->userdata('id_usuario');
 
+      $this->db->where('id', $id);
+      
+      if($this->db->update('usuario', ['password_activo' => true, 'password' => $pass]))
+      {
+        $this->db->close();
+        $this->session->set_userdata('bpass',true);
+        return true;
+      }
+      else
+      {
+        $this->db->close();
+        return true;
+      }
+
+    }
 
 
    

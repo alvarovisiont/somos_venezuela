@@ -30,6 +30,7 @@
 <body>
     
     <div class="text-center">
+        <img src="<?= base_url().'index.php/assets_sistema/images/gallery/complementos_login/'.$this->session->userdata('acceso')->logo ?>" alt="">
         Censados del Estado Sucre ¡Somos Venezuela!
     </div>
     <table class="">

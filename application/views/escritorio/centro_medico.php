@@ -322,6 +322,36 @@
     </div><!-- fin modal-dialog -->
 </div> <!-- fin modal -->
 
+<!-- =============================== MODAL CAMBIAR CONTRASEÑA ==================================== -->
+	
+	<div id="modal_constraseña" class="modal fade" role="dialog" data-backdrop="static">
+	    <div class="modal-dialog">
+	        <!-- Modal content-->
+	        <div class="modal-content">
+	            <div class="modal-header modalHeader">
+	                <h4 class="modal-title">Cambiar Contraseña por Defecto&nbsp;<i class="fa fa-pencil"></i></h4>
+	            </div>
+	            <form action="<?= base_url().'index.php/usuario/cambiar_contra' ?>" id="form_cambiar_contraseña" method="POST">
+		            <div class="modal-body">
+		            	<div class="row no-gutters">
+		            		<div class="form-group">
+			            		<label for="" class="control-label">Contraseña</label>
+			            		<input type="password" class="form-control" name="contraseña" id="contraseña">
+			            	</div>
+			            	<div class="form-group">
+			            		<label for="" class="control-label">Nueva Contraseña</label>
+			            		<input type="password" class="form-control" name="nueva_contraseña" id="nueva_contraseña">
+			            	</div>
+		            	</div>
+		            </div><!-- fin modal-body -->
+		            <div class="modal-footer">
+		                <button type="submit" class="btn btn-success">Cambiar&nbsp;<i class="fa fa-thumbs-up"></i></button>
+		            </div>
+	            </form>
+	        </div><!-- fin modal-content -->
+	    </div><!-- fin modal-dialog -->
+	</div> <!-- fin modal -->
+
 <!-- =============================== Gift Cargando ==================================== -->
 
 	<div class="row no-gutters loading_gift" id="div_image" style="display: none;">

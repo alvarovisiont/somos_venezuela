@@ -33,11 +33,11 @@
 				{
 					$('#form_estructura')[0].reset()
 					$('#btn_guardar').text('Guardar')
-					alert('Registro Agregado con Éxito')
+					toastr.success('Integrante registrado con éxito', 'Éxito!')
 				}
 				else
 				{
-					alert('Ya este registro existe y no ha podido guardarse')
+					toastr.error('Ya existe un integrante en el sistema con estos datos', 'Error!')	
 					$('#form_estructura')[0].reset()
 					$('#btn_guardar').text('Guardar')
 				}
@@ -82,6 +82,9 @@
 				window.location.href = '<?= base_url()."index.php/censo/estructura_delete/" ?>'+id+'/'+centro
 			}
 		})
+
+// ==================================== MODAL DE CENTROS MEDICOS ==============================================
+
 
 		$('#modal_censados').on('shown.bs.modal', function(e){
 
@@ -145,5 +148,46 @@
 		$('#modal_censados').on('hide.bs.modal',function(e){
 			$('#tabla_censados').children('tbody').empty()
 		})
+
+// ===================================== CAMBIAR CONSTRASEÑA =============================================
+
+		let password_activo = "<?= $this->session->userdata('bpass') ?>"
+
+		if(password_activo === 'f')
+		{
+			$('#modal_constraseña').modal('show')
+		}
+
+		$('#form_cambiar_contraseña').submit(function(e) {
+			e.preventDefault()
+
+			let pass = $('#contraseña').val(),
+				new_pass = $('#nueva_contraseña').val()
+
+			if(pass !== new_pass)
+			{
+				toastr.error('Las Contraseñas no Coinciden','Error!')	
+				return false
+			}
+
+			$.ajax({
+				url: $(this).attr('action'),
+				type: 'POST',
+				dataType: 'JSON',
+				data: {pass},
+			})
+			.done(function(data) {
+				if(data.r)
+				{
+					toastr.success('Su contraseña ha sido cambiada con éxito','Éxito!')
+
+					$('#modal_constraseña').modal('hide')
+				}
+				else
+				{
+					toastr.error('Ha ocurrido un error al cambiar su contraseña','Error!')
+				}
+			})
+		});
 	})
 </script>

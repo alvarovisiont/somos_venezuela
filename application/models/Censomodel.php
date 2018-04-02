@@ -60,8 +60,38 @@ class Censomodel extends CI_Model {
 
     public function store_censo($jefe)
     {
-        $this->db->insert('censo',$jefe);
-        $this->db->close();   
+        $sql = "CASE WHEN v.tipo_vivienda = 't' THEN
+                concat(v.direccion,' casa: ', v.nro)
+                ELSE 
+                concat('apartamento: ',v.direccion,' piso: ', v.piso,' nro:', v.nro)
+                END as direccion
+                ";
+
+        $this->db->where('c.cedula', $jefe['cedula']);
+        $this->db->select($sql);
+        $this->db->from('censo as c');
+        $this->db->join('vivienda as v', 'c.id_vivienda = v.id');
+        $result = $this->db->get()->result();
+
+        if(count($result) > 0)
+        {
+            $this->session->set_flashdata('type', 'danger');
+            $this->session->set_flashdata('message', 'Ya existe el registro en la dirección: '.$result[0]->direccion);
+            return false;   
+        }
+        else
+        {
+            $this->db->insert('censo',$jefe);
+            $this->db->close(); 
+
+            $this->session->set_flashdata('type', 'success');
+            $this->session->set_flashdata('message', 'Jefe Registrado con Éxito');   
+            return true;  
+            
+            
+        }
+
+            
     }
 
     public function update_censo($jefe)
@@ -112,9 +142,16 @@ class Censomodel extends CI_Model {
         {
             $sql = "WITH RECURSIVE padre(id,nombre,apellido,cedula,telefono,condicion,nivel,verificado,con,vivienda) AS(
                 
-                SELECT censo.id,nombre,apellido,cedula,telefono,censo.condicion,'Jefe Familia',censo.verificado, censo.id as con, concat(vivienda.direccion,' ',vivienda.nro) as vivienda
+                SELECT censo.id,nombre,apellido,cedula,telefono,censo.condicion,'Jefe Familia',censo.verificado, censo.id as con, 
+
+                CASE v.tipo_vivienda WHEN true THEN
+                concat('casa: ',v.direccion,'<br/> nª: ',v.nro)
+                WHEN false THEN
+                concat('apartamento: ',v.direccion,'<br/> piso: ',v.piso,'<br/> nª: ',v.nro)
+                END as vivienda
+
                 from censo 
-                INNER JOIN vivienda ON vivienda.id = censo.id_vivienda
+                INNER JOIN vivienda as v ON v.id = censo.id_vivienda
                 where cedula = $ced and id_padre = 0
                 
                 UNION ALL 
@@ -129,9 +166,15 @@ class Censomodel extends CI_Model {
             $sql = "WITH RECURSIVE padre(id,nombre,apellido,cedula,telefono,condicion,nivel,verificado,id_padre,con,vivienda) AS(
                 
                 SELECT censo.id,nombre,apellido,cedula,telefono,censo.condicion,'Carga Familiar',censo.verificado,id_padre, id_padre as con,
-                concat(vivienda.direccion,' ',vivienda.nro) as vivienda
+                
+                CASE v.tipo_vivienda WHEN true THEN
+                concat('casa: ',v.direccion,'<br/> nª: ',v.nro)
+                WHEN false THEN
+                concat('apartamento: ',v.direccion,'<br/> piso: ',v.piso,'<br/> nª: ',v.nro)
+                END as vivienda
+
                 from censo 
-                INNER JOIN vivienda ON vivienda.id = censo.id_vivienda
+                INNER JOIN vivienda as v ON v.id = censo.id_vivienda
                 where cedula = $ced and censo.id_padre > 0
 
                 UNION ALL 
@@ -197,6 +240,9 @@ class Censomodel extends CI_Model {
         $this->db->where('id',$id);
         $this->db->update('estructura',$data);
         $this->db->close();
+
+        $this->session->set_flashdata('type', 'success');
+        $this->session->set_flashdata('message', 'Integrante editado con éxito');   
     }
 
     public function delete_estructura($id)

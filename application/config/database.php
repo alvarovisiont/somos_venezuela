@@ -75,13 +75,13 @@ $query_builder = TRUE;
 
  $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'ec2-54-235-101-91.compute-1.amazonaws.com',
+	'hostname' => 'localhost',
 
-	'username' => 'tbalxrgddkmkds',
+	'username' => 'postgres',
 
-	'password' => '8a52a3d321079462b2448e5cb5c5da69f8819c147ff05b425d4d32a1b5eb71a5',
+	'password' => 'admin123',
 	
-	'database' => 'd40lsgi2jrphbi',
+	'database' => 'sucre',
         //'database' => 'DIGITAL',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
@@ -98,56 +98,6 @@ $query_builder = TRUE;
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
-
- $db['admin21'] = array(
-	'dsn'	=> '',
-	'hostname' => 'ec2-54-83-23-91.compute-1.amazonaws.com',
-
-	'username' => 'txqliwkdxdxpjw',
-
-	'password' => '04e9d5e09009b4c6300a7d1959191ed9fe7c9d988e923d2674ae0aa545d476d5',
-	
-	'database' => 'd2mga2qn2c9cli',
-        //'database' => 'DIGITAL',
-	'dbdriver' => 'postgre',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
-
-$db['geografia'] = array(
-	'dsn'	=> '',
-	'hostname' => '127.0.0.1',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'prueba21',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
-
 
 
 

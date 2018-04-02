@@ -67,7 +67,6 @@ class Permisomodel extends CI_Model {
 
     public function guardar_permisos_asignados($permisos)
     {
-
       $db_admin = $this->load->database($this->session->userdata('bd_activa'), TRUE);
 
       // función para guardar los accesos
@@ -226,6 +225,7 @@ class Permisomodel extends CI_Model {
 
           if($total < 1)
           {
+
             $array_insert = ['id_modulo' => $value, $key => $valor, 
                              'createdat' => date('Y-m-d H:i:s'), 
                              'updatedat' => date('Y-m-d H:i:s')];

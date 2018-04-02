@@ -101,10 +101,7 @@ class Censo extends CI_Controller {
         $_POST['fecha_nac'] = date('Y-m-d',strtotime($_POST['fecha_nac']));
 
         $this->censomodel->store_censo($this->input->post());
-
-        $this->session->set_flashdata('type', 'success');
-        $this->session->set_flashdata('message', 'Jefe Registrado con Éxito');
-
+        
         redirect('censo/jefe/'.base64_encode($this->input->post('id_vivienda')),'refresh');
     }
 

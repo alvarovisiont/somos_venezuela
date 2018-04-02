@@ -75,17 +75,24 @@
 								<div class="profile-info-value">
 									<i class="fa fa-map-marker light-orange bigger-110"></i>
 									<span>Venezuela</span>
-									<span>Caracas</span>
+									<span>Sucre</span>
 								</div>
 							</div>
+							<?
+							if($this->session->userdata('id_permiso') !== '7')
+							{
+							?>
+								<div class="profile-info-row">
+									<div class="profile-info-name"> Age </div>
 
-							<div class="profile-info-row">
-								<div class="profile-info-name"> Age </div>
-
-								<div class="profile-info-value">
-									<span><?= $edad ?></span>
+									<div class="profile-info-value">
+										<span><?= $edad ?></span>
+									</div>
 								</div>
-							</div>
+							<?
+							}
+							?>
+								
 
 							<div class="profile-info-row">
 								<div class="profile-info-name"> Perfil </div>
@@ -102,15 +109,23 @@
 									<span><?= $info->telefono ? $info->telefono : 'Sin Información' ?></span>
 								</div>
 							</div>
+							
+							<?
+							if($this->session->userdata('id_permiso') !== '7')
+							{
+							?>
 
-							<div class="profile-info-row">
-								<div class="profile-info-name"> Género </div>
+								<div class="profile-info-row">
+									<div class="profile-info-name"> Género </div>
 
-								<div class="profile-info-value">
-									<span><?= $info->genero === 't' ? 'Mascúlino' : $info->genero === null || '' ? 'Sin Identificación' : 'Femenino' ?></span>
+									<div class="profile-info-value">
+										<span><?= $info->genero === 't' ? 'Mascúlino' : $info->genero === null || '' ? 'Sin Identificación' : 'Femenino' ?></span>
+									</div>
 								</div>
-							</div>
-
+							<?
+							}	
+							?>
+							<!--
 							<div class="profile-info-row">
 								<div class="profile-info-name"> Departamentos </div>
 
@@ -118,6 +133,7 @@
 									<span>Presidencia</span>
 								</div>
 							</div>
+							-->
 
 							<div class="profile-info-row">
 								<div class="profile-info-name"> Inclución al Sistema </div>
@@ -142,7 +158,7 @@
 
 				<div class="space-20"></div>
 
-				<div class="row">
+				<!--<div class="row">
 					<div class="col-xs-12 col-sm-6">
 						<div class="widget-box transparent">
 							<div class="widget-header widget-header-small">
@@ -209,7 +225,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div><!-- /#home -->
 			<div id="informacion" class="tab-pane">
 				<div class="user-profile row no-gutters">

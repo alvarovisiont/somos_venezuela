@@ -76,4 +76,17 @@ class Accesomodel extends CI_Model {
     	$db_admin->update('acceso_accion',$array_update);
       $db_admin->close();
     }
+
+    public function all_access($id_modulo)
+    {
+      
+      $tipo = $this->session->userdata('id_permiso') === '1' ? 1 : 2;
+
+      $key = $tipo === 1 ? 'id_usuario' : 'id_perfil';
+      $valor = $tipo === 1 ? $this->session->userdata('id_usuario') : $this->session->userdata('id_permiso');
+
+      $this->db->where(['id_modulo' => $id_modulo, $key => $valor]);
+      return $this->db->get('acceso_accion')->row();
+      $this->db->close();
+    }
 }

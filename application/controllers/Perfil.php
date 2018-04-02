@@ -18,6 +18,7 @@ class Perfil extends CI_Controller {
 
     public function dashboard($tipo_bd = null) {
 
+        $data = '';
         switch ($tipo_bd) 
        {
         case null:

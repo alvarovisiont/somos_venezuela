@@ -90,7 +90,6 @@
     			if(type)
     			{
     				let message = '<?= $this->session->flashdata("message") ?>'
-
     				
     				switch (type) {
     					case 'success':
@@ -100,7 +99,7 @@
     						toastr.alert(message, 'Alerta!')
     					break;
     					case 'danger':
-    						toastr.danger(message, 'Error!')
+    						toastr.error(message, 'Error!')
     					break;
     				}
     				

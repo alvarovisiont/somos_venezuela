@@ -35,6 +35,7 @@ class Login extends CI_Controller {
 		//buscar tipo de logueo
 		 $row = $this->configmodel->get_by_tipo(1);
 	     $tipo = $row->login;
+       
 	     $datos = [
 	     	'imagen' => $row->imagen,
 	     	'banner' => $row->cintillo,
@@ -178,6 +179,7 @@ class Login extends CI_Controller {
          $parr= base64_encode($this->session->userdata('parroquia'));
          $id = base64_encode($this->session->userdata('id_usuario'));
 
+         
          switch ($this->session->userdata('id_permiso')) {
             case '2':
               $this->load->view('dashboard/header');
@@ -354,6 +356,7 @@ class Login extends CI_Controller {
        $menu_data = array(
          'menu_usuario' => $html_menu,
       );
+
       $this->session->set_userdata($menu_data);
 
   }
