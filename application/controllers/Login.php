@@ -33,17 +33,18 @@ class Login extends CI_Controller {
 
           $this->session->set_userdata($data);
 		//buscar tipo de logueo
-		 $row = $this->configmodel->get_by_tipo(1);
+		   $row = $this->configmodel->get_by_tipo(1);
 	     $tipo = $row->login;
        
 	     $datos = [
 	     	'imagen' => $row->imagen,
 	     	'banner' => $row->cintillo,
 	     	'titulo' => $row->titulo,
-        'logo' => $row->logo,
+        'logo' =>   $row->logo,
 	     ];
 
-       $this->session->set_userdata(['acceso' => $row->acceso]);
+       $this->session->set_userdata(['acceso' => $row->acceso, 'logo_reporte' => $datos['logo'] ] );
+
 
 		  $this->load->view('login/header');
 		switch ($tipo) 

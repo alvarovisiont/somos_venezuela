@@ -186,8 +186,6 @@ class Reportes extends CI_Controller {
 
 	private function output_pdf($where)
 	{
-		
-
 		//load mPDF library
 		$this->load->library('m_pdf'); 
 		

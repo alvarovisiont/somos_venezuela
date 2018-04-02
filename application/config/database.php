@@ -81,7 +81,7 @@ $query_builder = TRUE;
 
 	'password' => 'admin123',
 	
-	'database' => 'sucre',
+	'database' => 'somos_venezuela',
         //'database' => 'DIGITAL',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
